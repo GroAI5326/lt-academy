@@ -100,6 +100,34 @@
   .bdg .e{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px}
   .lead{font-size:13.5px;color:var(--mut);max-width:640px;margin-bottom:18px;line-height:1.6}
   @media(max-width:1200px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  /* AI + messaging */
+  .aichip{font-size:10px;font-weight:800;color:var(--v);background:var(--vsoft);padding:4px 9px;border-radius:20px;letter-spacing:.3px}
+  .inbox{display:grid;grid-template-columns:322px 1fr;gap:18px;align-items:start}
+  .thread{display:flex;gap:11px;padding:12px 12px;border-radius:12px;cursor:pointer;border:1px solid transparent}
+  .thread:hover{background:var(--bg)} .thread.sel{background:var(--vsoft);border-color:#e0dbff}
+  .thread .a{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:13px;flex:none}
+  .thread .nm{font-weight:700;color:var(--ink);font-size:13px}
+  .thread .pv{font-size:12px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:175px;margin-top:2px}
+  .thread .rt{margin-left:auto;text-align:right;flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+  .thread .tm{font-size:10.5px;color:var(--mut)} .unread{width:9px;height:9px;border-radius:50%;background:var(--pink)}
+  .chat{display:flex;flex-direction:column;min-height:430px}
+  .msgs{flex:1;display:flex;flex-direction:column;gap:11px;padding:6px 2px 14px}
+  .bubble{max-width:76%;padding:11px 15px;border-radius:15px;font-size:13.5px;line-height:1.5}
+  .bubble.them{background:var(--bg);color:var(--text);border-bottom-left-radius:4px;align-self:flex-start}
+  .bubble.me{background:linear-gradient(135deg,var(--v),var(--v2));color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
+  .aibox{border:1.5px dashed var(--v);background:var(--vsoft);border-radius:14px;padding:15px 16px}
+  .aibox .lb{font-size:11px;font-weight:800;color:var(--v);letter-spacing:.4px;text-transform:uppercase;display:flex;align-items:center;gap:6px;margin-bottom:9px}
+  .aitools{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .ait{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow)}
+  .ait .e{width:42px;height:42px;border-radius:12px;background:var(--vsoft);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:11px}
+  .ait h4{font-size:14px;color:var(--ink);margin-bottom:5px} .ait p{font-size:12px;color:var(--mut);line-height:1.45}
+  .switch{width:42px;height:24px;border-radius:20px;background:var(--mint);position:relative;flex:none}
+  .switch::after{content:'';position:absolute;width:18px;height:18px;border-radius:50%;background:#fff;top:3px;right:3px}
+  .switch.off{background:var(--line)} .switch.off::after{left:3px;right:auto}
+  .auto{display:flex;align-items:center;gap:14px;padding:15px 2px;border-bottom:1px solid var(--line)} .auto:last-child{border:none}
+  .auto .e{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:18px;background:var(--vsoft);flex:none}
+  .auto .nm{font-weight:800;color:var(--ink);font-size:14px} .auto .me{font-size:12px;color:var(--mut);margin-top:2px}
+  @media(max-width:1200px){.aitools{grid-template-columns:repeat(2,1fr)}.inbox{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -112,11 +140,17 @@
       <a data-v="overview" class="active" onclick="show('overview','Dashboard','Welcome back, Louise 👋')"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>Overview</a>
       <a data-v="classroom" onclick="show('classroom','Classroom','12 training modules · your curriculum')"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Classroom</a>
       <a data-v="students" onclick="show('students','Students','Everyone learning inside your academy')"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>Students</a>
+      <a data-v="messages" onclick="show('messages','Messages','Chats with your students — AI drafts every reply')"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Messages<span style="margin-left:auto;background:var(--pink);color:#fff;font-size:10px;font-weight:800;padding:1px 7px;border-radius:20px">3</span></a>
       <a data-v="community" onclick="show('community','Community','Your paying members, together')"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></svg>Community</a>
       <div class="sec">Business</div>
       <a data-v="payments" onclick="show('payments','Payments &amp; Plans','Every way people pay to learn')"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="3"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Payments &amp; Plans</a>
       <a data-v="earnings" onclick="show('earnings','Earnings &amp; Commission','What you take home')"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Earnings</a>
       <a data-v="creators" onclick="show('creators','Creator Network','Creators you bring on, and your override')"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><circle cx="5" cy="18" r="3"/><circle cx="19" cy="18" r="3"/><path d="M12 11v3M9.5 15.5 7 16.5M14.5 15.5 17 16.5"/></svg>Creator Network</a>
+      <a data-v="affiliates" onclick="show('affiliates','Affiliate Program','Your students become your marketing')"><svg viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>Affiliates</a>
+      <div class="sec">Intelligence · AI</div>
+      <a data-v="aistudio" onclick="show('aistudio','AI Studio','Your AI team — it writes, builds and replies')"><svg viewBox="0 0 24 24"><path d="M12 3l1.9 4.6L18.5 9l-4.6 1.9L12 15l-1.9-4.1L5.5 9l4.6-1.4L12 3z"/><path d="M19 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg>AI Studio</a>
+      <a data-v="automations" onclick="show('automations','Automations','Set once — the AI runs it forever')"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>Automations</a>
+      <a data-v="analytics" onclick="show('analytics','Analytics','Your numbers, read for you by AI')"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Analytics</a>
       <div class="sec">Manage</div>
       <a data-v="settings" onclick="show('settings','Settings','Your brand, your academy')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-2.82 1.17V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 8 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15H4.5a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 6 8.6l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 12 4.6a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 2.82 1.17l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 12z"/></svg>Settings</a>
     </nav>
@@ -126,7 +160,7 @@
   <!-- MAIN -->
   <div class="main">
     <div class="top"><div><h1 id="ptitle">Dashboard</h1><div class="sub" id="psub">Welcome back, Louise 👋</div></div>
-      <div class="r"><div class="search">🔍 Search students, modules…</div><div class="ic"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></div><button class="btn">+ New module</button></div>
+      <div class="r"><div class="search" style="width:360px;border-color:#e0dbff;background:var(--vsoft);color:var(--v);font-weight:600">✨ Ask AI — "write a welcome email", "make a £3k plan"…</div><div class="ic"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></div><button class="btn">+ New module</button></div>
     </div>
     <div class="wrap">
 
@@ -211,7 +245,7 @@
       <section id="classroom" class="view">
         <p class="lead">Your full curriculum — everything you do to make money online, taught step by step. Students unlock modules as they progress, earn certificates, and climb the leaderboard.</p>
         <div class="grid" style="grid-template-columns:1fr 1fr 1fr">
-          <div class="card"><div class="h"><h3 style="font-size:15px">12</h3><span class="pill">modules</span></div><div class="me" style="color:var(--mut)">92 lessons total · drip-released weekly</div></div>
+          <div class="card"><div class="h"><h3 style="font-size:15px">18</h3><span class="pill">modules</span></div><div class="me" style="color:var(--mut)">140 lessons total · drip-released weekly</div></div>
           <div class="card"><div class="h"><h3 style="font-size:15px">68%</h3><span class="pill" style="background:var(--mintsoft);color:var(--mint)">avg completion</span></div><div class="me" style="color:var(--mut)">above the 40% industry norm</div></div>
           <div class="card"><div class="h"><h3 style="font-size:15px">1,204</h3><span class="pill" style="background:var(--ambersoft);color:#b9791a">certificates</span></div><div class="me" style="color:var(--mut)">issued to students</div></div>
         </div>
@@ -333,6 +367,132 @@
         </div>
       </section>
 
+      <!-- MESSAGES -->
+      <section id="messages" class="view">
+        <p class="lead">Every chat with your students in one inbox — and the AI drafts a reply in your voice for each one. Louise reads, tweaks if she wants, and hits send. She never types from a blank box.</p>
+        <div class="inbox">
+          <div class="card" style="padding:12px">
+            <div class="h" style="padding:2px 8px 8px"><h3>Inbox</h3><span class="pill" style="background:var(--pinksoft);color:var(--pink)">3 unread</span></div>
+            <div class="thread sel"><span class="a" style="background:#7C6CF0">P</span><div><div class="nm">Priya K.</div><div class="pv">Should I niche down or stay broad?</div></div><div class="rt"><span class="tm">2m</span><span class="unread"></span></div></div>
+            <div class="thread"><span class="a" style="background:#F0567A">R</span><div><div class="nm">Reece T.</div><div class="pv">Loved module 6! Quick q on hooks…</div></div><div class="rt"><span class="tm">18m</span></div></div>
+            <div class="thread"><span class="a" style="background:#12B981">C</span><div><div class="nm">Chloe M.</div><div class="pv">Can I upgrade to VIP mid-month?</div></div><div class="rt"><span class="tm">1h</span><span class="unread"></span></div></div>
+            <div class="thread"><span class="a" style="background:#F4A63A">J</span><div><div class="nm">Jordan L.</div><div class="pv">My first brand deal came in 🎉</div></div><div class="rt"><span class="tm">3h</span></div></div>
+            <div class="thread"><span class="a" style="background:#37B6F0">A</span><div><div class="nm">Amara J.</div><div class="pv">Struggling with consistency…</div></div><div class="rt"><span class="tm">5h</span><span class="unread"></span></div></div>
+          </div>
+          <div class="card">
+            <div class="h"><div style="display:flex;align-items:center;gap:11px"><span class="a" style="width:38px;height:38px;border-radius:50%;background:#7C6CF0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800">P</span><div><div class="nm" style="font-weight:800;color:var(--ink);font-size:14px">Priya K.</div><div class="me" style="font-size:11px;color:var(--mut)">VIP member · online now</div></div></div><span class="aichip">✨ AI assist on</span></div>
+            <div class="chat">
+              <div class="msgs">
+                <div class="bubble them">Hey Louise! Should I niche down or stay broad with my content? I do fitness + lifestyle.</div>
+                <div class="bubble them">Worried niching loses followers 😅</div>
+                <div class="bubble me">You're going to love this answer…</div>
+              </div>
+              <div class="aibox">
+                <div class="lb">✨ AI drafted this reply · in your tone</div>
+                <div style="font-size:13.5px;color:var(--ink);line-height:1.55">"Great question, Priya! Niche down — it feels scary but a clear niche <b>grows faster</b>, because the algorithm knows exactly who to show you to. Keep lifestyle as your personality, but lead with fitness for the next 30 days and watch your saves climb. Want me to review your last 5 posts and pull the 3 that fit best?"</div>
+                <div style="display:flex;gap:10px;margin-top:13px;align-items:center;flex-wrap:wrap"><button class="btn">Send reply</button><button class="btn" style="background:var(--panel);color:var(--v);border:1px solid #e0dbff;box-shadow:none">✨ Regenerate</button><button class="btn" style="background:var(--panel);color:var(--mut);border:1px solid var(--line);box-shadow:none">Edit</button><span class="me" style="color:var(--mut);font-size:11.5px">Louise never types from scratch</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- AI STUDIO -->
+      <section id="aistudio" class="view">
+        <p class="lead">Louise's AI team. It writes the content, builds the courses, spins up new plans and answers students — she just approves. Anywhere she'd normally have to type, the AI does it first.</p>
+        <div class="aitools">
+          <div class="ait"><div class="e">✍️</div><h4>AI Content Writer</h4><p>Captions, hooks, posts and emails in her voice — in seconds.</p></div>
+          <div class="ait"><div class="e">🎬</div><h4>AI Video Scripts</h4><p>Full TikTok &amp; Reels scripts from a one-line idea.</p></div>
+          <div class="ait"><div class="e">📚</div><h4>AI Course Builder</h4><p>Turn any topic into a module with lessons &amp; slides.</p></div>
+          <div class="ait"><div class="e">💷</div><h4>AI Plan Builder</h4><p>Describe an offer — get a new plan, checkout &amp; page.</p></div>
+          <div class="ait"><div class="e">💬</div><h4>AI Reply Assistant</h4><p>Drafts every student DM &amp; comment reply for her.</p></div>
+          <div class="ait"><div class="e">🎓</div><h4>AI Student Coach</h4><p>Answers students 24/7 so Louise doesn't have to.</p></div>
+          <div class="ait"><div class="e">✉️</div><h4>AI Email Sequences</h4><p>Writes whole welcome &amp; win-back flows automatically.</p></div>
+          <div class="ait"><div class="e">📈</div><h4>AI Insights</h4><p>Reads the numbers and tells her the next move.</p></div>
+        </div>
+        <div class="card" style="margin-top:18px">
+          <div class="h"><h3>Live demo · create a new plan without typing a page</h3><span class="aichip">✨ AI Plan Builder</span></div>
+          <div class="aibox" style="border-style:solid;border-color:var(--line);background:var(--bg)"><div class="lb" style="color:var(--mut)">Louise typed once</div><div style="font-size:13.5px;color:var(--ink)">"Create a new plan called <b>Accelerator</b> — £3,000, 8 weeks, weekly group calls + a 1:1 kickoff."</div></div>
+          <div style="text-align:center;color:var(--v);font-weight:800;margin:12px 0">↓ &nbsp; AI built all of this &nbsp; ↓</div>
+          <div class="grid" style="grid-template-columns:1fr 1fr">
+            <div class="plan feat"><div class="badge">New · live</div><div class="pn">Accelerator</div><div class="pr">£3,000</div><div class="me" style="color:var(--mut)">8-week programme · or 3× £1,000</div><ul><li>Weekly group coaching calls</li><li>1:1 kickoff with Louise</li><li>All 18 modules unlocked</li><li>Private Accelerator community</li><li>Certificate on completion</li></ul></div>
+            <div>
+              <div class="card" style="box-shadow:none;margin-bottom:12px"><div class="lb" style="color:var(--v);font-size:11px;font-weight:800;text-transform:uppercase;margin-bottom:6px">✨ Auto-generated</div><div style="font-size:13px;color:var(--text);line-height:1.5"><b>✓ Checkout page</b> built &amp; live<br><b>✓ Sales page</b> written<br><b>✓ Welcome email</b> drafted<br><b>✓ 8-week curriculum</b> mapped<br><b>✓ Commission</b> applied (70/30)</div></div>
+              <div class="note">Louise wrote one sentence. The AI created the plan, the pages, the emails and the schedule — ready to launch in a click.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- AUTOMATIONS -->
+      <section id="automations" class="view">
+        <p class="lead">Set once, runs forever. The AI handles the follow-ups, the nudges and the upsells in the background — so the academy keeps selling and retaining while Louise films content.</p>
+        <div class="card">
+          <div class="h"><h3>Active automations</h3><span class="pill" style="background:var(--mintsoft);color:var(--mint)">8 running</span></div>
+          <div class="auto"><div class="e">👋</div><div style="flex:1"><div class="nm">Welcome sequence <span class="aichip">✨ AI-written</span></div><div class="me">5 emails over 7 days · onboards every new member</div></div><div class="me" style="color:var(--mut);text-align:right">1,842 sent<br>68% open</div><div class="switch"></div></div>
+          <div class="auto"><div class="e">💔</div><div style="flex:1"><div class="nm">Churn win-back <span class="aichip">✨ AI reaches out</span></div><div class="me">Spots at-risk members and re-engages them</div></div><div class="me" style="color:var(--mut);text-align:right">64 saved<br>this month</div><div class="switch"></div></div>
+          <div class="auto"><div class="e">⬆️</div><div style="flex:1"><div class="nm">Upsell to VIP <span class="aichip">✨ AI-timed</span></div><div class="me">Offers the upgrade at the perfect moment</div></div><div class="me" style="color:var(--mut);text-align:right">£9,600<br>added /mo</div><div class="switch"></div></div>
+          <div class="auto"><div class="e">🛒</div><div style="flex:1"><div class="nm">Abandoned checkout</div><div class="me">AI follow-up recovers dropped sales</div></div><div class="me" style="color:var(--mut);text-align:right">22% recovered</div><div class="switch"></div></div>
+          <div class="auto"><div class="e">🔔</div><div style="flex:1"><div class="nm">Inactivity nudge</div><div class="me">Re-engages members who haven't logged in</div></div><div class="me" style="color:var(--mut);text-align:right">running</div><div class="switch"></div></div>
+          <div class="auto"><div class="e">🎓</div><div style="flex:1"><div class="nm">Auto-certificate</div><div class="me">Issues a certificate the moment a module is finished</div></div><div class="me" style="color:var(--mut);text-align:right">1,204 issued</div><div class="switch"></div></div>
+          <div class="auto"><div class="e">📅</div><div style="flex:1"><div class="nm">Weekly content drip</div><div class="me">Releases the next lesson every Monday, 8am</div></div><div class="me" style="color:var(--mut);text-align:right">scheduled</div><div class="switch"></div></div>
+          <div class="auto"><div class="e">💤</div><div style="flex:1"><div class="nm">Birthday &amp; milestone messages</div><div class="me">AI sends a personal note on the big days</div></div><div class="me" style="color:var(--mut);text-align:right">off</div><div class="switch off"></div></div>
+        </div>
+      </section>
+
+      <!-- ANALYTICS -->
+      <section id="analytics" class="view">
+        <div class="card" style="margin-bottom:18px;border-left:4px solid var(--v);background:var(--vsoft)"><div class="lb" style="color:var(--v);font-size:11px;font-weight:800;text-transform:uppercase;margin-bottom:6px">✨ AI insight · read for you</div><div style="font-size:14.5px;color:var(--ink);line-height:1.5">Your <b>VIP tier converts 3× better</b> when members attend the first live call. AI suggests moving the welcome call to <b>day 2</b> — projected to lift VIP retention by ~9%. <span style="color:var(--v);font-weight:700">Apply change →</span></div></div>
+        <div class="kpis">
+          <div class="kpi"><span class="cap">Avg. watch time</span><div class="v">14m</div><div class="s">per session ▲ 11%</div></div>
+          <div class="kpi"><span class="cap">Completion rate</span><div class="v">68%</div><div class="s">vs 40% industry</div></div>
+          <div class="kpi"><span class="cap">30-day retention</span><div class="v">82%</div><div class="s">▲ 4 pts</div></div>
+          <div class="kpi"><span class="cap">Refund rate</span><div class="v">1.8%</div><div class="s">very low</div></div>
+        </div>
+        <div class="grid" style="grid-template-columns:1.5fr 1fr">
+          <div class="card">
+            <div class="h"><h3>Active members by week</h3><span class="mo">illustrative</span></div>
+            <svg viewBox="0 0 620 220" style="width:100%;height:auto">
+              <g fill="#7C6CF0">
+                <rect x="30" y="150" width="34" height="50" rx="5"/><rect x="82" y="132" width="34" height="68" rx="5"/><rect x="134" y="140" width="34" height="60" rx="5"/><rect x="186" y="118" width="34" height="82" rx="5"/><rect x="238" y="104" width="34" height="96" rx="5"/><rect x="290" y="112" width="34" height="88" rx="5"/><rect x="342" y="86" width="34" height="114" rx="5"/><rect x="394" y="70" width="34" height="130" rx="5"/><rect x="446" y="58" width="34" height="142" rx="5"/>
+                <rect x="498" y="44" width="34" height="156" rx="5" fill="#F0567A"/><rect x="550" y="30" width="34" height="170" rx="5" fill="#F0567A"/>
+              </g>
+              <line x1="20" y1="200" x2="600" y2="200" stroke="#ECEBF3" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="card">
+            <div class="h"><h3>Where members come from</h3></div>
+            <div style="font-size:13px;display:flex;flex-direction:column;gap:12px;margin-top:6px">
+              <div><div style="display:flex;justify-content:space-between;margin-bottom:5px"><span>TikTok</span><b>58%</b></div><div class="prog"><span style="width:58%"></span></div></div>
+              <div><div style="display:flex;justify-content:space-between;margin-bottom:5px"><span>Instagram</span><b>22%</b></div><div class="prog"><span style="width:22%"></span></div></div>
+              <div><div style="display:flex;justify-content:space-between;margin-bottom:5px"><span>Student referrals</span><b>14%</b></div><div class="prog"><span style="width:14%"></span></div></div>
+              <div><div style="display:flex;justify-content:space-between;margin-bottom:5px"><span>YouTube</span><b>6%</b></div><div class="prog"><span style="width:6%"></span></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- AFFILIATES -->
+      <section id="affiliates" class="view">
+        <p class="lead">Turn your students into your marketing team. Every member gets a referral link and earns commission for anyone they bring in — new students at zero ad cost, and it runs itself.</p>
+        <div class="kpis">
+          <div class="kpi"><span class="cap">Active affiliates</span><div class="v">486</div><div class="s">students sharing their link</div></div>
+          <div class="kpi"><span class="cap">Referred members</span><div class="v">312</div><div class="s">joined via a referral</div></div>
+          <div class="kpi"><span class="cap">Referral revenue</span><div class="v">£74,200</div><div class="s">▲ 21% this quarter</div></div>
+          <div class="kpi"><span class="cap">Paid to affiliates</span><div class="v">£11,130</div><div class="s">15% commission</div></div>
+        </div>
+        <div class="card">
+          <div class="h"><h3>Top referrers</h3><span class="pill">this month</span></div>
+          <table><thead><tr><th>Student</th><th>Referrals</th><th>Converted</th><th>Earned</th><th>Status</th></tr></thead><tbody>
+            <tr><td><span class="u"><span class="a" style="background:#7C6CF0">P</span><span class="n">Priya K.</span></span></td><td>34</td><td>21</td><td><b>£2,940</b></td><td><span class="tag t-mint">Top 1%</span></td></tr>
+            <tr><td><span class="u"><span class="a" style="background:#F0567A">R</span><span class="n">Reece T.</span></span></td><td>28</td><td>16</td><td><b>£2,240</b></td><td><span class="tag t-v">Star</span></td></tr>
+            <tr><td><span class="u"><span class="a" style="background:#12B981">C</span><span class="n">Chloe M.</span></span></td><td>19</td><td>12</td><td><b>£1,680</b></td><td><span class="tag t-v">Star</span></td></tr>
+            <tr><td><span class="u"><span class="a" style="background:#F4A63A">J</span><span class="n">Jordan L.</span></span></td><td>15</td><td>9</td><td><b>£1,260</b></td><td><span class="tag t-amber">Rising</span></td></tr>
+            <tr><td><span class="u"><span class="a" style="background:#37B6F0">A</span><span class="n">Amara J.</span></span></td><td>11</td><td>7</td><td><b>£980</b></td><td><span class="tag t-amber">Rising</span></td></tr>
+          </tbody></table>
+        </div>
+      </section>
+
       <!-- SETTINGS -->
       <section id="settings" class="view">
         <p class="lead">Your academy, your brand. Everything is white-labelled to Louise Thomson — your name, your domain, your look. GroAI runs the tech behind it.</p>
@@ -365,7 +525,13 @@
     ['09','Sponsorships &amp; Rate Negotiation','5 lessons',540,44,'t-v'],
     ['10','AI Tools For Creators','7 lessons',1120,63,'t-pink'],
     ['11','Mindset &amp; Consistency','6 lessons',1300,78,'t-mint'],
-    ['12','Business, Tax &amp; Setup','5 lessons',610,40,'t-amber']
+    ['12','Business, Tax &amp; Setup','5 lessons',610,40,'t-amber'],
+    ['13','Faceless Content Systems','7 lessons',880,52,'t-v'],
+    ['14','Brand Deals &amp; UGC','9 lessons',940,57,'t-pink'],
+    ['15','YouTube Long-Form','8 lessons',560,43,'t-mint'],
+    ['16','Email List &amp; Funnels','7 lessons',700,46,'t-amber'],
+    ['17','TikTok LIVE Selling','6 lessons',820,50,'t-v'],
+    ['18','Scaling To An Agency','6 lessons',390,38,'t-pink']
   ];
   document.getElementById('modlist').innerHTML = mods.map(function(m){
     return '<div class="mod"><div class="nu">'+m[0]+'</div><div style="flex:1"><div class="nm">'+m[1]+'</div><div class="me">'+m[2]+' · '+m[3].toLocaleString()+' enrolled</div></div><div class="rt"><div class="prog"><span style="width:'+m[4]+'%"></span></div><div class="me" style="margin-top:5px">'+m[4]+'% complete</div></div></div>';
