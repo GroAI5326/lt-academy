@@ -171,6 +171,26 @@
     .chat{min-height:360px}
   }
   @media(max-width:480px){ .kpis{grid-template-columns:1fr!important} .top .btn{display:none} .cal{gap:4px} .cal .day{min-height:52px;padding:4px;font-size:11px} .cal .ev{display:none} }
+  /* interactive: modal, toast, forms */
+  .search{cursor:pointer} .switch,.ait,.thread,.evrow .btn{cursor:pointer}
+  .modalbg{display:none;position:fixed;inset:0;background:rgba(10,8,20,.55);z-index:100;align-items:center;justify-content:center;padding:20px}
+  .modalbg.open{display:flex}
+  .modal{background:var(--panel);border-radius:18px;max-width:580px;width:100%;max-height:90vh;overflow:auto;box-shadow:0 30px 80px rgba(0,0,0,.4)}
+  .modal .mh{display:flex;justify-content:space-between;align-items:center;padding:20px 24px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--panel)}
+  .modal .mh h3{font-size:18px} .modal .mh .x{cursor:pointer;color:var(--mut);font-size:22px;background:none;border:none;line-height:1}
+  .modal .mb{padding:20px 24px} .modal .mf{padding:16px 24px;border-top:1px solid var(--line);display:flex;gap:10px;justify-content:flex-end;position:sticky;bottom:0;background:var(--panel)}
+  .fl label{font-size:12px;font-weight:700;color:var(--ink);display:block;margin:14px 0 6px} .fl:first-child label{margin-top:0}
+  .inp,.modal textarea,.modal select{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 13px;font-size:14px;font-family:inherit;color:var(--ink);background:var(--bg)}
+  .modal textarea{min-height:96px;resize:vertical}
+  .inp:focus,.modal textarea:focus,.modal select:focus{outline:none;border-color:var(--v);box-shadow:0 0 0 3px var(--vsoft)}
+  .btn2{background:var(--panel);color:var(--v);border:1px solid #e0dbff;border-radius:10px;padding:10px 16px;font-weight:700;font-size:13px;cursor:pointer}
+  .btn3{background:var(--bg);color:var(--mut);border:1px solid var(--line);border-radius:10px;padding:10px 16px;font-weight:700;font-size:13px;cursor:pointer}
+  .out{background:var(--vsoft);border:1px solid #e0dbff;border-radius:12px;padding:14px 16px;font-size:13.5px;color:var(--ink);line-height:1.6;white-space:pre-wrap;min-height:70px;margin-top:6px}
+  .spin{width:15px;height:15px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;display:inline-block;animation:sp .7s linear infinite;vertical-align:-2px}
+  .out .spin{border-color:var(--vsoft);border-top-color:var(--v)}
+  @keyframes sp{to{transform:rotate(360deg)}}
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(24px);background:var(--ink);color:#fff;padding:13px 20px;border-radius:12px;font-size:13.5px;font-weight:600;z-index:200;opacity:0;transition:.25s;box-shadow:0 14px 34px rgba(0,0,0,.35);pointer-events:none;max-width:90vw}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
@@ -207,7 +227,7 @@
   <!-- MAIN -->
   <div class="main">
     <div class="top"><div style="display:flex;align-items:center"><button class="burger" onclick="toggleNav()">☰</button><div><h1 id="ptitle">Dashboard</h1><div class="sub" id="psub">Welcome back, Louise 👋</div></div></div>
-      <div class="r"><div class="search" style="width:360px;border-color:#e0dbff;background:var(--vsoft);color:var(--v);font-weight:600">✨ Ask AI — "write a welcome email", "make a £3k plan"…</div><div class="ic"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></div><button class="btn">+ New module</button></div>
+      <div class="r"><div class="search" onclick="openAI()" style="width:360px;border-color:#e0dbff;background:var(--vsoft);color:var(--v);font-weight:600">✨ Ask AI — "write a welcome email", "make a £3k plan"…</div><div class="ic" onclick="toast('You&#39;re all caught up ✨')"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></div><button class="btn" onclick="addModuleModal()">+ New module</button></div>
     </div>
     <div class="wrap">
 
@@ -292,12 +312,12 @@
       <section id="classroom" class="view">
         <p class="lead">Your full curriculum — everything you do to make money online, taught step by step. Students unlock modules as they progress, earn certificates, and climb the leaderboard.</p>
         <div class="grid" style="grid-template-columns:1fr 1fr 1fr">
-          <div class="card"><div class="h"><h3 style="font-size:15px">18</h3><span class="pill">modules</span></div><div class="me" style="color:var(--mut)">140 lessons total · drip-released weekly</div></div>
+          <div class="card"><div class="h"><h3 style="font-size:15px" id="modcount">18</h3><span class="pill">modules</span></div><div class="me" style="color:var(--mut)"><span id="lesscount">140</span> lessons total · drip-released weekly</div></div>
           <div class="card"><div class="h"><h3 style="font-size:15px">68%</h3><span class="pill" style="background:var(--mintsoft);color:var(--mint)">avg completion</span></div><div class="me" style="color:var(--mut)">above the 40% industry norm</div></div>
           <div class="card"><div class="h"><h3 style="font-size:15px">1,204</h3><span class="pill" style="background:var(--ambersoft);color:#b9791a">certificates</span></div><div class="me" style="color:var(--mut)">issued to students</div></div>
         </div>
         <div class="card" style="margin-top:18px">
-          <div class="h"><h3>Training modules</h3><button class="btn">+ Add module</button></div>
+          <div class="h"><h3>Training modules</h3><button class="btn" onclick="addModuleModal()">+ Add module</button></div>
           <div id="modlist"></div>
         </div>
       </section>
@@ -311,7 +331,7 @@
           <div class="kpi"><span class="cap">Monthly churn</span><div class="v">4.2%</div><div class="s">below 6% benchmark</div></div>
         </div>
         <div class="card">
-          <div class="h"><h3>Students</h3><span class="mo">1,842 total · showing recent</span></div>
+          <div class="h"><h3>Students</h3><button class="btn2" onclick="openAI('students')">✉️ Email all students</button></div>
           <table><thead><tr><th>Student</th><th>Plan</th><th>Joined</th><th>Progress</th><th>Spent</th><th>Status</th></tr></thead><tbody id="stulist"></tbody></table>
         </div>
       </section>
@@ -396,20 +416,14 @@
       <section id="creators" class="view">
         <p class="lead">Your network. Recruit other creators onto their own academy — GroAI builds each one, they earn 20%, and you take a <b>10% override</b> on everything they generate. Your income grows without you lifting a finger.</p>
         <div class="kpis" style="grid-template-columns:repeat(3,1fr)">
-          <div class="kpi"><span class="cap">Creators in your network</span><div class="v">5</div><div class="s">3 more onboarding</div></div>
-          <div class="kpi"><span class="cap">Network revenue</span><div class="v">£82,000</div><div class="s">their gross this month</div></div>
-          <div class="kpi"><span class="cap">Your override income</span><div class="v" style="color:var(--mint)">£8,200</div><div class="s">10% · this month</div></div>
+          <div class="kpi"><span class="cap">Creators in your network</span><div class="v" id="cCount">5</div><div class="s">growing every month</div></div>
+          <div class="kpi"><span class="cap">Network revenue</span><div class="v" id="cRev">£82,000</div><div class="s">their gross this month</div></div>
+          <div class="kpi"><span class="cap">Your override income</span><div class="v" id="cOver" style="color:var(--mint)">£8,200</div><div class="s">10% · this month</div></div>
         </div>
         <div class="card">
-          <div class="h"><h3>Your creators</h3><button class="btn">+ Invite creator</button></div>
+          <div class="h"><h3>Your creators</h3><div style="display:flex;gap:10px"><button class="btn2" onclick="openAI('creator')">💬 Message creators</button><button class="btn" onclick="inviteCreatorModal()">+ Invite creator</button></div></div>
           <table><thead><tr><th>Creator</th><th>Niche</th><th>Members</th><th>Their gross /mo</th><th>Your 10%</th><th>Status</th></tr></thead>
-          <tbody>
-            <tr><td><span class="u"><span class="a" style="background:#F0567A">M</span><span class="n">Mia K.</span></span></td><td>Beauty</td><td>420</td><td>£24,000</td><td><b style="color:var(--mint)">£2,400</b></td><td><span class="tag t-mint">Live</span></td></tr>
-            <tr><td><span class="u"><span class="a" style="background:#7C6CF0">J</span><span class="n">Jordan T.</span></span></td><td>Fitness</td><td>310</td><td>£18,000</td><td><b style="color:var(--mint)">£1,800</b></td><td><span class="tag t-mint">Live</span></td></tr>
-            <tr><td><span class="u"><span class="a" style="background:#12B981">A</span><span class="n">Amara L.</span></span></td><td>Fashion</td><td>260</td><td>£14,000</td><td><b style="color:var(--mint)">£1,400</b></td><td><span class="tag t-mint">Live</span></td></tr>
-            <tr><td><span class="u"><span class="a" style="background:#F4A63A">S</span><span class="n">Sofia R.</span></span></td><td>Food</td><td>180</td><td>£16,000</td><td><b style="color:var(--mint)">£1,600</b></td><td><span class="tag t-mint">Live</span></td></tr>
-            <tr><td><span class="u"><span class="a" style="background:#37B6F0">K</span><span class="n">Kai N.</span></span></td><td>Tech</td><td>140</td><td>£10,000</td><td><b style="color:var(--mint)">£1,000</b></td><td><span class="tag t-amber">Launching</span></td></tr>
-          </tbody></table>
+          <tbody id="creatorlist"></tbody></table>
           <div class="note" style="margin-top:16px">Ten creators at this rate would add <b>£16k+ a month</b> to your income — on top of your own academy. This is how a creator becomes a business.</div>
         </div>
       </section>
@@ -419,28 +433,10 @@
         <p class="lead">Every chat with your students in one inbox — and the AI drafts a reply in your voice for each one. Louise reads, tweaks if she wants, and hits send. She never types from a blank box.</p>
         <div class="inbox">
           <div class="card" style="padding:12px">
-            <div class="h" style="padding:2px 8px 8px"><h3>Inbox</h3><span class="pill" style="background:var(--pinksoft);color:var(--pink)">3 unread</span></div>
-            <div class="thread sel"><span class="a" style="background:#7C6CF0">P</span><div><div class="nm">Priya K.</div><div class="pv">Should I niche down or stay broad?</div></div><div class="rt"><span class="tm">2m</span><span class="unread"></span></div></div>
-            <div class="thread"><span class="a" style="background:#F0567A">R</span><div><div class="nm">Reece T.</div><div class="pv">Loved module 6! Quick q on hooks…</div></div><div class="rt"><span class="tm">18m</span></div></div>
-            <div class="thread"><span class="a" style="background:#12B981">C</span><div><div class="nm">Chloe M.</div><div class="pv">Can I upgrade to VIP mid-month?</div></div><div class="rt"><span class="tm">1h</span><span class="unread"></span></div></div>
-            <div class="thread"><span class="a" style="background:#F4A63A">J</span><div><div class="nm">Jordan L.</div><div class="pv">My first brand deal came in 🎉</div></div><div class="rt"><span class="tm">3h</span></div></div>
-            <div class="thread"><span class="a" style="background:#37B6F0">A</span><div><div class="nm">Amara J.</div><div class="pv">Struggling with consistency…</div></div><div class="rt"><span class="tm">5h</span><span class="unread"></span></div></div>
+            <div class="h" style="padding:2px 8px 10px"><h3>Inbox</h3><button class="btn2" onclick="openAI('client')">+ New message</button></div>
+            <div id="inboxlist"></div>
           </div>
-          <div class="card">
-            <div class="h"><div style="display:flex;align-items:center;gap:11px"><span class="a" style="width:38px;height:38px;border-radius:50%;background:#7C6CF0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800">P</span><div><div class="nm" style="font-weight:800;color:var(--ink);font-size:14px">Priya K.</div><div class="me" style="font-size:11px;color:var(--mut)">VIP member · online now</div></div></div><span class="aichip">✨ AI assist on</span></div>
-            <div class="chat">
-              <div class="msgs">
-                <div class="bubble them">Hey Louise! Should I niche down or stay broad with my content? I do fitness + lifestyle.</div>
-                <div class="bubble them">Worried niching loses followers 😅</div>
-                <div class="bubble me">You're going to love this answer…</div>
-              </div>
-              <div class="aibox">
-                <div class="lb">✨ AI drafted this reply · in your tone</div>
-                <div style="font-size:13.5px;color:var(--ink);line-height:1.55">"Great question, Priya! Niche down — it feels scary but a clear niche <b>grows faster</b>, because the algorithm knows exactly who to show you to. Keep lifestyle as your personality, but lead with fitness for the next 30 days and watch your saves climb. Want me to review your last 5 posts and pull the 3 that fit best?"</div>
-                <div style="display:flex;gap:10px;margin-top:13px;align-items:center;flex-wrap:wrap"><button class="btn">Send reply</button><button class="btn" style="background:var(--panel);color:var(--v);border:1px solid #e0dbff;box-shadow:none">✨ Regenerate</button><button class="btn" style="background:var(--panel);color:var(--mut);border:1px solid var(--line);box-shadow:none">Edit</button><span class="me" style="color:var(--mut);font-size:11.5px">Louise never types from scratch</span></div>
-              </div>
-            </div>
-          </div>
+          <div class="card" id="chatpane"></div>
         </div>
       </section>
 
@@ -448,14 +444,14 @@
       <section id="aistudio" class="view">
         <p class="lead">Louise's AI team. It writes the content, builds the courses, spins up new plans and answers students — she just approves. Anywhere she'd normally have to type, the AI does it first.</p>
         <div class="aitools">
-          <div class="ait"><div class="e">✍️</div><h4>AI Content Writer</h4><p>Captions, hooks, posts and emails in her voice — in seconds.</p></div>
-          <div class="ait"><div class="e">🎬</div><h4>AI Video Scripts</h4><p>Full TikTok &amp; Reels scripts from a one-line idea.</p></div>
-          <div class="ait"><div class="e">📚</div><h4>AI Course Builder</h4><p>Turn any topic into a module with lessons &amp; slides.</p></div>
-          <div class="ait"><div class="e">💷</div><h4>AI Plan Builder</h4><p>Describe an offer — get a new plan, checkout &amp; page.</p></div>
-          <div class="ait"><div class="e">💬</div><h4>AI Reply Assistant</h4><p>Drafts every student DM &amp; comment reply for her.</p></div>
-          <div class="ait"><div class="e">🎓</div><h4>AI Student Coach</h4><p>Answers students 24/7 so Louise doesn't have to.</p></div>
-          <div class="ait"><div class="e">✉️</div><h4>AI Email Sequences</h4><p>Writes whole welcome &amp; win-back flows automatically.</p></div>
-          <div class="ait"><div class="e">📈</div><h4>AI Insights</h4><p>Reads the numbers and tells her the next move.</p></div>
+          <div class="ait" onclick="openAITool(this)"><div class="e">✍️</div><h4>AI Content Writer</h4><p>Captions, hooks, posts and emails in her voice — in seconds.</p></div>
+          <div class="ait" onclick="openAITool(this)"><div class="e">🎬</div><h4>AI Video Scripts</h4><p>Full TikTok &amp; Reels scripts from a one-line idea.</p></div>
+          <div class="ait" onclick="openAITool(this)"><div class="e">📚</div><h4>AI Course Builder</h4><p>Turn any topic into a module with lessons &amp; slides.</p></div>
+          <div class="ait" onclick="openAITool(this)"><div class="e">💷</div><h4>AI Plan Builder</h4><p>Describe an offer — get a new plan, checkout &amp; page.</p></div>
+          <div class="ait" onclick="openAITool(this)"><div class="e">💬</div><h4>AI Reply Assistant</h4><p>Drafts every student DM &amp; comment reply for her.</p></div>
+          <div class="ait" onclick="openAITool(this)"><div class="e">🎓</div><h4>AI Student Coach</h4><p>Answers students 24/7 so Louise doesn't have to.</p></div>
+          <div class="ait" onclick="openAITool(this)"><div class="e">✉️</div><h4>AI Email Sequences</h4><p>Writes whole welcome &amp; win-back flows automatically.</p></div>
+          <div class="ait" onclick="openAITool(this)"><div class="e">📈</div><h4>AI Insights</h4><p>Reads the numbers and tells her the next move.</p></div>
         </div>
         <div class="card" style="margin-top:18px">
           <div class="h"><h3>Live demo · create a new plan without typing a page</h3><span class="aichip">✨ AI Plan Builder</span></div>
@@ -476,20 +472,20 @@
         <p class="lead">Set once, runs forever. The AI handles the follow-ups, the nudges and the upsells in the background — so the academy keeps selling and retaining while Louise films content.</p>
         <div class="card">
           <div class="h"><h3>Active automations</h3><span class="pill" style="background:var(--mintsoft);color:var(--mint)">8 running</span></div>
-          <div class="auto"><div class="e">👋</div><div style="flex:1"><div class="nm">Welcome sequence <span class="aichip">✨ AI-written</span></div><div class="me">5 emails over 7 days · onboards every new member</div></div><div class="me" style="color:var(--mut);text-align:right">1,842 sent<br>68% open</div><div class="switch"></div></div>
-          <div class="auto"><div class="e">💔</div><div style="flex:1"><div class="nm">Churn win-back <span class="aichip">✨ AI reaches out</span></div><div class="me">Spots at-risk members and re-engages them</div></div><div class="me" style="color:var(--mut);text-align:right">64 saved<br>this month</div><div class="switch"></div></div>
-          <div class="auto"><div class="e">⬆️</div><div style="flex:1"><div class="nm">Upsell to VIP <span class="aichip">✨ AI-timed</span></div><div class="me">Offers the upgrade at the perfect moment</div></div><div class="me" style="color:var(--mut);text-align:right">£9,600<br>added /mo</div><div class="switch"></div></div>
-          <div class="auto"><div class="e">🛒</div><div style="flex:1"><div class="nm">Abandoned checkout</div><div class="me">AI follow-up recovers dropped sales</div></div><div class="me" style="color:var(--mut);text-align:right">22% recovered</div><div class="switch"></div></div>
-          <div class="auto"><div class="e">🔔</div><div style="flex:1"><div class="nm">Inactivity nudge</div><div class="me">Re-engages members who haven't logged in</div></div><div class="me" style="color:var(--mut);text-align:right">running</div><div class="switch"></div></div>
-          <div class="auto"><div class="e">🎓</div><div style="flex:1"><div class="nm">Auto-certificate</div><div class="me">Issues a certificate the moment a module is finished</div></div><div class="me" style="color:var(--mut);text-align:right">1,204 issued</div><div class="switch"></div></div>
-          <div class="auto"><div class="e">📅</div><div style="flex:1"><div class="nm">Weekly content drip</div><div class="me">Releases the next lesson every Monday, 8am</div></div><div class="me" style="color:var(--mut);text-align:right">scheduled</div><div class="switch"></div></div>
-          <div class="auto"><div class="e">💤</div><div style="flex:1"><div class="nm">Birthday &amp; milestone messages</div><div class="me">AI sends a personal note on the big days</div></div><div class="me" style="color:var(--mut);text-align:right">off</div><div class="switch off"></div></div>
+          <div class="auto"><div class="e">👋</div><div style="flex:1"><div class="nm">Welcome sequence <span class="aichip">✨ AI-written</span></div><div class="me">5 emails over 7 days · onboards every new member</div></div><div class="me" style="color:var(--mut);text-align:right">1,842 sent<br>68% open</div><div class="switch" onclick="toggleAuto(this)"></div></div>
+          <div class="auto"><div class="e">💔</div><div style="flex:1"><div class="nm">Churn win-back <span class="aichip">✨ AI reaches out</span></div><div class="me">Spots at-risk members and re-engages them</div></div><div class="me" style="color:var(--mut);text-align:right">64 saved<br>this month</div><div class="switch" onclick="toggleAuto(this)"></div></div>
+          <div class="auto"><div class="e">⬆️</div><div style="flex:1"><div class="nm">Upsell to VIP <span class="aichip">✨ AI-timed</span></div><div class="me">Offers the upgrade at the perfect moment</div></div><div class="me" style="color:var(--mut);text-align:right">£9,600<br>added /mo</div><div class="switch" onclick="toggleAuto(this)"></div></div>
+          <div class="auto"><div class="e">🛒</div><div style="flex:1"><div class="nm">Abandoned checkout</div><div class="me">AI follow-up recovers dropped sales</div></div><div class="me" style="color:var(--mut);text-align:right">22% recovered</div><div class="switch" onclick="toggleAuto(this)"></div></div>
+          <div class="auto"><div class="e">🔔</div><div style="flex:1"><div class="nm">Inactivity nudge</div><div class="me">Re-engages members who haven't logged in</div></div><div class="me" style="color:var(--mut);text-align:right">running</div><div class="switch" onclick="toggleAuto(this)"></div></div>
+          <div class="auto"><div class="e">🎓</div><div style="flex:1"><div class="nm">Auto-certificate</div><div class="me">Issues a certificate the moment a module is finished</div></div><div class="me" style="color:var(--mut);text-align:right">1,204 issued</div><div class="switch" onclick="toggleAuto(this)"></div></div>
+          <div class="auto"><div class="e">📅</div><div style="flex:1"><div class="nm">Weekly content drip</div><div class="me">Releases the next lesson every Monday, 8am</div></div><div class="me" style="color:var(--mut);text-align:right">scheduled</div><div class="switch" onclick="toggleAuto(this)"></div></div>
+          <div class="auto"><div class="e">💤</div><div style="flex:1"><div class="nm">Birthday &amp; milestone messages</div><div class="me">AI sends a personal note on the big days</div></div><div class="me" style="color:var(--mut);text-align:right">off</div><div class="switch off" onclick="toggleAuto(this)"></div></div>
         </div>
       </section>
 
       <!-- ANALYTICS -->
       <section id="analytics" class="view">
-        <div class="card" style="margin-bottom:18px;border-left:4px solid var(--v);background:var(--vsoft)"><div class="lb" style="color:var(--v);font-size:11px;font-weight:800;text-transform:uppercase;margin-bottom:6px">✨ AI insight · read for you</div><div style="font-size:14.5px;color:var(--ink);line-height:1.5">Your <b>VIP tier converts 3× better</b> when members attend the first live call. AI suggests moving the welcome call to <b>day 2</b> — projected to lift VIP retention by ~9%. <span style="color:var(--v);font-weight:700">Apply change →</span></div></div>
+        <div class="card" style="margin-bottom:18px;border-left:4px solid var(--v);background:var(--vsoft)"><div class="lb" style="color:var(--v);font-size:11px;font-weight:800;text-transform:uppercase;margin-bottom:6px">✨ AI insight · read for you</div><div style="font-size:14.5px;color:var(--ink);line-height:1.5">Your <b>VIP tier converts 3× better</b> when members attend the first live call. AI suggests moving the welcome call to <b>day 2</b> — projected to lift VIP retention by ~9%. <span onclick="applyInsight()" style="color:var(--v);font-weight:700;cursor:pointer">Apply change →</span></div></div>
         <div class="kpis">
           <div class="kpi"><span class="cap">Avg. watch time</span><div class="v">14m</div><div class="s">per session ▲ 11%</div></div>
           <div class="kpi"><span class="cap">Completion rate</span><div class="v">68%</div><div class="s">vs 40% industry</div></div>
@@ -553,11 +549,11 @@
           </div>
           <div class="card">
             <div class="h"><h3>Upcoming</h3><span class="pill" style="background:var(--mintsoft);color:var(--mint)">RSVP open</span></div>
-            <div class="evrow"><div class="db" style="background:var(--vsoft);color:var(--v)"><div class="d">03</div><div class="m">Oct</div></div><div style="flex:1"><div class="nm">Weekly Coaching Call</div><div class="me">Thu · 7:00pm · 420 going</div></div><button class="btn" style="padding:8px 14px">RSVP</button></div>
-            <div class="evrow"><div class="db" style="background:var(--pinksoft);color:var(--pink)"><div class="d">09</div><div class="m">Oct</div></div><div style="flex:1"><div class="nm">Guest Expert: Landing Brand Deals</div><div class="me">Wed · 6:00pm · 380 going</div></div><button class="btn" style="padding:8px 14px">RSVP</button></div>
-            <div class="evrow"><div class="db" style="background:var(--mintsoft);color:var(--mint)"><div class="d">16</div><div class="m">Oct</div></div><div style="flex:1"><div class="nm">Live Q&amp;A with Louise</div><div class="me">Wed · 7:00pm · 512 going</div></div><button class="btn" style="padding:8px 14px">RSVP</button></div>
-            <div class="evrow"><div class="db" style="background:var(--ambersoft);color:#b9791a"><div class="d">24</div><div class="m">Oct</div></div><div style="flex:1"><div class="nm">VIP Mastermind <span class="tag t-amber" style="margin-left:4px">VIP</span></div><div class="me">Thu · 5:00pm · 60 seats</div></div><button class="btn" style="padding:8px 14px">RSVP</button></div>
-            <div class="evrow"><div class="db" style="background:#e6f6fd;color:#1f8fc4"><div class="d">30</div><div class="m">Oct</div></div><div style="flex:1"><div class="nm">New Course Launch Party</div><div class="me">Fri · 7:00pm · 1,200 invited</div></div><button class="btn" style="padding:8px 14px">RSVP</button></div>
+            <div class="evrow"><div class="db" style="background:var(--vsoft);color:var(--v)"><div class="d">03</div><div class="m">Oct</div></div><div style="flex:1"><div class="nm">Weekly Coaching Call</div><div class="me">Thu · 7:00pm · 420 going</div></div><button class="btn" style="padding:8px 14px" onclick="rsvp(this)">RSVP</button></div>
+            <div class="evrow"><div class="db" style="background:var(--pinksoft);color:var(--pink)"><div class="d">09</div><div class="m">Oct</div></div><div style="flex:1"><div class="nm">Guest Expert: Landing Brand Deals</div><div class="me">Wed · 6:00pm · 380 going</div></div><button class="btn" style="padding:8px 14px" onclick="rsvp(this)">RSVP</button></div>
+            <div class="evrow"><div class="db" style="background:var(--mintsoft);color:var(--mint)"><div class="d">16</div><div class="m">Oct</div></div><div style="flex:1"><div class="nm">Live Q&amp;A with Louise</div><div class="me">Wed · 7:00pm · 512 going</div></div><button class="btn" style="padding:8px 14px" onclick="rsvp(this)">RSVP</button></div>
+            <div class="evrow"><div class="db" style="background:var(--ambersoft);color:#b9791a"><div class="d">24</div><div class="m">Oct</div></div><div style="flex:1"><div class="nm">VIP Mastermind <span class="tag t-amber" style="margin-left:4px">VIP</span></div><div class="me">Thu · 5:00pm · 60 seats</div></div><button class="btn" style="padding:8px 14px" onclick="rsvp(this)">RSVP</button></div>
+            <div class="evrow"><div class="db" style="background:#e6f6fd;color:#1f8fc4"><div class="d">30</div><div class="m">Oct</div></div><div style="flex:1"><div class="nm">New Course Launch Party</div><div class="me">Fri · 7:00pm · 1,200 invited</div></div><button class="btn" style="padding:8px 14px" onclick="rsvp(this)">RSVP</button></div>
           </div>
         </div>
         <div class="card" style="margin-top:18px;border-left:4px solid var(--v);background:var(--vsoft)"><div style="font-size:13.5px;color:var(--ink)"><b>✨ Automated:</b> reminders go out 24 hours and 1 hour before every event, replays post automatically, and no-shows get the recording — Louise sets the date and nothing else.</div></div>
@@ -642,6 +638,8 @@
   </div>
 </div>
 
+<div class="modalbg" id="modalbg" onclick="if(event.target===this)closeModal()"><div class="modal" id="modalbox"></div></div>
+<div class="toast" id="toastbox"></div>
 <script>
   var mods=[
     ['01','TikTok Growth Mastery','12 lessons',1640,74,'t-v'],
@@ -699,10 +697,167 @@
     document.querySelectorAll('.nav a').forEach(function(a){a.classList.remove('active')});
     document.querySelector('[data-v="'+id+'"]').classList.add('active');
     document.getElementById('ptitle').innerHTML=title; document.getElementById('psub').innerHTML=sub;
-    document.body.classList.remove('navopen');
-    window.scrollTo(0,0);
+    document.body.classList.remove('navopen'); window.scrollTo(0,0);
   }
   function toggleNav(){ document.body.classList.toggle('navopen'); }
+
+  /* ---- toast + modal ---- */
+  var _t;
+  function toast(m){ var e=document.getElementById('toastbox'); e.innerHTML=m; e.classList.add('show'); clearTimeout(_t); _t=setTimeout(function(){e.classList.remove('show')},2600); }
+  function openModal(title,body,footer){ document.getElementById('modalbox').innerHTML='<div class="mh"><h3>'+title+'</h3><button class="x" onclick="closeModal()">&times;</button></div><div class="mb">'+body+'</div><div class="mf">'+(footer||'')+'</div>'; document.getElementById('modalbg').classList.add('open'); }
+  function closeModal(){ document.getElementById('modalbg').classList.remove('open'); }
+  function val(id){ var e=document.getElementById(id); return e?String(e.value).trim():''; }
+  function cap(s){ return s?s.charAt(0).toUpperCase()+s.slice(1):s; }
+  function titleCase(s){ return (s||'').replace(/\w\S*/g,function(w){return w.charAt(0).toUpperCase()+w.slice(1)}); }
+  function gbp(n){ return '£'+Number(n).toLocaleString(); }
+  var palette=['#7C6CF0','#F0567A','#12B981','#F4A63A','#37B6F0','#C46BFF'];
+
+  /* ---- modules ---- */
+  function renderMods(){
+    document.getElementById('modlist').innerHTML = mods.map(function(m){
+      return '<div class="mod"><div class="nu">'+m[0]+'</div><div style="flex:1"><div class="nm">'+m[1]+'</div><div class="me">'+m[2]+' · '+Number(m[3]).toLocaleString()+' enrolled</div></div><div class="rt"><div class="prog"><span style="width:'+m[4]+'%"></span></div><div class="me" style="margin-top:5px">'+m[4]+'% complete</div></div></div>';
+    }).join('');
+    var mc=document.getElementById('modcount'); if(mc)mc.textContent=mods.length;
+    var lc=document.getElementById('lesscount'); if(lc)lc.textContent=mods.reduce(function(s,m){return s+(parseInt(m[2])||0)},0);
+  }
+  function addModuleModal(){
+    openModal('Add a training module',
+      '<div class="fl"><label>Module title</label><input class="inp" id="m_title" placeholder="e.g. Going Viral on Reels"></div><div class="fl"><label>Number of lessons</label><input class="inp" id="m_less" type="number" value="6"></div><div class="fl"><label>✨ Or let AI build it from a topic</label><input class="inp" id="m_topic" placeholder="Describe a topic — AI writes the lessons"></div>',
+      '<button class="btn3" onclick="closeModal()">Cancel</button><button class="btn2" onclick="aiModule()">✨ AI build</button><button class="btn" onclick="addModule()">Add module</button>');
+  }
+  function addModule(){
+    var t=val('m_title')||'New Module', l=(val('m_less')||'6')+' lessons';
+    var n=String(mods.length+1); if(n.length<2)n='0'+n;
+    mods.push([n,t,l,0,0,['t-v','t-pink','t-mint','t-amber'][mods.length%4]]); renderMods(); closeModal();
+    toast('✓ Module "'+t+'" added &amp; live for students');
+  }
+  function aiModule(){
+    var topic=val('m_topic')||val('m_title')||'your topic';
+    toast('✨ AI is writing the module…');
+    setTimeout(function(){ document.getElementById('m_title').value=titleCase(topic); document.getElementById('m_less').value=8; toast('✨ AI drafted 8 lessons — review &amp; add'); },900);
+  }
+
+  /* ---- creators ---- */
+  var creators=[
+    ['Mia K.','#F0567A','Beauty',420,24000,'Live'],['Jordan T.','#7C6CF0','Fitness',310,18000,'Live'],
+    ['Amara L.','#12B981','Fashion',260,14000,'Live'],['Sofia R.','#F4A63A','Food',180,16000,'Live'],
+    ['Kai N.','#37B6F0','Tech',140,10000,'Launching']
+  ];
+  function renderCreators(){
+    var el=document.getElementById('creatorlist'); if(!el)return;
+    el.innerHTML=creators.map(function(c){
+      var st=c[5]==='Live'?'t-mint':'t-amber';
+      return '<tr><td><span class="u"><span class="a" style="background:'+c[1]+'">'+c[0][0]+'</span><span class="n">'+c[0]+'</span></span></td><td>'+c[2]+'</td><td>'+c[3].toLocaleString()+'</td><td>'+gbp(c[4])+'</td><td><b style="color:var(--mint)">'+gbp(Math.round(c[4]*0.1))+'</b></td><td><span class="tag '+st+'">'+c[5]+'</span></td></tr>';
+    }).join('');
+    var rev=creators.reduce(function(s,c){return s+c[4]},0);
+    document.getElementById('cCount').textContent=creators.length;
+    document.getElementById('cRev').textContent=gbp(rev);
+    document.getElementById('cOver').textContent=gbp(Math.round(rev*0.1));
+  }
+  function inviteCreatorModal(){
+    openModal('Invite a creator to the network',
+      '<div class="fl"><label>Creator name</label><input class="inp" id="c_name" placeholder="e.g. Ella Rose"></div><div class="fl"><label>Niche</label><input class="inp" id="c_niche" placeholder="e.g. Travel"></div><div class="fl"><label>Their audience size</label><input class="inp" id="c_aud" placeholder="e.g. 120k"></div>',
+      '<button class="btn3" onclick="closeModal()">Cancel</button><button class="btn" onclick="addCreator()">Send invite</button>');
+  }
+  function addCreator(){
+    var n=val('c_name')||'New Creator', niche=val('c_niche')||'Lifestyle';
+    creators.push([n,palette[creators.length%palette.length],niche,0,0,'Launching']); renderCreators(); closeModal();
+    toast('✓ Invite sent to '+n+' — GroAI will build their academy');
+  }
+
+  /* ---- messages ---- */
+  var threads=[
+    {id:'priya',n:'Priya K.',c:'#7C6CF0',role:'VIP member · online now',unread:true,pv:'Should I niche down or stay broad?',tm:'2m',
+     msgs:[{w:'them',t:'Hey Louise! Should I niche down or stay broad with my content? I do fitness + lifestyle.'},{w:'them',t:'Worried niching loses followers 😅'}],
+     drafts:['Great question, Priya! Niche down — it feels scary but a clear niche grows faster, because the algorithm knows exactly who to show you to. Keep lifestyle as your personality, but lead with fitness for 30 days and watch your saves climb. Want me to review your last 5 posts?','Love this Q! Honest answer: niche down. A focused feed tells the algorithm who to serve you to, so you grow faster. Keep lifestyle as your flavour, make fitness the hook. Try 30 days and track your saves.'],di:0},
+    {id:'reece',n:'Reece T.',c:'#F0567A',role:'Elite course · student',unread:false,pv:'Loved module 6! Quick q on hooks…',tm:'18m',
+     msgs:[{w:'them',t:'Loved module 6! Quick q — how long should my hooks actually be?'}],
+     drafts:['So glad you loved it! Keep hooks under 3 seconds and ~6 words — say the outcome or the tension first, then deliver. Post your next hook here and I\'ll tighten it.','Great to hear! Rule of thumb: 3 seconds, one clear promise, front-load the payoff. Want me to look at your last hook?'],di:0},
+    {id:'chloe',n:'Chloe M.',c:'#12B981',role:'Pro member',unread:true,pv:'Can I upgrade to VIP mid-month?',tm:'1h',
+     msgs:[{w:'them',t:'Can I upgrade to VIP mid-month? 🙏'}],
+     drafts:['Absolutely, Chloe! Upgrade any time — you just pay the pro-rated difference this month, then £200/mo after. Want me to switch you over now?','Of course! Upgrades are instant and we only charge the difference. Say the word and you\'re VIP today.'],di:0},
+    {id:'jordan',n:'Jordan L.',c:'#F4A63A',role:'Full playbook · student',unread:false,pv:'My first brand deal came in 🎉',tm:'3h',
+     msgs:[{w:'them',t:'LOUISE my first brand deal just came in 🎉🎉'}],
+     drafts:['AHH Jordan that\'s HUGE — so proud of you! 🎉 Use the rate-card template from module 14 so you don\'t undercharge. What did they offer?','This is amazing!! 🎉 Don\'t say yes to the first number — use the negotiation script in module 9. Tell me the offer?'],di:0},
+    {id:'amara',n:'Amara J.',c:'#37B6F0',role:'Standard member',unread:true,pv:'Struggling with consistency…',tm:'5h',
+     msgs:[{w:'them',t:'I keep falling off with posting. How do you stay consistent??'}],
+     drafts:['I feel you, Amara — consistency beats intensity. Batch 5 videos in one sitting each week, schedule them, done. Want me to set you a simple weekly target?','Totally normal! The trick is batching — film a week in one go, then schedule. Start with 3 posts a week, not 7. Shall I check in on Fridays?'],di:0}
+  ];
+  var activeThread='priya';
+  function renderInbox(){
+    var el=document.getElementById('inboxlist'); if(!el)return;
+    el.innerHTML=threads.map(function(t){
+      return '<div class="thread'+(t.id===activeThread?' sel':'')+'" onclick="openThread(\''+t.id+'\')"><span class="a" style="background:'+t.c+'">'+t.n[0]+'</span><div><div class="nm">'+t.n+'</div><div class="pv">'+t.pv+'</div></div><div class="rt"><span class="tm">'+t.tm+'</span>'+(t.unread?'<span class="unread"></span>':'')+'</div></div>';
+    }).join('');
+  }
+  function renderChat(){
+    var t=threads.filter(function(x){return x.id===activeThread})[0]; var el=document.getElementById('chatpane'); if(!t||!el)return;
+    var msgs=t.msgs.map(function(m){return '<div class="bubble '+m.w+'">'+m.t+'</div>'}).join('');
+    el.innerHTML='<div class="h"><div style="display:flex;align-items:center;gap:11px"><span class="a" style="width:38px;height:38px;border-radius:50%;background:'+t.c+';display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800">'+t.n[0]+'</span><div><div class="nm" style="font-weight:800;color:var(--ink);font-size:14px">'+t.n+'</div><div class="me" style="font-size:11px;color:var(--mut)">'+t.role+'</div></div></div><span class="aichip">✨ AI assist on</span></div>'+
+      '<div class="chat"><div class="msgs" id="msgs">'+msgs+'</div><div class="aibox"><div class="lb">✨ AI drafted this reply · in your tone</div><div id="draftwrap" style="font-size:13.5px;color:var(--ink);line-height:1.55">"'+t.drafts[t.di]+'"</div><div style="display:flex;gap:10px;margin-top:13px;align-items:center;flex-wrap:wrap"><button class="btn" onclick="sendReply()">Send reply</button><button class="btn2" onclick="regen()">✨ Regenerate</button><button class="btn3" onclick="editDraft()">Edit</button><span class="me" style="color:var(--mut);font-size:11.5px">Louise never types from scratch</span></div></div></div>';
+  }
+  function openThread(id){ activeThread=id; var t=threads.filter(function(x){return x.id===id})[0]; if(t)t.unread=false; renderInbox(); renderChat(); }
+  function draftText(){ var e=document.getElementById('draftedit'); if(e)return e.value; var t=threads.filter(function(x){return x.id===activeThread})[0]; return t.drafts[t.di]; }
+  function sendReply(){ var t=threads.filter(function(x){return x.id===activeThread})[0]; t.msgs.push({w:'me',t:draftText()}); renderChat(); toast('✓ Reply sent to '+t.n); var m=document.getElementById('msgs'); if(m)m.scrollTop=m.scrollHeight; }
+  function regen(){ var t=threads.filter(function(x){return x.id===activeThread})[0]; toast('✨ Regenerating…'); setTimeout(function(){ t.di=(t.di+1)%t.drafts.length; renderChat(); },600); }
+  function editDraft(){ var t=threads.filter(function(x){return x.id===activeThread})[0]; document.getElementById('draftwrap').innerHTML='<textarea id="draftedit" style="width:100%;border:1px solid #e0dbff;border-radius:10px;padding:10px;font-size:13.5px;font-family:inherit;min-height:90px">'+t.drafts[t.di]+'</textarea>'; }
+
+  /* ---- AI compose: emails / texts to students, creators, clients ---- */
+  function openAI(preset){
+    openModal('✨ AI Compose',
+      '<div class="fl"><label>Send to</label><select id="ai_to"><option>All students (1,842)</option><option>VIP members (168)</option><option>Your creators (5)</option><option>A single student / client</option><option>Lapsed members (win-back)</option></select></div>'+
+      '<div class="fl"><label>Format</label><select id="ai_fmt"><option>Email</option><option>Text / SMS</option><option>App push notification</option><option>Community post</option></select></div>'+
+      '<div class="fl"><label>What do you want to say?</label><input class="inp" id="ai_prompt" placeholder="e.g. remind everyone the live Q&amp;A is Wednesday 7pm"></div>'+
+      '<div class="fl"><label>✨ AI draft</label><div class="out" id="ai_out">Your message appears here — Louise never writes it herself. Add a line above and hit Generate.</div></div>',
+      '<button class="btn3" onclick="closeModal()">Cancel</button><button class="btn2" onclick="aiCompose()">✨ Generate</button><button class="btn" onclick="aiSend()">Send</button>');
+    var s=document.getElementById('ai_to');
+    if(preset==='creator')s.value='Your creators (5)'; else if(preset==='client')s.value='A single student / client'; else if(preset==='students')s.value='All students (1,842)';
+  }
+  function aiCompose(){
+    var fmt=val('ai_fmt'), p=val('ai_prompt')||'a quick update', out=document.getElementById('ai_out');
+    out.innerHTML='<span class="spin"></span> Writing your '+fmt.toLowerCase()+'…';
+    setTimeout(function(){ out.textContent=aiGen(fmt,p); },900);
+  }
+  function aiGen(fmt,p){
+    var t=titleCase(p);
+    if(/text|sms/i.test(fmt)) return 'Hey! 💛 '+cap(p)+'. Full details in the app — Louise x';
+    if(/push/i.test(fmt)) return '✨ '+t+' — open the app to see more!';
+    if(/community/i.test(fmt)) return 'Hey team 👋 '+cap(p)+'.\n\nDrop a 🔥 if you\'re in, and tag someone who needs this. Let\'s go!';
+    return 'Subject: '+t+'\n\nHi [first name],\n\n'+cap(p)+'.\n\nHere\'s everything you need — and if you\'ve any questions just hit reply, I read every one.\n\nYou\'ve got this 💛\nLouise · Louise Thomson Academy';
+  }
+  function aiSend(){ var to=val('ai_to')||'your students'; closeModal(); toast('✓ Sent to '+to); }
+
+  /* ---- AI Studio tools ---- */
+  function openAITool(el){
+    var name=el.querySelector('h4').textContent;
+    if(/Course Builder/.test(name)){ addModuleModal(); return; }
+    if(/Reply/.test(name)){ show('messages','Messages','Chats with your students — AI drafts every reply'); return; }
+    if(/Email/.test(name)){ openAI('students'); return; }
+    openModal('✨ '+name,
+      '<div class="fl"><label>What do you need?</label><input class="inp" id="t_prompt" placeholder="Describe it — the AI writes it for you"></div><div class="fl"><label>✨ Output</label><div class="out" id="t_out">Your output appears here.</div></div>',
+      '<button class="btn3" onclick="closeModal()">Close</button><button class="btn2" onclick="toolGen(this)" data-n="'+name+'">✨ Generate</button><button class="btn" onclick="toast(\'✓ Saved &amp; ready to use\');closeModal()">Use it</button>');
+  }
+  function toolGen(btn){
+    var name=btn.getAttribute('data-n'), p=val('t_prompt')||'my next idea', out=document.getElementById('t_out');
+    out.innerHTML='<span class="spin"></span> Generating…';
+    setTimeout(function(){
+      var r;
+      if(/Video Script/.test(name)) r='HOOK (0-3s): "Stop scrolling if '+p+'…"\n\nBODY: 3 fast tips, show don\'t tell, cuts under 2s.\n\nCTA: "Follow for part 2 👀"';
+      else if(/Plan Builder/.test(name)) r='New plan: "'+titleCase(p)+'"\n\n✓ Price + checkout page built\n✓ Sales page written\n✓ Welcome email drafted\n✓ Commission 70/30 applied\n\nReady to launch in one click.';
+      else if(/Insights/.test(name)) r='📈 Insight on "'+p+'": this is your best-performing angle. Post 2 more like it this week — projected +14% saves. Want me to schedule them?';
+      else if(/Student Coach/.test(name)) r='AI answers students 24/7. Sample: "'+cap(p)+'" → replies instantly in your tone, and flags anything that needs you.';
+      else r='✨ '+cap(p)+':\n\n• Scroll-stopping hook\n• 3 talking points\n• Caption + 5 hashtags\n\nWritten in your voice, ready to post.';
+      out.textContent=r;
+    },900);
+  }
+
+  /* ---- misc controls ---- */
+  function toggleAuto(el){ el.classList.toggle('off'); toast(el.classList.contains('off')?'Automation paused':'✓ Automation is now live'); }
+  function rsvp(b){ if(b.getAttribute('data-on')){ b.textContent='RSVP'; b.style.background=''; b.removeAttribute('data-on'); } else { b.textContent='Going ✓'; b.style.background='#12B981'; b.setAttribute('data-on','1'); toast('✓ You\'re going — reminder set'); } }
+  function applyInsight(){ toast('✓ Applied — welcome call moved to day 2'); }
+
+  /* ---- init ---- */
+  renderMods(); renderCreators(); renderInbox(); renderChat();
   (function(){
     var events={3:['Coaching call','#7C6CF0'],9:['Guest expert','#F0567A'],16:['Live Q&A','#12B981'],24:['VIP mastermind','#F4A63A'],30:['Launch party','#37B6F0']};
     var today=14, first=new Date(2026,9,1).getDay(), lead=(first+6)%7, cells='';
