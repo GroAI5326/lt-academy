@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Louise Thomson Academy — Dashboard</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --bg:#F5F5FA; --panel:#FFFFFF; --ink:#191627; --text:#3a3652; --mut:#8b87a3; --line:#ECEBF3;
+    --side:#171426; --side2:#211c37; --sidetx:#a9a3c4;
+    --v:#7C6CF0; --v2:#5647d6; --vsoft:#efecff;
+    --pink:#F0567A; --pinksoft:#fde8ee; --mint:#12B981; --mintsoft:#e2f7ef; --amber:#F4A63A; --ambersoft:#fdf0dd; --cyan:#37B6F0;
+    --shadow:0 1px 3px rgba(20,16,40,.06), 0 8px 24px rgba(20,16,40,.05);
+  }
+  html,body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);font-size:14px;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{font-family:'Helvetica Neue',Arial,sans-serif;color:var(--ink);font-weight:800;letter-spacing:-.3px}
+  .app{display:flex;min-height:100vh}
+
+  /* sidebar */
+  .side{width:246px;background:var(--side);color:var(--sidetx);flex:none;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
+  .brand{display:flex;align-items:center;gap:11px;padding:22px 22px 18px}
+  .brand .lg{width:40px;height:40px;border-radius:11px;background:linear-gradient(135deg,var(--v),var(--pink));display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:17px;font-family:'Helvetica Neue',Arial}
+  .brand .nm{color:#fff;font-weight:900;font-size:15px;line-height:1.05}
+  .brand .nm span{display:block;font-size:9px;letter-spacing:2px;color:var(--v);margin-top:3px;font-weight:700}
+  .nav{padding:8px 12px;display:flex;flex-direction:column;gap:2px}
+  .nav .sec{font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;color:#5b567a;font-weight:800;padding:14px 12px 6px}
+  .nav a{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:9px;color:var(--sidetx);text-decoration:none;font-size:13.5px;font-weight:600;cursor:pointer}
+  .nav a svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;flex:none}
+  .nav a:hover{background:rgba(255,255,255,.05);color:#fff}
+  .nav a.active{background:linear-gradient(135deg,var(--v),var(--v2));color:#fff;box-shadow:0 6px 16px rgba(124,108,240,.4)}
+  .side .me{margin-top:auto;padding:16px;border-top:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:11px}
+  .side .me .av{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--amber));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;flex:none}
+  .side .me .nm{color:#fff;font-size:13px;font-weight:700}.side .me .rl{font-size:11px;color:#7d78a0}
+
+  /* main */
+  .main{flex:1;min-width:0}
+  .top{height:66px;background:var(--panel);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 30px;position:sticky;top:0;z-index:5}
+  .top h1{font-size:20px}
+  .top .sub{font-size:12px;color:var(--mut);font-weight:500;margin-top:2px}
+  .top .r{display:flex;align-items:center;gap:14px}
+  .search{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:9px 14px;font-size:13px;color:var(--mut);width:240px;display:flex;align-items:center;gap:8px}
+  .btn{background:linear-gradient(135deg,var(--v),var(--v2));color:#fff;border:none;border-radius:10px;padding:10px 16px;font-weight:700;font-size:13px;cursor:pointer;box-shadow:0 6px 16px rgba(124,108,240,.35)}
+  .ic{width:38px;height:38px;border-radius:10px;background:var(--bg);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--mut)}
+  .ic svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2}
+
+  .wrap{padding:28px 30px 60px}
+  .view{display:none} .view.on{display:block}
+
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:22px}
+  .kpi{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 20px;box-shadow:var(--shadow)}
+  .kpi .t{display:flex;align-items:center;justify-content:space-between}
+  .kpi .cap{font-size:12px;color:var(--mut);font-weight:600}
+  .kpi .chip{font-size:11px;font-weight:800;padding:3px 8px;border-radius:20px}
+  .up{color:var(--mint);background:var(--mintsoft)} .dn{color:var(--pink);background:var(--pinksoft)}
+  .kpi .v{font-size:30px;font-weight:900;color:var(--ink);letter-spacing:-1px;margin-top:12px;font-family:'Helvetica Neue',Arial}
+  .kpi .s{font-size:11.5px;color:var(--mut);margin-top:4px}
+  .kpi .ico{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center}
+  .kpi .ico svg{width:18px;height:18px;stroke-width:2;fill:none}
+
+  .grid{display:grid;gap:18px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow)}
+  .card .h{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+  .card .h h3{font-size:16px}
+  .card .h .mo{font-size:12px;color:var(--mut);font-weight:600}
+  .pill{font-size:11px;font-weight:800;padding:5px 11px;border-radius:20px;background:var(--vsoft);color:var(--v)}
+
+  table{width:100%;border-collapse:collapse}
+  th{text-align:left;font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:var(--mut);font-weight:700;padding:11px 12px;border-bottom:1px solid var(--line)}
+  td{padding:13px 12px;border-bottom:1px solid var(--line);font-size:13.5px;color:var(--text)}
+  tr:last-child td{border-bottom:none}
+  .u{display:flex;align-items:center;gap:10px}
+  .u .a{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:12px;flex:none}
+  .u .n{font-weight:700;color:var(--ink);font-size:13px}
+  .tag{font-size:11px;font-weight:800;padding:4px 10px;border-radius:20px;display:inline-block}
+  .t-v{background:var(--vsoft);color:var(--v)} .t-pink{background:var(--pinksoft);color:var(--pink)} .t-mint{background:var(--mintsoft);color:var(--mint)} .t-amber{background:var(--ambersoft);color:#b9791a}
+  .prog{height:7px;background:var(--line);border-radius:6px;overflow:hidden;width:100px} .prog span{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--v),var(--pink))}
+
+  .mod{display:flex;align-items:center;gap:16px;padding:15px 0;border-bottom:1px solid var(--line)} .mod:last-child{border-bottom:none}
+  .mod .nu{width:40px;height:40px;border-radius:11px;background:var(--vsoft);color:var(--v);display:flex;align-items:center;justify-content:center;font-weight:900;flex:none}
+  .mod .nm{font-weight:800;color:var(--ink);font-size:14.5px} .mod .me{font-size:12px;color:var(--mut);margin-top:2px}
+  .mod .rt{margin-left:auto;text-align:right;flex:none}
+
+  .plan{border:1.5px solid var(--line);border-radius:16px;padding:24px;background:var(--panel);position:relative}
+  .plan.feat{border-color:var(--v);box-shadow:0 12px 30px rgba(124,108,240,.16)}
+  .plan .badge{position:absolute;top:-11px;left:24px;background:var(--v);color:#fff;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:20px}
+  .plan .pn{font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--v)}
+  .plan .pr{font-size:38px;font-weight:900;color:var(--ink);letter-spacing:-1.5px;margin:8px 0 2px;font-family:'Helvetica Neue',Arial}
+  .plan .pr small{font-size:15px;color:var(--mut);font-weight:700}
+  .plan ul{list-style:none;margin-top:16px}
+  .plan li{font-size:13px;color:var(--text);padding:7px 0 7px 24px;position:relative}
+  .plan li::before{content:'✓';position:absolute;left:0;color:var(--mint);font-weight:900}
+  .split{display:flex;height:46px;border-radius:11px;overflow:hidden;border:1px solid var(--line)}
+  .split div{display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:13px}
+  .note{background:var(--vsoft);border-left:4px solid var(--v);border-radius:0 12px 12px 0;padding:15px 18px;font-size:13px;color:var(--ink)} .note b{color:var(--v2)}
+  .feed li{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);list-style:none;font-size:13px} .feed li:last-child{border:none}
+  .dot{width:9px;height:9px;border-radius:50%;margin-top:5px;flex:none}
+  .badges{display:flex;gap:10px;flex-wrap:wrap}
+  .bdg{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:700;color:var(--ink)}
+  .bdg .e{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px}
+  .lead{font-size:13.5px;color:var(--mut);max-width:640px;margin-bottom:18px;line-height:1.6}
+  @media(max-width:1200px){.kpis{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- SIDEBAR -->
+  <aside class="side">
+    <div class="brand"><div class="lg">LT</div><div class="nm">Louise Thomson<span>ACADEMY</span></div></div>
+    <nav class="nav">
+      <div class="sec">Academy</div>
+      <a data-v="overview" class="active" onclick="show('overview','Dashboard','Welcome back, Louise 👋')"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>Overview</a>
+      <a data-v="classroom" onclick="show('classroom','Classroom','12 training modules · your curriculum')"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Classroom</a>
+      <a data-v="students" onclick="show('students','Students','Everyone learning inside your academy')"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>Students</a>
+      <a data-v="community" onclick="show('community','Community','Your paying members, together')"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></svg>Community</a>
+      <div class="sec">Business</div>
+      <a data-v="payments" onclick="show('payments','Payments &amp; Plans','Every way people pay to learn')"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="3"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Payments &amp; Plans</a>
+      <a data-v="earnings" onclick="show('earnings','Earnings &amp; Commission','What you take home')"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Earnings</a>
+      <a data-v="creators" onclick="show('creators','Creator Network','Creators you bring on, and your override')"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><circle cx="5" cy="18" r="3"/><circle cx="19" cy="18" r="3"/><path d="M12 11v3M9.5 15.5 7 16.5M14.5 15.5 17 16.5"/></svg>Creator Network</a>
+      <div class="sec">Manage</div>
+      <a data-v="settings" onclick="show('settings','Settings','Your brand, your academy')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-2.82 1.17V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 8 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15H4.5a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 6 8.6l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 12 4.6a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 2.82 1.17l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 12z"/></svg>Settings</a>
+    </nav>
+    <div class="me"><div class="av">L</div><div><div class="nm">Louise Thomson</div><div class="rl">Academy owner</div></div></div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="top"><div><h1 id="ptitle">Dashboard</h1><div class="sub" id="psub">Welcome back, Louise 👋</div></div>
+      <div class="r"><div class="search">🔍 Search students, modules…</div><div class="ic"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></div><button class="btn">+ New module</button></div>
+    </div>
+    <div class="wrap">
+
+      <!-- OVERVIEW -->
+      <section id="overview" class="view on">
+        <div class="kpis">
+          <div class="kpi"><div class="t"><span class="cap">Total revenue</span><span class="chip up">▲ 18%</span></div><div class="v">£486,200</div><div class="s">all-time gross</div></div>
+          <div class="kpi"><div class="t"><span class="cap">Monthly recurring</span><span class="chip up">▲ 12%</span></div><div class="v">£128,400</div><div class="s">MRR · this month</div></div>
+          <div class="kpi"><div class="t"><span class="cap">Your earnings (30%)</span><span class="chip up">▲ 14%</span></div><div class="v">£38,520</div><div class="s">this month · own academy</div></div>
+          <div class="kpi"><div class="t"><span class="cap">Active students</span><span class="chip up">▲ 9%</span></div><div class="v">1,842</div><div class="s">across all plans</div></div>
+        </div>
+
+        <div class="grid" style="grid-template-columns:1.6fr 1fr">
+          <div class="card">
+            <div class="h"><h3>Revenue growth</h3><span class="mo">Last 12 months · illustrative</span></div>
+            <svg viewBox="0 0 640 240" style="width:100%;height:auto">
+              <defs><linearGradient id="fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7C6CF0" stop-opacity=".28"/><stop offset="1" stop-color="#7C6CF0" stop-opacity="0"/></linearGradient></defs>
+              <g stroke="#ECEBF3" stroke-width="1"><line x1="40" y1="30" x2="620" y2="30"/><line x1="40" y1="80" x2="620" y2="80"/><line x1="40" y1="130" x2="620" y2="130"/><line x1="40" y1="180" x2="620" y2="180"/></g>
+              <path d="M40 195 L 96 188 L 152 178 L 208 168 L 264 150 L 320 138 L 376 120 L 432 104 L 488 86 L 544 66 L 600 44 L 620 38 L 620 200 L 40 200 Z" fill="url(#fill)"/>
+              <path d="M40 195 L 96 188 L 152 178 L 208 168 L 264 150 L 320 138 L 376 120 L 432 104 L 488 86 L 544 66 L 600 44 L 620 38" fill="none" stroke="#7C6CF0" stroke-width="3"/>
+              <g fill="#7C6CF0"><circle cx="376" cy="120" r="4"/><circle cx="488" cy="86" r="4"/><circle cx="600" cy="44" r="4.5"/></g>
+              <g font-size="10" fill="#8b87a3" font-family="Inter"><text x="40" y="216">Jan</text><text x="208" y="216">Apr</text><text x="376" y="216">Jul</text><text x="544" y="216">Oct</text></g>
+            </svg>
+          </div>
+          <div class="card">
+            <div class="h"><h3>Revenue by source</h3></div>
+            <svg viewBox="0 0 180 180" width="150" height="150" style="display:block;margin:6px auto 14px">
+              <circle cx="90" cy="90" r="66" fill="none" stroke="#ECEBF3" stroke-width="20"/>
+              <circle cx="90" cy="90" r="66" fill="none" stroke="#7C6CF0" stroke-width="20" stroke-dasharray="228 187" transform="rotate(-90 90 90)"/>
+              <circle cx="90" cy="90" r="66" fill="none" stroke="#F0567A" stroke-width="20" stroke-dasharray="104 311" transform="rotate(107 90 90)"/>
+              <circle cx="90" cy="90" r="66" fill="none" stroke="#12B981" stroke-width="20" stroke-dasharray="52 363" transform="rotate(197 90 90)"/>
+              <text x="90" y="86" text-anchor="middle" font-size="20" font-weight="800" fill="#191627" font-family="Helvetica Neue">£128k</text>
+              <text x="90" y="104" text-anchor="middle" font-size="10" fill="#8b87a3">this month</text>
+            </svg>
+            <div style="font-size:12.5px">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span class="dot" style="background:#7C6CF0"></span>Memberships <b style="margin-left:auto">55%</b></div>
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span class="dot" style="background:#F0567A"></span>Course sales <b style="margin-left:auto">25%</b></div>
+              <div style="display:flex;align-items:center;gap:8px"><span class="dot" style="background:#12B981"></span>Creator overrides <b style="margin-left:auto">20%</b></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid" style="grid-template-columns:1fr 1fr;margin-top:18px">
+          <div class="card">
+            <div class="h"><h3>Top modules</h3><span class="pill">by enrolment</span></div>
+            <div class="mod"><div class="nu">01</div><div><div class="nm">TikTok Growth Mastery</div><div class="me">12 lessons · 1,640 enrolled</div></div><div class="rt"><div class="prog"><span style="width:74%"></span></div><div class="me" style="margin-top:5px">74% complete</div></div></div>
+            <div class="mod"><div class="nu">06</div><div><div class="nm">Building Your Personal Brand</div><div class="me">8 lessons · 1,430 enrolled</div></div><div class="rt"><div class="prog"><span style="width:71%"></span></div><div class="me" style="margin-top:5px">71% complete</div></div></div>
+            <div class="mod"><div class="nu">11</div><div><div class="nm">Mindset &amp; Consistency</div><div class="me">6 lessons · 1,300 enrolled</div></div><div class="rt"><div class="prog"><span style="width:78%"></span></div><div class="me" style="margin-top:5px">78% complete</div></div></div>
+          </div>
+          <div class="card">
+            <div class="h"><h3>Live activity</h3><span class="pill" style="background:var(--mintsoft);color:var(--mint)">● live</span></div>
+            <ul class="feed">
+              <li><span class="dot" style="background:#12B981"></span><div><b>Chloe M.</b> joined the <b>VIP membership</b> — £200/mo<div class="me">2 min ago</div></div></li>
+              <li><span class="dot" style="background:#7C6CF0"></span><div><b>Reece T.</b> bought <b>Elite course</b> — £2,000<div class="me">18 min ago</div></div></li>
+              <li><span class="dot" style="background:#F0567A"></span><div><b>Priya K.</b> completed <b>Affiliate Income Blueprint</b> 🏆<div class="me">41 min ago</div></div></li>
+              <li><span class="dot" style="background:#F4A63A"></span><div><b>Mia (creator)</b> earned you a <b>£640 override</b><div class="me">1 hr ago</div></div></li>
+              <li><span class="dot" style="background:#12B981"></span><div><b>Jordan L.</b> upgraded to <b>Pro membership</b> — £120/mo<div class="me">2 hr ago</div></div></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:18px">
+          <div class="h"><h3>What makes it a high-end academy</h3><span class="mo">all built into your platform</span></div>
+          <div class="badges">
+            <div class="bdg"><span class="e" style="background:var(--vsoft)">🎓</span>Certificates</div>
+            <div class="bdg"><span class="e" style="background:var(--pinksoft)">🏆</span>Gamification &amp; badges</div>
+            <div class="bdg"><span class="e" style="background:var(--mintsoft)">📊</span>Leaderboards</div>
+            <div class="bdg"><span class="e" style="background:var(--ambersoft)">🔥</span>Streaks</div>
+            <div class="bdg"><span class="e" style="background:var(--vsoft)">📅</span>Live sessions</div>
+            <div class="bdg"><span class="e" style="background:var(--pinksoft)">🤖</span>AI tutor</div>
+            <div class="bdg"><span class="e" style="background:var(--mintsoft)">📚</span>Resource vault</div>
+            <div class="bdg"><span class="e" style="background:var(--ambersoft)">💬</span>Community &amp; DMs</div>
+            <div class="bdg"><span class="e" style="background:var(--vsoft)">✉️</span>Email automation</div>
+            <div class="bdg"><span class="e" style="background:var(--pinksoft)">🔗</span>Affiliate program</div>
+            <div class="bdg"><span class="e" style="background:var(--mintsoft)">📱</span>Mobile app</div>
+            <div class="bdg"><span class="e" style="background:var(--ambersoft)">📈</span>Analytics &amp; LTV</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CLASSROOM -->
+      <section id="classroom" class="view">
+        <p class="lead">Your full curriculum — everything you do to make money online, taught step by step. Students unlock modules as they progress, earn certificates, and climb the leaderboard.</p>
+        <div class="grid" style="grid-template-columns:1fr 1fr 1fr">
+          <div class="card"><div class="h"><h3 style="font-size:15px">12</h3><span class="pill">modules</span></div><div class="me" style="color:var(--mut)">92 lessons total · drip-released weekly</div></div>
+          <div class="card"><div class="h"><h3 style="font-size:15px">68%</h3><span class="pill" style="background:var(--mintsoft);color:var(--mint)">avg completion</span></div><div class="me" style="color:var(--mut)">above the 40% industry norm</div></div>
+          <div class="card"><div class="h"><h3 style="font-size:15px">1,204</h3><span class="pill" style="background:var(--ambersoft);color:#b9791a">certificates</span></div><div class="me" style="color:var(--mut)">issued to students</div></div>
+        </div>
+        <div class="card" style="margin-top:18px">
+          <div class="h"><h3>Training modules</h3><button class="btn">+ Add module</button></div>
+          <div id="modlist"></div>
+        </div>
+      </section>
+
+      <!-- STUDENTS -->
+      <section id="students" class="view">
+        <div class="kpis" style="grid-template-columns:repeat(4,1fr)">
+          <div class="kpi"><span class="cap">Active students</span><div class="v">1,842</div><div class="s">▲ 162 this month</div></div>
+          <div class="kpi"><span class="cap">Paying members</span><div class="v">1,040</div><div class="s">on monthly plans</div></div>
+          <div class="kpi"><span class="cap">Avg lifetime value</span><div class="v">£640</div><div class="s">per student</div></div>
+          <div class="kpi"><span class="cap">Monthly churn</span><div class="v">4.2%</div><div class="s">below 6% benchmark</div></div>
+        </div>
+        <div class="card">
+          <div class="h"><h3>Students</h3><span class="mo">1,842 total · showing recent</span></div>
+          <table><thead><tr><th>Student</th><th>Plan</th><th>Joined</th><th>Progress</th><th>Spent</th><th>Status</th></tr></thead><tbody id="stulist"></tbody></table>
+        </div>
+      </section>
+
+      <!-- COMMUNITY -->
+      <section id="community" class="view">
+        <p class="lead">A paying community keeps members longer than any course. Feed, challenges, leaderboard and live rooms — all under your brand.</p>
+        <div class="grid" style="grid-template-columns:1.4fr 1fr">
+          <div class="card">
+            <div class="h"><h3>Community feed</h3><span class="pill" style="background:var(--mintsoft);color:var(--mint)">2,140 members</span></div>
+            <ul class="feed">
+              <li><span class="u"><span class="a" style="background:#7C6CF0">L</span></span><div><b>Louise Thomson</b> · pinned<div style="margin-top:3px">"New challenge this week — post your first monetised video 👇 winner gets a 1:1 with me."</div><div class="me" style="margin-top:4px">❤ 312 · 💬 88</div></div></li>
+              <li><span class="u"><span class="a" style="background:#F0567A">A</span></span><div><b>Amara J.</b><div style="margin-top:3px">"Hit my first £1k month from the affiliate module 🙌"</div><div class="me" style="margin-top:4px">❤ 140 · 💬 26</div></div></li>
+              <li><span class="u"><span class="a" style="background:#12B981">D</span></span><div><b>Dan R.</b><div style="margin-top:3px">"TikTok Shop set up in a weekend — thank you!"</div><div class="me" style="margin-top:4px">❤ 96 · 💬 12</div></div></li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="h"><h3>Leaderboard</h3><span class="pill">this month</span></div>
+            <div class="mod" style="padding:11px 0"><div class="nu" style="background:var(--ambersoft);color:#b9791a">1</div><div><div class="nm">Priya K.</div><div class="me">4,820 pts · 🔥 61-day streak</div></div></div>
+            <div class="mod" style="padding:11px 0"><div class="nu">2</div><div><div class="nm">Reece T.</div><div class="me">4,410 pts · 🔥 40-day streak</div></div></div>
+            <div class="mod" style="padding:11px 0"><div class="nu">3</div><div><div class="nm">Chloe M.</div><div class="me">3,980 pts · 🔥 33-day streak</div></div></div>
+            <div class="note" style="margin-top:14px">Gamification lifts completion <b>2–3×</b>. Points, badges and streaks keep members paying month after month.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAYMENTS -->
+      <section id="payments" class="view">
+        <p class="lead">Every way to pay to learn — one-off courses (pay in full or in instalments) and tiered monthly membership. Cards, Apple &amp; Google Pay, and buy-now-pay-later all built in.</p>
+        <h3 style="margin:6px 0 12px;font-size:14px;color:var(--mut);letter-spacing:.5px;text-transform:uppercase">Courses · one-off</h3>
+        <div class="grid" style="grid-template-columns:1fr 1fr 1fr">
+          <div class="plan"><div class="pn" style="color:var(--v)">Starter</div><div class="pr">£799</div><div class="me" style="color:var(--mut)">or 3× £266/mo</div><ul><li>Core money-making modules</li><li>Community access</li><li>Certificate</li></ul></div>
+          <div class="plan feat"><div class="badge">Most popular</div><div class="pn">Full playbook</div><div class="pr">£1,300</div><div class="me" style="color:var(--mut)">or 3× £434/mo</div><ul><li>Everything in Starter</li><li>All 12 modules</li><li>Templates &amp; resource vault</li><li>Group Q&amp;A calls</li></ul></div>
+          <div class="plan"><div class="pn" style="color:var(--mint)">Elite</div><div class="pr">£2,000</div><div class="me" style="color:var(--mut)">or 4× £500/mo</div><ul><li>Everything in Full</li><li>1:1 mentorship</li><li>Priority support</li><li>Ad-account setup</li></ul></div>
+        </div>
+        <h3 style="margin:24px 0 12px;font-size:14px;color:var(--mut);letter-spacing:.5px;text-transform:uppercase">Membership · recurring</h3>
+        <div class="grid" style="grid-template-columns:1fr 1fr 1fr">
+          <div class="plan"><div class="pn" style="color:var(--v)">Standard</div><div class="pr">£80<small>/mo</small></div><ul><li>All courses &amp; community</li><li>Weekly content drops</li><li>Cancel anytime</li></ul></div>
+          <div class="plan feat"><div class="badge">Best value</div><div class="pn">Pro</div><div class="pr">£120<small>/mo</small></div><ul><li>Everything in Standard</li><li>Monthly live coaching</li><li>Guest expert sessions</li></ul></div>
+          <div class="plan"><div class="pn" style="color:var(--mint)">VIP</div><div class="pr">£200<small>/mo</small></div><ul><li>Everything in Pro</li><li>Small-group mastermind</li><li>Direct access to Louise</li></ul></div>
+        </div>
+        <div class="card" style="margin-top:24px">
+          <div class="h"><h3>Recent transactions</h3><span class="mo">dummy data</span></div>
+          <table><thead><tr><th>Student</th><th>Plan</th><th>Method</th><th>Date</th><th>Amount</th></tr></thead><tbody id="txlist"></tbody></table>
+        </div>
+      </section>
+
+      <!-- EARNINGS -->
+      <section id="earnings" class="view">
+        <div class="kpis" style="grid-template-columns:repeat(3,1fr)">
+          <div class="kpi"><div class="t"><span class="cap">Your total this month</span><span class="chip up">▲ 15%</span></div><div class="v" style="color:var(--v)">£46,720</div><div class="s">own academy + overrides</div></div>
+          <div class="kpi"><span class="cap">From your academy (30%)</span><div class="v">£38,520</div><div class="s">of £128,400 gross</div></div>
+          <div class="kpi"><span class="cap">Creator overrides (10%)</span><div class="v">£8,200</div><div class="s">from 5 creators</div></div>
+        </div>
+
+        <div class="grid" style="grid-template-columns:1fr 1fr">
+          <div class="card">
+            <div class="h"><h3>Your academy · the split</h3></div>
+            <div class="split"><div style="flex:70;background:linear-gradient(135deg,#211c37,#171426)">GroAI 70%</div><div style="flex:30;background:linear-gradient(135deg,var(--v),var(--v2))">Louise 30%</div></div>
+            <p class="me" style="color:var(--mut);margin-top:12px">GroAI builds, funds, hosts and runs the platform. You keep 30% of everything your academy earns — with zero cost or tech to manage.</p>
+          </div>
+          <div class="card">
+            <div class="h"><h3>Creators you recruit · the split</h3></div>
+            <div class="split"><div style="flex:70;background:linear-gradient(135deg,#211c37,#171426)">GroAI 70%</div><div style="flex:20;background:linear-gradient(135deg,var(--pink),#d63a60)">Creator 20%</div><div style="flex:10;background:linear-gradient(135deg,var(--mint),#0a8f63)">You 10%</div></div>
+            <p class="me" style="color:var(--mut);margin-top:12px">Bring on other creators like you. They earn 20% of their academy; you take a <b>10% override</b> on everything they make — forever, hands-off.</p>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:18px">
+          <div class="h"><h3>Payout history</h3><span class="mo">paid monthly · dummy data</span></div>
+          <table><thead><tr><th>Month</th><th>Academy gross</th><th>Your 30%</th><th>Overrides (10%)</th><th>Your payout</th></tr></thead>
+          <tbody>
+            <tr><td>September 2026</td><td>£128,400</td><td>£38,520</td><td>£8,200</td><td><b style="color:var(--v)">£46,720</b></td></tr>
+            <tr><td>August 2026</td><td>£114,600</td><td>£34,380</td><td>£6,900</td><td><b style="color:var(--v)">£41,280</b></td></tr>
+            <tr><td>July 2026</td><td>£101,200</td><td>£30,360</td><td>£5,400</td><td><b style="color:var(--v)">£35,760</b></td></tr>
+            <tr><td>June 2026</td><td>£88,900</td><td>£26,670</td><td>£3,900</td><td><b style="color:var(--v)">£30,570</b></td></tr>
+          </tbody></table>
+        </div>
+      </section>
+
+      <!-- CREATORS -->
+      <section id="creators" class="view">
+        <p class="lead">Your network. Recruit other creators onto their own academy — GroAI builds each one, they earn 20%, and you take a <b>10% override</b> on everything they generate. Your income grows without you lifting a finger.</p>
+        <div class="kpis" style="grid-template-columns:repeat(3,1fr)">
+          <div class="kpi"><span class="cap">Creators in your network</span><div class="v">5</div><div class="s">3 more onboarding</div></div>
+          <div class="kpi"><span class="cap">Network revenue</span><div class="v">£82,000</div><div class="s">their gross this month</div></div>
+          <div class="kpi"><span class="cap">Your override income</span><div class="v" style="color:var(--mint)">£8,200</div><div class="s">10% · this month</div></div>
+        </div>
+        <div class="card">
+          <div class="h"><h3>Your creators</h3><button class="btn">+ Invite creator</button></div>
+          <table><thead><tr><th>Creator</th><th>Niche</th><th>Members</th><th>Their gross /mo</th><th>Your 10%</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><span class="u"><span class="a" style="background:#F0567A">M</span><span class="n">Mia K.</span></span></td><td>Beauty</td><td>420</td><td>£24,000</td><td><b style="color:var(--mint)">£2,400</b></td><td><span class="tag t-mint">Live</span></td></tr>
+            <tr><td><span class="u"><span class="a" style="background:#7C6CF0">J</span><span class="n">Jordan T.</span></span></td><td>Fitness</td><td>310</td><td>£18,000</td><td><b style="color:var(--mint)">£1,800</b></td><td><span class="tag t-mint">Live</span></td></tr>
+            <tr><td><span class="u"><span class="a" style="background:#12B981">A</span><span class="n">Amara L.</span></span></td><td>Fashion</td><td>260</td><td>£14,000</td><td><b style="color:var(--mint)">£1,400</b></td><td><span class="tag t-mint">Live</span></td></tr>
+            <tr><td><span class="u"><span class="a" style="background:#F4A63A">S</span><span class="n">Sofia R.</span></span></td><td>Food</td><td>180</td><td>£16,000</td><td><b style="color:var(--mint)">£1,600</b></td><td><span class="tag t-mint">Live</span></td></tr>
+            <tr><td><span class="u"><span class="a" style="background:#37B6F0">K</span><span class="n">Kai N.</span></span></td><td>Tech</td><td>140</td><td>£10,000</td><td><b style="color:var(--mint)">£1,000</b></td><td><span class="tag t-amber">Launching</span></td></tr>
+          </tbody></table>
+          <div class="note" style="margin-top:16px">Ten creators at this rate would add <b>£16k+ a month</b> to your income — on top of your own academy. This is how a creator becomes a business.</div>
+        </div>
+      </section>
+
+      <!-- SETTINGS -->
+      <section id="settings" class="view">
+        <p class="lead">Your academy, your brand. Everything is white-labelled to Louise Thomson — your name, your domain, your look. GroAI runs the tech behind it.</p>
+        <div class="grid" style="grid-template-columns:1fr 1fr">
+          <div class="card"><div class="h"><h3>Branding</h3></div>
+            <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px"><div class="lg" style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,var(--v),var(--pink));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:20px;font-family:'Helvetica Neue'">LT</div><div><div class="u"><span class="n" style="font-size:15px">Louise Thomson Academy</span></div><div class="me" style="color:var(--mut)">academy.louisethomson.com</div></div></div>
+            <ul class="plan" style="border:none;padding:0"><li>Your logo, colours &amp; domain</li><li>Your name on every certificate</li><li>Your own mobile app icon</li></ul>
+          </div>
+          <div class="card"><div class="h"><h3>Run by GroAI</h3></div>
+            <ul class="plan" style="border:none;padding:0"><li>Platform build &amp; hosting</li><li>Payments, tax &amp; payouts</li><li>Course production &amp; editing</li><li>Support &amp; maintenance</li><li>Investment up front</li></ul>
+            <div class="note" style="margin-top:12px">You promote. <b>GroAI does the rest.</b></div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  var mods=[
+    ['01','TikTok Growth Mastery','12 lessons',1640,74,'t-v'],
+    ['02','Monetising Your Content','9 lessons',1210,66,'t-pink'],
+    ['03','Selling Your Own Products','8 lessons',980,58,'t-mint'],
+    ['04','Affiliate Income Blueprint','7 lessons',1050,61,'t-amber'],
+    ['05','Socials For Brands (paid clients)','10 lessons',720,49,'t-v'],
+    ['06','Building Your Personal Brand','8 lessons',1430,71,'t-pink'],
+    ['07','Editing &amp; Production','11 lessons',890,55,'t-mint'],
+    ['08','The Algorithm &amp; Analytics','6 lessons',760,47,'t-amber'],
+    ['09','Sponsorships &amp; Rate Negotiation','5 lessons',540,44,'t-v'],
+    ['10','AI Tools For Creators','7 lessons',1120,63,'t-pink'],
+    ['11','Mindset &amp; Consistency','6 lessons',1300,78,'t-mint'],
+    ['12','Business, Tax &amp; Setup','5 lessons',610,40,'t-amber']
+  ];
+  document.getElementById('modlist').innerHTML = mods.map(function(m){
+    return '<div class="mod"><div class="nu">'+m[0]+'</div><div style="flex:1"><div class="nm">'+m[1]+'</div><div class="me">'+m[2]+' · '+m[3].toLocaleString()+' enrolled</div></div><div class="rt"><div class="prog"><span style="width:'+m[4]+'%"></span></div><div class="me" style="margin-top:5px">'+m[4]+'% complete</div></div></div>';
+  }).join('');
+
+  var stu=[
+    ['Priya K.','#7C6CF0','VIP membership','t-v','12 Aug 2026',86,'£1,840','Active','t-mint'],
+    ['Reece T.','#F0567A','Elite course','t-pink','03 Sep 2026',54,'£2,000','Active','t-mint'],
+    ['Chloe M.','#12B981','Pro membership','t-mint','21 Jul 2026',72,'£980','Active','t-mint'],
+    ['Jordan L.','#F4A63A','Full playbook','t-amber','09 Sep 2026',38,'£1,300','Active','t-mint'],
+    ['Amara J.','#37B6F0','Standard','t-v','28 Jun 2026',91,'£640','Active','t-mint'],
+    ['Dan R.','#7C6CF0','Starter course','t-pink','15 Sep 2026',22,'£799','Active','t-mint'],
+    ['Sofia B.','#F0567A','Pro membership','t-mint','02 May 2026',100,'£1,320','Graduate','t-amber'],
+    ['Leo W.','#12B981','VIP membership','t-v','19 Sep 2026',12,'£400','Trial','t-amber']
+  ];
+  document.getElementById('stulist').innerHTML = stu.map(function(s){
+    return '<tr><td><span class="u"><span class="a" style="background:'+s[1]+'">'+s[0][0]+'</span><span class="n">'+s[0]+'</span></span></td><td><span class="tag '+s[3]+'">'+s[2]+'</span></td><td>'+s[4]+'</td><td><div class="prog"><span style="width:'+s[5]+'%"></span></div></td><td><b>'+s[6]+'</b></td><td><span class="tag '+s[8]+'">'+s[7]+'</span></td></tr>';
+  }).join('');
+
+  var tx=[
+    ['Reece T.','#F0567A','Elite course','Card','16 Sep 2026','£2,000'],
+    ['Chloe M.','#12B981','VIP membership','Apple Pay','16 Sep 2026','£200'],
+    ['Dan R.','#7C6CF0','Starter (3× instalment)','Klarna','15 Sep 2026','£266'],
+    ['Jordan L.','#F4A63A','Pro membership','Card','15 Sep 2026','£120'],
+    ['Maya P.','#37B6F0','Full playbook','Google Pay','14 Sep 2026','£1,300'],
+    ['Leo W.','#7C6CF0','Standard membership','Card','14 Sep 2026','£80']
+  ];
+  document.getElementById('txlist').innerHTML = tx.map(function(t){
+    return '<tr><td><span class="u"><span class="a" style="background:'+t[1]+'">'+t[0][0]+'</span><span class="n">'+t[0]+'</span></span></td><td>'+t[2]+'</td><td>'+t[3]+'</td><td>'+t[4]+'</td><td><b>'+t[5]+'</b></td></tr>';
+  }).join('');
+
+  function show(id,title,sub){
+    document.querySelectorAll('.view').forEach(function(v){v.classList.remove('on')});
+    document.getElementById(id).classList.add('on');
+    document.querySelectorAll('.nav a').forEach(function(a){a.classList.remove('active')});
+    document.querySelector('[data-v="'+id+'"]').classList.add('active');
+    document.getElementById('ptitle').innerHTML=title; document.getElementById('psub').innerHTML=sub;
+    document.querySelector('.wrap').scrollTo(0,0); window.scrollTo(0,0);
+  }
+</script>
+</body>
+</html>
