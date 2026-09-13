@@ -168,6 +168,19 @@
   .modal .mrow{display:flex;gap:12px;justify-content:flex-end;margin-top:22px}
   .toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(140px);background:var(--grad);color:#20121a;padding:14px 22px;border-radius:12px;font-weight:800;font-size:14px;z-index:130;transition:transform .3s;box-shadow:0 14px 40px rgba(0,0,0,.4);max-width:90vw;text-align:center}
   .toast.show{transform:translateX(-50%) translateY(0)}
+  .amtchips{display:flex;gap:8px;flex-wrap:wrap;margin:2px 0 4px}
+  .achip{padding:7px 13px;border-radius:999px;border:1px solid var(--line);background:var(--panel2);color:var(--tx);font-weight:800;font-size:13px;cursor:pointer;transition:.14s}
+  .achip:hover{border-color:var(--gold);color:var(--gold)}
+  .opt{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 15px;border:1px solid var(--line);border-radius:13px;margin-bottom:9px;cursor:pointer;background:var(--panel2);transition:.14s}
+  .opt:hover{border-color:rgba(230,190,134,.5)}
+  .opt.sel{border-color:var(--gold);background:rgba(230,190,134,.09)}
+  .opt .ol .on{font-weight:800;font-size:14.5px}
+  .opt .ol .od{font-size:12px;color:var(--mut);margin-top:1px}
+  .opt .op{font-weight:900;color:var(--gold);font-size:15px;white-space:nowrap}
+  .amtbig{display:flex;align-items:center;gap:8px;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:4px 14px;margin-top:4px}
+  .amtbig span{font-size:22px;font-weight:900;color:var(--gold)}
+  .amtbig input{border:none!important;background:transparent!important;font-size:22px!important;font-weight:900!important;padding:10px 0!important;color:var(--tx)}
+  .setby{font-size:12px;color:var(--mut);text-align:center;margin-top:14px}
 
   @media(max-width:960px){
     .phero{grid-template-columns:1fr;gap:24px} .pcard{max-width:320px}
@@ -244,6 +257,7 @@
       <div class="pcta">
         <button class="btn btn-p btn-lg" onclick="openJoin()">🔓 Unlock everything</button>
         <button class="btn btn-o btn-lg" onclick="openChat()">💬 Message me</button>
+        <button class="btn btn-o btn-lg" onclick="openGift()">🎁 Send a gift</button>
         <div class="pprice">from <b>£14.99</b>/mo · cancel anytime</div>
       </div>
     </div>
@@ -253,7 +267,7 @@
 <!-- MEMBERSHIP TIERS -->
 <section class="sec" id="tiers">
   <div class="wrap">
-    <div class="head"><div><span class="eyebrow">Membership</span><h2>Choose your access.</h2></div></div>
+    <div class="head"><div><span class="eyebrow">Membership</span><h2>Choose your access.</h2><p>Prices shown are examples — Louise sets her own rates on every plan, product and service.</p></div></div>
     <div class="tiers">
       <div class="tier">
         <div class="tn">Free</div>
@@ -330,9 +344,9 @@
   <div class="wrap">
     <div class="head"><div><span class="eyebrow">Just for you</span><h2>Private &amp; personal.</h2></div></div>
     <div class="svc">
-      <div class="scard"><div class="e">💬</div><h3>Private chat</h3><p>One-to-one DMs with me. Ask for what you want — I reply personally, no bots.</p><div class="pr">£3 / message · free on VIP+</div><button class="btn btn-p" onclick="openChat()">Start chatting</button></div>
-      <div class="scard"><div class="e">📹</div><h3>Private video call</h3><p>Book a live 1:1 video call. Pick your slot and it's just us for the session.</p><div class="pr">£8 / minute · book a slot</div><button class="btn btn-p" onclick="openBook('Private video call','£8/minute')">Book a call</button></div>
-      <div class="scard"><div class="e">🎁</div><h3>Custom requests</h3><p>Want something made just for you? Tell me the idea and I'll create a custom photo or video set.</p><div class="pr">from £40 · your idea</div><button class="btn btn-p" onclick="openBook('Custom request','from £40')">Request custom</button></div>
+      <div class="scard"><div class="e">💬</div><h3>Private chat</h3><p>One-to-one DMs with me. Choose per-message, 10 minutes, a full day, or a monthly open conversation.</p><div class="pr">from £3 · you choose</div><button class="btn btn-p" onclick="openChat()">Choose &amp; chat</button></div>
+      <div class="scard"><div class="e">📹</div><h3>Private video call</h3><p>Book a live 1:1 video call. Pick your slot, set your amount, and it's just us for the session.</p><div class="pr">£8 / minute · you set it</div><button class="btn btn-p" onclick="openBook('Private video call',8,'per minute')">Book a call</button></div>
+      <div class="scard"><div class="e">🎁</div><h3>Custom requests</h3><p>Want something made just for you? Tell me the idea, name your budget, and I'll create a custom set.</p><div class="pr">from £40 · your idea</div><button class="btn btn-p" onclick="openBook('Custom request',40,'your budget')">Request custom</button></div>
     </div>
   </div>
 </section>
@@ -344,9 +358,12 @@
       <div>
         <span class="lock-pill">💬 Direct message</span>
         <h2 style="margin-top:12px">Talk to me directly.</h2>
-        <p>No middlemen. Message me for a chat, a custom, or just to say hi. VIP+ members message free — everyone else £3 a message.</p>
+        <p>No middlemen. Choose per-message, 10 minutes, a full day, or a monthly open chat — or just send a gift. VIP+ members message free.</p>
       </div>
-      <button class="btn btn-p btn-lg" onclick="openChat()">Message Louise →</button>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <button class="btn btn-p btn-lg" onclick="openChat()">Choose &amp; chat →</button>
+        <button class="btn btn-o btn-lg" onclick="openGift()">🎁 Send a gift</button>
+      </div>
     </div>
   </div>
 </section>
@@ -374,8 +391,50 @@
   function showModal(html){document.getElementById('mbox').innerHTML=html;document.getElementById('mbg').classList.add('show')}
 
   var cart=0;
-  function addBag(name){cart++;document.getElementById('cc').textContent=cart;toast('🛍️ Added "'+name+'" to your bag');}
+  function bag(){cart++;document.getElementById('cc').textContent=cart;}
   function unlock(){openJoin();}
+  function amtField(id,val){
+    return '<div class="amtchips">'+[5,10,20,50,100].map(function(v){return '<button class="achip" onclick="setAmt(\''+id+'\','+v+')">£'+v+'</button>'}).join('')+'</div>'+
+      '<div class="amtbig"><span>£</span><input id="'+id+'" type="number" min="1" value="'+val+'" style="width:100%"></div>';
+  }
+  function setAmt(id,v){var el=document.getElementById(id);if(el)el.value=v;}
+  function amtVal(id){var v=parseFloat(document.getElementById(id).value);return (isNaN(v)||v<1)?null:Math.round(v);}
+
+  // Gift — fan chooses any amount
+  function openGift(){
+    showModal('<h3>Send Louise a gift 🎁</h3><p class="ms">Choose an amount or type your own — send a little love any time.</p>'+
+      amtField('g_amt',20)+
+      '<label>Message (optional)</label><input id="g_msg" placeholder="Add a note…">'+
+      '<div class="mrow"><button class="btn btn-o" onclick="closeModal()">Cancel</button><button class="btn btn-p" onclick="sendGift()">Send gift</button></div>'+
+      '<div class="setby">Gifts go straight to Louise, securely through the platform.</div>');
+  }
+  function sendGift(){var a=amtVal('g_amt');if(!a){toast('Please enter an amount');return;}closeModal();toast('🎁 Sent a £'+a+' gift to Louise — thank you!');}
+
+  // Buy any product / content unlock with your own amount
+  function buyModal(name,suggested,note){
+    showModal('<h3>'+name+'</h3><p class="ms">'+(note||'Pay the suggested price or gift more — your choice.')+'</p>'+
+      amtField('b_amt',suggested)+
+      '<label>Add a message (optional)</label><input id="b_note" placeholder="Say something to Louise…">'+
+      '<div class="mrow"><button class="btn btn-o" onclick="closeModal()">Cancel</button><button class="btn btn-p" onclick="doBuy(\''+name.replace(/'/g,"")+'\')">Add to bag</button></div>'+
+      '<div class="setby">Prices shown are examples — Louise sets her own.</div>');
+  }
+  function doBuy(name){var a=amtVal('b_amt');if(!a){toast('Please enter an amount');return;}bag();closeModal();toast('🛍️ Added "'+name+'" — £'+a+' in your bag');}
+  function buyContent(title,price){buyModal(title,price,'Unlock this now, or subscribe to VIP for everything. Pay the price or gift more.');}
+
+  // Chat — pick duration, editable price
+  var chatOpts=[['msg','Per message','one message',3],['ten','10-minute session','live back-and-forth',15],['day','1-day open chat','message all day',40],['month','Monthly open conversation','free on VIP+ Diamond',120]];
+  function openChat(){
+    var rows=chatOpts.map(function(o,i){
+      return '<div class="opt'+(i===1?' sel':'')+'" id="opt_'+o[0]+'" onclick="pickChat(\''+o[0]+'\','+o[3]+')"><div class="ol"><div class="on">'+o[1]+'</div><div class="od">'+o[2]+'</div></div><div class="op">£'+o[3]+'</div></div>';
+    }).join('');
+    showModal('<h3>Chat with Louise 💬</h3><p class="ms">Pick how you want to talk — then set your amount.</p>'+rows+
+      '<label>Your amount (£)</label>'+amtField('ch_amt',15)+
+      '<label>Your first message</label><input id="ch_msg" placeholder="Say hi…">'+
+      '<div class="mrow"><button class="btn btn-o" onclick="closeModal()">Cancel</button><button class="btn btn-p" onclick="startChat()">Start chatting</button></div>'+
+      '<div class="setby">Prices are examples — Louise sets her own rates.</div>');
+  }
+  function pickChat(id,price){document.querySelectorAll('.opt').forEach(function(x){x.classList.remove('sel')});var el=document.getElementById('opt_'+id);if(el)el.classList.add('sel');setAmt('ch_amt',price);}
+  function startChat(){var a=amtVal('ch_amt');if(!a){toast('Please enter an amount');return;}closeModal();toast('💬 Chat started with Louise — £'+a+'. She replies personally.');}
 
   function openJoin(){
     showModal('<h3>Join Louise Thomson VIP</h3><p class="ms">Unlock every photo, video and gallery — and message me directly.</p>'+
@@ -390,17 +449,16 @@
       '<label>Password</label><input id="l_pass" type="password" placeholder="••••••••">'+
       '<div class="mrow"><button class="btn btn-o" onclick="openJoin()">Not a member?</button><button class="btn btn-p" onclick="closeModal();toast(\'✔ Welcome back — your VIP content is unlocked.\')">Sign in</button></div>');
   }
-  function openChat(){
-    showModal('<h3>Message Louise</h3><p class="ms">£3 per message · free for VIP+ Diamond members. I reply personally.</p>'+
-      '<label>Your message</label><input id="c_msg" placeholder="Say hi…">'+
-      '<div class="mrow"><button class="btn btn-o" onclick="closeModal()">Cancel</button><button class="btn btn-p" onclick="closeModal();toast(\'💬 Message sent to Louise — she\\\'ll reply soon.\')">Send (£3)</button></div>');
+  // Booking (video call / custom) with editable amount
+  function openBook(t,suggested,unit){
+    showModal('<h3>'+t+'</h3><p class="ms">Set your amount ('+unit+') and pick a time — Louise will confirm.</p>'+
+      amtField('bk_amt',suggested)+
+      '<label>Preferred date</label><input id="bk_date" type="date">'+
+      '<label>Email</label><input id="bk_email" placeholder="you@email.com">'+
+      '<div class="mrow"><button class="btn btn-o" onclick="closeModal()">Cancel</button><button class="btn btn-p" onclick="doBook(\''+t.replace(/'/g,"")+'\')">Request</button></div>'+
+      '<div class="setby">Prices are examples — Louise sets her own rates.</div>');
   }
-  function openBook(t,p){
-    showModal('<h3>'+t+'</h3><p class="ms">'+p+'. Choose a time and I\'ll confirm.</p>'+
-      '<label>Preferred date</label><input id="b_date" type="date">'+
-      '<label>Email</label><input id="b_email" placeholder="you@email.com">'+
-      '<div class="mrow"><button class="btn btn-o" onclick="closeModal()">Cancel</button><button class="btn btn-p" onclick="closeModal();toast(\'✔ Request sent — Louise will confirm your booking.\')">Request</button></div>');
-  }
+  function doBook(t){var a=amtVal('bk_amt');if(!a){toast('Please enter an amount');return;}closeModal();toast('✔ '+t+' requested — £'+a+'. Louise will confirm.');}
 
   /* ---- PREMIUM PHOTO GRID (previews use real images, most locked) ---- */
   var PHOTOS=[
@@ -420,14 +478,14 @@
   function renderPhotos(){
     document.getElementById('photogrid').innerHTML=PHOTOS.map(function(p){
       if(p.free) return '<div class="ctile" onclick="openJoin()"><img src="'+p.img+'" onerror="this.remove()"><span class="free">Free preview</span></div>';
-      return '<div class="ctile locked" onclick="unlock()"><img src="'+p.img+'" onerror="this.remove()"><div class="ov"><div class="ic">🔒</div><div class="t">VIP only</div></div><span class="price">'+p.lock+'</span></div>';
+      return '<div class="ctile locked" onclick="buyContent(\'Premium photo\','+parseInt(p.lock.replace(/[^0-9]/g,''))+')"><img src="'+p.img+'" onerror="this.remove()"><div class="ov"><div class="ic">🔒</div><div class="t">VIP only</div></div><span class="price">'+p.lock+'</span></div>';
     }).join('');
   }
   /* ---- FEET & HANDS (locked placeholders) ---- */
   function renderFeet(){
     var items=[['🦶','Feet','£5'],['💅','Hands','£5'],['🦶','Feet set','£9'],['💅','Hands set','£9'],['🦶','Feet','£5'],['💅','Hands','£5'],['🦶','Feet HD','£12'],['💅','Hands HD','£12']];
     document.getElementById('feetgrid').innerHTML=items.map(function(i){
-      return '<div class="ctile locked" onclick="unlock()"><div class="ov"><div class="ic">'+i[0]+'</div><div class="t">'+i[1]+'</div><div class="c">🔒 Unlock</div></div><span class="price">'+i[2]+'</span></div>';
+      return '<div class="ctile locked" onclick="buyContent(\''+i[1]+'\','+parseInt(i[2].replace(/[^0-9]/g,''))+')"><div class="ov"><div class="ic">'+i[0]+'</div><div class="t">'+i[1]+'</div><div class="c">🔒 Unlock</div></div><span class="price">'+i[2]+'</span></div>';
     }).join('');
   }
   /* ---- VIDEOS (locked placeholders with duration) ---- */
@@ -435,7 +493,7 @@
     var vids=[['4:12','£9'],['8:40','£14'],['2:05','£6'],['12:30','£19']];
     var imgs=['images/v1.jpg','images/v4.jpg','images/v2.jpg','images/v3.jpg'];
     document.getElementById('videogrid').innerHTML=vids.map(function(v,i){
-      return '<div class="ctile locked" onclick="unlock()"><img src="'+imgs[i]+'" onerror="this.remove()"><div class="ov"><div class="ic">▶</div><div class="t">Premium video</div><div class="c">🔒 VIP</div></div><span class="dur">🎬 '+v[0]+'</span><span class="price">'+v[1]+'</span></div>';
+      return '<div class="ctile locked" onclick="buyContent(\'Premium video\','+parseInt(v[1].replace(/[^0-9]/g,''))+')"><img src="'+imgs[i]+'" onerror="this.remove()"><div class="ov"><div class="ic">▶</div><div class="t">Premium video</div><div class="c">🔒 VIP</div></div><span class="dur">🎬 '+v[0]+'</span><span class="price">'+v[1]+'</span></div>';
     }).join('');
   }
 
@@ -464,7 +522,7 @@
       var media=p[4]?'<img src="'+p[4]+'" onerror="this.remove()">':'<div class="ph">👗</div>';
       return '<div class="prod"><div class="im">'+media+'<span class="worn">'+p[2]+'</span></div>'+
         '<div class="b"><div class="pn">'+p[0]+'</div><div class="pd">'+p[1]+'</div>'+
-        '<div class="pr"><span class="price">£'+p[3]+'</span><button onclick="addBag(\''+p[0].replace(/'/g,"")+'\')">Add to bag</button></div></div></div>';
+        '<div class="pr"><span class="price">£'+p[3]+'</span><button onclick="buyModal(\''+p[0].replace(/'/g,"")+'\','+p[3]+')">Choose &amp; pay</button></div></div></div>';
     }).join('');
   }
   function renderShopChips(){
