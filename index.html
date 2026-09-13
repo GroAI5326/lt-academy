@@ -437,12 +437,12 @@
         <div class="grid" style="grid-template-columns:1fr 1fr">
           <div class="card">
             <div class="h"><h3>Your academy · the split</h3></div>
-            <div class="split"><div style="flex:70;background:linear-gradient(135deg,#211c37,#171426)">GroAI 70%</div><div style="flex:30;background:linear-gradient(135deg,var(--v),var(--v2))">Louise 30%</div></div>
-            <p class="me" style="color:var(--mut);margin-top:12px">GroAI builds, funds, hosts and runs the platform. You keep 30% of everything your academy earns — with zero cost or tech to manage.</p>
+            <div class="split"><div style="flex:70;background:linear-gradient(135deg,#211c37,#171426)">Platform 70%</div><div style="flex:30;background:linear-gradient(135deg,var(--v),var(--v2))">Louise 30%</div></div>
+            <p class="me" style="color:var(--mut);margin-top:12px">It's all built, funded, hosted and run for you. You keep 30% of everything your academy earns — with zero cost or tech to manage.</p>
           </div>
           <div class="card">
             <div class="h"><h3>Creators you recruit · the split</h3></div>
-            <div class="split"><div style="flex:70;background:linear-gradient(135deg,#211c37,#171426)">GroAI 70%</div><div style="flex:20;background:linear-gradient(135deg,var(--pink),#d63a60)">Creator 20%</div><div style="flex:10;background:linear-gradient(135deg,var(--mint),#0a8f63)">You 10%</div></div>
+            <div class="split"><div style="flex:70;background:linear-gradient(135deg,#211c37,#171426)">Platform 70%</div><div style="flex:20;background:linear-gradient(135deg,var(--pink),#d63a60)">Creator 20%</div><div style="flex:10;background:linear-gradient(135deg,var(--mint),#0a8f63)">You 10%</div></div>
             <p class="me" style="color:var(--mut);margin-top:12px">Bring on other creators like you. They earn 20% of their academy; you take a <b>10% override</b> on everything they make — forever, hands-off.</p>
           </div>
         </div>
@@ -461,7 +461,7 @@
 
       <!-- CREATORS -->
       <section id="creators" class="view">
-        <p class="lead">Your network. Recruit other creators onto their own academy — GroAI builds each one, they earn 20%, and you take a <b>10% override</b> on everything they generate. Your income grows without you lifting a finger.</p>
+        <p class="lead">Your network. Recruit other creators onto their own academy — Each academy is built for you, they earn 20%, and you take a <b>10% override</b> on everything they generate. Your income grows without you lifting a finger.</p>
         <div class="kpis" style="grid-template-columns:repeat(3,1fr)">
           <div class="kpi"><span class="cap">Creators in your network</span><div class="v" id="cCount">5</div><div class="s">growing every month</div></div>
           <div class="kpi"><span class="cap">Network revenue</span><div class="v" id="cRev">£82,000</div><div class="s">their gross this month</div></div>
@@ -630,7 +630,7 @@
 
       <!-- MOBILE APP -->
       <section id="mobileapp" class="view">
-        <p class="lead">Your academy in their pocket — a fully branded iOS &amp; Android app. Push notifications, offline lessons and the community, one tap away. Same brand, same login, built and maintained by GroAI.</p>
+        <p class="lead">Your academy in their pocket — a fully branded iOS &amp; Android app. Push notifications, offline lessons and the community, one tap away. Same brand, same login, built and maintained by the platform.</p>
         <div class="phones">
           <div class="phone"><div class="scr">
             <div class="aph"><div class="t">Louise Thomson · Academy</div><div class="h">Continue learning 👋</div></div>
@@ -813,15 +813,15 @@
 
       <!-- SETTINGS -->
       <section id="settings" class="view">
-        <p class="lead">Your academy, your brand. Everything is white-labelled to Louise Thomson — your name, your domain, your look. GroAI runs the tech behind it.</p>
+        <p class="lead">Your academy, your brand. Everything is white-labelled to Louise Thomson — your name, your domain, your look. The tech is all run for you.</p>
         <div class="grid" style="grid-template-columns:1fr 1fr">
           <div class="card"><div class="h"><h3>Branding</h3></div>
             <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px"><div class="lg" style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,var(--v),var(--pink));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:20px;font-family:'Helvetica Neue'">LT</div><div><div class="u"><span class="n" style="font-size:15px">Louise Thomson Academy</span></div><div class="me" style="color:var(--mut)">academy.louisethomson.com</div></div></div>
             <ul class="plan" style="border:none;padding:0"><li>Your logo, colours &amp; domain</li><li>Your name on every certificate</li><li>Your own mobile app icon</li></ul>
           </div>
-          <div class="card"><div class="h"><h3>Run by GroAI</h3></div>
+          <div class="card"><div class="h"><h3>Run by the platform</h3></div>
             <ul class="plan" style="border:none;padding:0"><li>Platform build &amp; hosting</li><li>Payments, tax &amp; payouts</li><li>Course production &amp; editing</li><li>Support &amp; maintenance</li><li>Investment up front</li></ul>
-            <div class="note" style="margin-top:12px">You promote. <b>GroAI does the rest.</b></div>
+            <div class="note" style="margin-top:12px">You promote. <b>The platform does the rest.</b></div>
           </div>
         </div>
         <div class="grid" style="grid-template-columns:1fr 1fr;margin-top:18px">
@@ -979,7 +979,7 @@
   function addCreator(){
     var n=val('c_name')||'New Creator', niche=val('c_niche')||'Lifestyle';
     creators.push([n,palette[creators.length%palette.length],niche,0,0,'Launching']); renderCreators(); closeModal();
-    toast('✓ Invite sent to '+n+' — GroAI will build their academy');
+    toast('✓ Invite sent to '+n+' — we'll build their academy');
   }
 
   /* ---- messages ---- */
