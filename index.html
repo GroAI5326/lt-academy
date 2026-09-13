@@ -23,13 +23,14 @@
   .brand .lg{width:40px;height:40px;border-radius:11px;background:linear-gradient(135deg,var(--v),var(--pink));display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:17px;font-family:'Helvetica Neue',Arial}
   .brand .nm{color:#fff;font-weight:900;font-size:15px;line-height:1.05}
   .brand .nm span{display:block;font-size:9px;letter-spacing:2px;color:var(--v);margin-top:3px;font-weight:700}
-  .nav{padding:8px 12px;display:flex;flex-direction:column;gap:2px}
+  .nav{padding:8px 12px;display:flex;flex-direction:column;gap:2px;flex:1 1 auto;overflow-y:auto;min-height:0}
+  .nav::-webkit-scrollbar{width:6px} .nav::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:6px} .nav{scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.15) transparent}
   .nav .sec{font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;color:#5b567a;font-weight:800;padding:14px 12px 6px}
   .nav a{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:9px;color:var(--sidetx);text-decoration:none;font-size:13.5px;font-weight:600;cursor:pointer}
   .nav a svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;flex:none}
   .nav a:hover{background:rgba(255,255,255,.05);color:#fff}
   .nav a.active{background:linear-gradient(135deg,var(--v),var(--v2));color:#fff;box-shadow:0 6px 16px rgba(124,108,240,.4)}
-  .side .me{margin-top:auto;padding:16px;border-top:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:11px}
+  .side .me{flex:none;padding:16px;border-top:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:11px}
   .side .me .av{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--amber));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;flex:none}
   .side .me .nm{color:#fff;font-size:13px;font-weight:700}.side .me .rl{font-size:11px;color:#7d78a0}
 
@@ -223,7 +224,7 @@
       <a data-v="store" onclick="show('store','Digital Store','Sell templates, presets &amp; downloads')"><svg viewBox="0 0 24 24"><path d="M3 3h2l2.4 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6L21 8H6"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>Store</a>
       <a data-v="earnings" onclick="show('earnings','Earnings &amp; Commission','What you take home')"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Earnings</a>
       <a data-v="creators" onclick="show('creators','Creator Network','Creators you bring on, and your override')"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><circle cx="5" cy="18" r="3"/><circle cx="19" cy="18" r="3"/><path d="M12 11v3M9.5 15.5 7 16.5M14.5 15.5 17 16.5"/></svg>Creator Network</a>
-      <a data-v="directory" onclick="show('directory','Creator Directory','Creators list profiles · clients book through you')"><svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M5.5 21a6.5 6.5 0 0 1 13 0"/><circle cx="19" cy="6" r="1.5"/><circle cx="5" cy="6" r="1.5"/></svg>Directory</a>
+      <a data-v="directory" onclick="show('directory','Creator Directory','Creators pay £60/mo to be listed · they keep 100% of bookings')"><svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M5.5 21a6.5 6.5 0 0 1 13 0"/><circle cx="19" cy="6" r="1.5"/><circle cx="5" cy="6" r="1.5"/></svg>Directory</a>
       <a data-v="affiliates" onclick="show('affiliates','Affiliate Program','Your students become your marketing')"><svg viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>Affiliates</a>
       <a data-v="growth" onclick="show('growth','Growth','Funnels, waitlists, social &amp; integrations')"><svg viewBox="0 0 24 24"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg>Growth</a>
       <div class="sec">Intelligence · AI</div>
@@ -781,18 +782,18 @@
 
       <!-- DIRECTORY -->
       <section id="directory" class="view">
-        <p class="lead">A public directory where creators list their profile and clients book them direct — but every booking is taken and paid <b>through the academy</b>, so you earn a fee on all of it. Creators get clients; you get a cut of every booking.</p>
+        <p class="lead">A public directory where your creators list their profile and clients book them direct. Creators keep <b>100%</b> of what they earn — you charge a flat <b>£60/month</b> to be listed. Pure recurring revenue, no admin, no chasing a cut of every booking.</p>
         <div class="kpis">
-          <div class="kpi"><span class="cap">Creators listed</span><div class="v" id="dirCount">6</div><div class="s">accepting bookings</div></div>
+          <div class="kpi"><span class="cap">Directory members</span><div class="v" id="dirMembers">68</div><div class="s">paying £60/mo</div></div>
+          <div class="kpi"><span class="cap">Monthly recurring</span><div class="v" id="dirRecurring" style="color:var(--mint)">£4,080</div><div class="s">from listings</div></div>
           <div class="kpi"><span class="cap">Bookings this month</span><div class="v">214</div><div class="s">▲ 27%</div></div>
-          <div class="kpi"><span class="cap">Booking volume</span><div class="v">£41,300</div><div class="s">paid through you</div></div>
-          <div class="kpi"><span class="cap">Your 20% fee</span><div class="v" style="color:var(--mint)">£8,260</div><div class="s">this month</div></div>
+          <div class="kpi"><span class="cap">Booked volume</span><div class="v">£41,300</div><div class="s">creators keep 100%</div></div>
         </div>
         <div class="card">
-          <div class="h"><h3>The directory</h3><div style="display:flex;gap:10px"><button class="btn2" onclick="toast('Directory shared ✓ — link copied')">Share directory</button><button class="btn" onclick="applyDirectoryModal()">+ Apply to list</button></div></div>
+          <div class="h"><h3>Featured creators</h3><div style="display:flex;gap:10px"><button class="btn2" onclick="toast('Directory shared ✓ — link copied')">Share directory</button><button class="btn" onclick="applyDirectoryModal()">+ Join the directory</button></div></div>
           <div class="dgrid" id="dirgrid" style="margin-top:4px"></div>
         </div>
-        <div class="note" style="margin-top:18px">Every booking is processed on the platform — the client pays the academy, you take a <b>20% booking fee</b> automatically, and the creator is paid the rest. Nobody books off-platform.</div>
+        <div class="note" style="margin-top:18px">Creators pay a flat <b>£60/month</b> to be listed — that's your recurring revenue. They keep everything they earn from bookings, so it's an easy yes for them. <b>68 members = £4,080/month</b>, and it grows every time a creator joins.</div>
       </section>
 
       <!-- SETTINGS -->
@@ -1112,24 +1113,29 @@
       var st=d[5]==='Busy'?'t-amber':(d[5]==='Top rated'?'t-v':'t-mint');
       return '<div class="dcard"><div class="av" style="background:'+d[1]+'">'+d[0][0]+'</div><div class="dn">'+d[0]+'</div><div class="di">'+d[2]+'</div><div class="dr">★ '+d[3]+'</div><div class="dp">from '+d[4]+' / session</div><div style="margin-top:8px"><span class="tag '+st+'">'+d[5]+'</span></div><div class="db2"><button class="btn" style="padding:8px 14px" onclick="bookCreator(\''+d[0]+'\',\''+d[4]+'\')">Book</button><button class="btn2" style="padding:8px 12px" onclick="toast(\'Opening profile…\')">Profile</button></div></div>';
     }).join('');
-    var c=document.getElementById('dirCount'); if(c)c.textContent=directory.length;
+    updateDirStats();
+  }
+  var dirMembers=68;
+  function updateDirStats(){
+    var m=document.getElementById('dirMembers'); if(m)m.textContent=dirMembers;
+    var r=document.getElementById('dirRecurring'); if(r)r.textContent='£'+(dirMembers*60).toLocaleString();
   }
   function applyDirectoryModal(){
-    openModal('Apply to the creator directory',
-      '<div class="fl"><label>Name / handle</label><input class="inp" id="d_name" placeholder="e.g. Ella Rose"></div><div class="fl"><label>What you do</label><input class="inp" id="d_niche" placeholder="e.g. Travel content &amp; UGC"></div><div class="fl"><label>Rate per session (£)</label><input class="inp" id="d_rate" type="number" value="150"></div><div class="fl"><label>Short bio</label><textarea id="d_bio" placeholder="A line or two clients will see"></textarea></div>',
-      '<button class="btn3" onclick="closeModal()">Cancel</button><button class="btn" onclick="submitApply()">Submit application</button>');
+    openModal('Join the creator directory',
+      '<div class="fl"><label>Name / handle</label><input class="inp" id="d_name" placeholder="e.g. Ella Rose"></div><div class="fl"><label>What you do</label><input class="inp" id="d_niche" placeholder="e.g. Travel content &amp; UGC"></div><div class="fl"><label>Rate per session (£)</label><input class="inp" id="d_rate" type="number" value="150"></div><div class="fl"><label>Short bio</label><textarea id="d_bio" placeholder="A line or two clients will see"></textarea></div><div class="note" style="margin-top:8px">Listing is <b>£60/month</b>. You keep <b>100%</b> of everything clients pay you — the £60 just keeps your profile live and bookable in the directory.</div>',
+      '<button class="btn3" onclick="closeModal()">Cancel</button><button class="btn" onclick="submitApply()">Join for £60/mo</button>');
   }
   function submitApply(){
     var n=val('d_name')||'New Creator', ni=val('d_niche')||'Creator', r='£'+(val('d_rate')||'150');
-    directory.push([titleCase(n),palette[directory.length%palette.length],ni,5.0,r,'Available']); renderDirectory(); closeModal();
-    toast('✓ '+titleCase(n)+' added to the directory — now bookable');
+    directory.push([titleCase(n),palette[directory.length%palette.length],ni,5.0,r,'Available']); dirMembers++; renderDirectory(); closeModal();
+    toast('✓ '+titleCase(n)+' joined — £60/mo listing added, +£60/mo recurring to you');
   }
   function bookCreator(name,rate){
     openModal('Book '+name,
-      '<div class="fl"><label>Session</label><select id="b_type"><option>60-min 1:1 ('+rate+')</option><option>30-min quick call</option><option>Half-day collaboration</option></select></div><div class="fl"><label>Date</label><input class="inp" id="b_date" type="date"></div><div class="fl"><label>Your email</label><input class="inp" id="b_email" placeholder="you@email.com"></div><div class="note" style="margin-top:8px">Payment is taken securely by <b>Louise Thomson Academy</b>. A 20% platform fee applies — the creator is paid the rest.</div>',
-      '<button class="btn3" onclick="closeModal()">Cancel</button><button class="btn" onclick="confirmBooking(\''+name+'\')">Confirm &amp; pay</button>');
+      '<div class="fl"><label>Session</label><select id="b_type"><option>60-min 1:1 ('+rate+')</option><option>30-min quick call</option><option>Half-day collaboration</option></select></div><div class="fl"><label>Date</label><input class="inp" id="b_date" type="date"></div><div class="fl"><label>Your email</label><input class="inp" id="b_email" placeholder="you@email.com"></div><div class="note" style="margin-top:8px">You book '+name+' direct and they keep <b>100%</b> of the fee. '+name+' pays the academy a flat <b>£60/month</b> to stay listed here — that\'s how the directory earns.</div>',
+      '<button class="btn3" onclick="closeModal()">Cancel</button><button class="btn" onclick="confirmBooking(\''+name+'\')">Confirm booking</button>');
   }
-  function confirmBooking(name){ closeModal(); toast('✓ Booked '+name+' — paid through the academy, 20% fee applied'); }
+  function confirmBooking(name){ closeModal(); toast('✓ Booked '+name+' — they keep 100%; you earn from their £60/mo listing'); }
 
   /* ---- init ---- */
   renderMods(); renderCreators(); renderInbox(); renderChat(); renderStore(); renderCRM(); renderDirectory();
