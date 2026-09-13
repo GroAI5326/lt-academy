@@ -118,6 +118,37 @@
   .dcard .bk{margin-top:12px;display:block;width:100%;padding:9px;border-radius:10px;background:#fff;color:var(--ink);font-weight:800;font-size:13px;cursor:pointer;border:none}
   .dnote{margin-top:26px;font-size:14px;color:#c6c2e0;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:16px 20px}
 
+  /* BROWSE DIRECTORY */
+  .chips{display:flex;gap:9px;flex-wrap:wrap;margin-top:26px}
+  .chip2{padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:13.5px;font-weight:700;color:var(--mut);cursor:pointer;transition:.14s}
+  .chip2:hover{border-color:var(--v);color:var(--v)}
+  .chip2.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .bgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:24px}
+  .bcard{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 18px;text-align:center;transition:.16s}
+  .bcard:hover{box-shadow:var(--shadow);transform:translateY(-3px);border-color:transparent}
+  .bcard .av{width:58px;height:58px;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:20px}
+  .bcard .dn{font-weight:800;font-size:15px}
+  .bcard .di{font-size:12.5px;color:var(--mut);margin-top:2px;min-height:32px}
+  .bcard .meta{display:flex;justify-content:center;gap:12px;font-size:12.5px;margin-top:6px}
+  .bcard .rt{color:var(--amber);font-weight:700} .bcard .pr{color:var(--tx);font-weight:700}
+  .bcard .tag{display:inline-block;font-size:11px;font-weight:800;padding:3px 10px;border-radius:999px;margin-top:10px}
+  .t-mint{background:var(--mintsoft);color:var(--mint)} .t-amber{background:var(--ambersoft);color:#b9791a} .t-v{background:var(--vsoft);color:var(--v)}
+  .bcard .bk{margin-top:13px;width:100%;padding:9px;border-radius:10px;background:linear-gradient(135deg,var(--v),var(--v2));color:#fff;font-weight:800;font-size:13px;cursor:pointer;border:none}
+  .bcard .bk:hover{opacity:.92}
+  .joincard{margin-top:28px;background:linear-gradient(120deg,var(--vsoft),var(--pinksoft));border:1px solid var(--line);border-radius:20px;padding:30px 34px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  /* MODAL + TOAST */
+  .modalbg{position:fixed;inset:0;background:rgba(20,17,38,.55);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:100;padding:20px}
+  .modalbg.show{display:flex}
+  .modal{background:#fff;border-radius:20px;max-width:460px;width:100%;padding:30px;box-shadow:0 30px 80px rgba(0,0,0,.4)}
+  .modal h3{font-size:22px;margin-bottom:6px}
+  .modal p.ms{color:var(--mut);font-size:14px;margin-bottom:8px}
+  .modal label{display:block;font-size:13px;font-weight:700;margin:13px 0 5px}
+  .modal input{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:11px;font-size:14px;font-family:inherit}
+  .modal input:focus{outline:none;border-color:var(--v)}
+  .modal .mrow{display:flex;gap:12px;justify-content:flex-end;margin-top:24px}
+  .toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(140px);background:var(--ink);color:#fff;padding:14px 22px;border-radius:12px;font-weight:700;font-size:14px;z-index:110;transition:transform .3s;box-shadow:0 14px 40px rgba(0,0,0,.3);max-width:90vw;text-align:center}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+
   /* SUCCESS */
   .tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:44px}
   .tcard{background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px 24px;box-shadow:var(--shadow)}
@@ -188,7 +219,7 @@
     .hgrid,.lgrid{grid-template-columns:1fr;gap:36px}
     .hvis{height:400px;max-width:440px;margin:0 auto}
     .modgrid,.tgrid,.pgrid{grid-template-columns:1fr 1fr}
-    .dcards{grid-template-columns:1fr 1fr}
+    .dcards,.bgrid{grid-template-columns:1fr 1fr}
     .fgrid{grid-template-columns:1fr 1fr}
     .plan.feat{transform:none}
   }
@@ -205,6 +236,8 @@
     .sec h2,.ltext h2,.ctaband h2{font-size:30px}
     .statrow{grid-template-columns:1fr 1fr;gap:26px}
     .modgrid,.steps,.tgrid,.pgrid,.dcards,.fgrid{grid-template-columns:1fr}
+    .bgrid{grid-template-columns:1fr 1fr;gap:12px}
+    .joincard{flex-direction:column;text-align:center;padding:26px 22px}
     .dsec,.ctaband{padding:44px 24px;border-radius:24px}
     .fc1,.fc2,.fc3{position:relative;width:100%!important;top:auto;left:auto;right:auto;bottom:auto;margin-bottom:14px}
     .hvis{height:auto}
@@ -337,13 +370,33 @@
         <h2>Get discovered. Get booked.</h2>
         <p class="lead">Graduate creators list a profile in the academy directory. Brands and clients book them directly — securely, through the platform. You keep 100% of what you earn.</p>
       </div>
-      <div class="dcards">
-        <div class="dcard"><div class="av" style="background:#7C6CF0">M</div><div class="dn">Mia K.</div><div class="di">Beauty & UGC</div><div class="dr">★ 4.8</div><div class="dp">from £180 / session</div><button class="bk" onclick="alert('In the live platform this books Mia directly — payment handled by the academy.')">Book</button></div>
-        <div class="dcard"><div class="av" style="background:#F0567A">J</div><div class="dn">Jordan T.</div><div class="di">Fitness coaching</div><div class="dr">★ 4.9</div><div class="dp">from £200 / session</div><button class="bk" onclick="alert('In the live platform this books Jordan directly — payment handled by the academy.')">Book</button></div>
-        <div class="dcard"><div class="av" style="background:#12B981">A</div><div class="dn">Amara L.</div><div class="di">Fashion styling</div><div class="dr">★ 4.7</div><div class="dp">from £150 / session</div><button class="bk" onclick="alert('In the live platform this books Amara directly — payment handled by the academy.')">Book</button></div>
-        <div class="dcard"><div class="av" style="background:#F4A63A">S</div><div class="dn">Sofia R.</div><div class="di">Food & recipes</div><div class="dr">★ 4.8</div><div class="dp">from £160 / session</div><button class="bk" onclick="alert('In the live platform this books Sofia directly — payment handled by the academy.')">Book</button></div>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:34px">
+        <a class="btn btn-lg btn-w" href="#browse">Browse the creators ↓</a>
+        <button class="btn btn-lg btn-g" onclick="openJoin()">Join the directory — £60/mo</button>
       </div>
       <div class="dnote">💡 <b>How it works:</b> creators pay a flat <b>£60/month</b> to be listed and keep every penny they earn from bookings. Clients book direct, but pay securely through Louise Thomson Academy — simple, safe, and trusted.</div>
+    </div>
+  </div>
+</section>
+
+<!-- BROWSE DIRECTORY -->
+<section class="sec" id="browse" style="padding-top:46px">
+  <div class="wrap">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:14px">
+      <div>
+        <span class="eyebrow">Browse the directory</span>
+        <h2 style="font-size:34px;margin-top:10px">Meet the creators</h2>
+      </div>
+      <div style="font-size:15px;color:var(--mut)"><b id="dcount" style="color:var(--v);font-size:22px">216</b> creators listed &amp; bookable</div>
+    </div>
+    <div class="chips" id="chips"></div>
+    <div class="bgrid" id="dgrid"></div>
+    <div class="joincard">
+      <div>
+        <h3 style="font-size:23px">Are you a creator? Get listed.</h3>
+        <p style="color:var(--mut);font-size:15px;margin-top:6px;max-width:460px">List your profile for a flat <b>£60/month</b>. Clients book you directly and you keep <b>100%</b> of your fee. Set up in two minutes.</p>
+      </div>
+      <button class="btn btn-lg btn-p" onclick="openJoin()">Join the directory →</button>
     </div>
   </div>
 </section>
@@ -518,6 +571,10 @@
   </div>
 </footer>
 
+<!-- MODAL + TOAST -->
+<div class="modalbg" id="mbg" onclick="if(event.target===this)closeModal()"><div class="modal" id="mbox"></div></div>
+<div class="toast" id="toast"></div>
+
 <script>
   function toggleNav(){document.getElementById('navlinks').classList.toggle('show')}
   function closeNav(){document.getElementById('navlinks').classList.remove('show')}
@@ -526,6 +583,80 @@
     document.querySelectorAll('.qa').forEach(function(x){x.classList.remove('open');x.querySelector('.ans').style.maxHeight=null});
     if(!open){qa.classList.add('open');ans.style.maxHeight=ans.scrollHeight+'px'}
   }
+
+  /* ===== CREATOR DIRECTORY ===== */
+  // [name, niche, category, rating, rate£, tag]
+  var DIR=[
+    ['Mia K.','Beauty & UGC','Beauty',4.8,180,'Top rated'],
+    ['Jordan T.','Fitness coaching','Fitness',4.9,200,'Available'],
+    ['Amara L.','Fashion styling','Fashion',4.7,150,'Available'],
+    ['Sofia R.','Food & recipes','Food',4.8,160,'Busy'],
+    ['Kai N.','Tech reviews','Tech',4.6,140,'Available'],
+    ['Ella R.','Travel content','Travel',4.9,190,'Top rated'],
+    ['Priya S.','Wellness & yoga','Wellness',4.8,170,'Available'],
+    ['Leo M.','Finance & investing','Finance',4.7,220,'Busy'],
+    ['Ruby F.','Makeup artistry','Beauty',4.7,145,'Available'],
+    ['Theo K.','Strength coaching','Fitness',4.8,185,'Top rated'],
+    ['Isla C.','Sustainable fashion','Fashion',4.6,135,'Available'],
+    ['Marcus D.','Investing & stocks','Finance',4.9,250,'Available'],
+    ['Chloe B.','Baking & desserts','Food',4.7,150,'Available'],
+    ['Nina P.','Solo travel','Travel',4.8,175,'Available'],
+    ['Oscar L.','AI & gadgets','Tech',4.6,160,'Available'],
+    ['Freya M.','Skincare science','Beauty',4.9,210,'Top rated'],
+    ['Sam R.','Home workouts','Fitness',4.5,125,'Busy'],
+    ['Aisha K.','Mindfulness','Wellness',4.8,165,'Available'],
+    ['Noah B.','Gaming & streams','Tech',4.5,130,'Available'],
+    ['Zara H.','Parenting & family','Wellness',4.6,120,'Available']
+  ];
+  var PAL=['#7C6CF0','#F0567A','#12B981','#F4A63A','#37B6F0'];
+  var dcat='All';
+  function renderDir(){
+    var el=document.getElementById('dgrid');
+    var list=DIR.filter(function(c){return dcat==='All'||c[2]===dcat});
+    el.innerHTML=list.map(function(c,i){
+      var col=PAL[i%PAL.length];
+      var t=c[5]==='Top rated'?'t-v':(c[5]==='Busy'?'t-amber':'t-mint');
+      return '<div class="bcard"><div class="av" style="background:'+col+'">'+c[0][0]+'</div>'+
+        '<div class="dn">'+c[0]+'</div><div class="di">'+c[1]+'</div>'+
+        '<div class="meta"><span class="rt">★ '+c[3]+'</span><span class="pr">£'+c[4]+'/session</span></div>'+
+        '<div><span class="tag '+t+'">'+c[5]+'</span></div>'+
+        '<button class="bk" onclick="bookC(\''+c[0].replace(/'/g,"")+'\')">Book '+c[0].split(' ')[0]+'</button></div>';
+    }).join('');
+  }
+  function renderChips(){
+    var cats=['All','Beauty','Fitness','Fashion','Food','Tech','Travel','Wellness','Finance'];
+    document.getElementById('chips').innerHTML=cats.map(function(c,i){
+      return '<button class="chip2'+(i===0?' on':'')+'" onclick="setCat(this,\''+c+'\')">'+c+'</button>';
+    }).join('');
+  }
+  function setCat(el,cat){dcat=cat;document.querySelectorAll('.chip2').forEach(function(x){x.classList.remove('on')});el.classList.add('on');renderDir();}
+  function bookC(n){toast('✓ In the live platform this books '+n+' directly — paid securely through the academy.');}
+  function openJoin(){
+    document.getElementById('mbox').innerHTML=
+      '<h3>Join the creator directory</h3>'+
+      '<p class="ms">£60/month. Keep 100% of every booking. Cancel anytime.</p>'+
+      '<label>Name / handle</label><input id="j_name" placeholder="e.g. Ella Rose">'+
+      '<label>What you do</label><input id="j_niche" placeholder="e.g. Travel content & UGC">'+
+      '<label>Rate per session (£)</label><input id="j_rate" type="number" value="150">'+
+      '<label>Email</label><input id="j_email" placeholder="you@email.com">'+
+      '<div class="mrow"><button class="btn btn-o" onclick="closeModal()">Cancel</button><button class="btn btn-p" onclick="submitJoin()">Join for £60/mo</button></div>';
+    document.getElementById('mbg').classList.add('show');
+  }
+  function closeModal(){document.getElementById('mbg').classList.remove('show');}
+  function submitJoin(){
+    var n=(document.getElementById('j_name').value||'').trim()||'New Creator';
+    var ni=(document.getElementById('j_niche').value||'').trim()||'Creator';
+    var r=parseInt(document.getElementById('j_rate').value)||150;
+    DIR.unshift([n,ni,'All',5.0,r,'New']);
+    var c=document.getElementById('dcount'); c.textContent=(parseInt(c.textContent.replace(/\D/g,''))+1);
+    dcat='All'; document.querySelectorAll('.chip2').forEach(function(x,i){x.classList.toggle('on',i===0)});
+    renderDir(); closeModal();
+    toast('✓ '+n+' added to the directory — you\'re now listed & bookable!');
+    document.getElementById('browse').scrollIntoView({behavior:'smooth'});
+  }
+  var _tt;
+  function toast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(function(){t.classList.remove('show')},3400);}
+  renderChips(); renderDir();
 </script>
 </body>
 </html>
