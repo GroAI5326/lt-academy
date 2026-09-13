@@ -6,10 +6,11 @@
 <title>Louise Thomson Academy — Turn your content into a career</title>
 <style>
   :root{
-    --v:#7C6CF0; --v2:#6A5AE0; --pink:#F0567A; --mint:#12B981; --amber:#F4A63A; --cyan:#37B6F0;
-    --ink:#141126; --tx:#20202B; --mut:#6E6A85; --line:#EAE9F2; --bg:#FFFFFF; --soft:#F6F5FB;
-    --vsoft:#EFEDFD; --pinksoft:#FDEBF0; --mintsoft:#E4F7F0; --ambersoft:#FCF1E1;
-    --shadow:0 18px 50px rgba(31,25,60,.10); --radius:20px;
+    --v:#7B1E3A; --v2:#5E1530; --pink:#D24E74; --mint:#2FA98A; --amber:#C9A15A; --cyan:#B76E79;
+    --ink:#241019; --tx:#2B1A22; --mut:#8B6E78; --line:#EFE2E6; --bg:#FFFDFC; --soft:#FBF3F5;
+    --vsoft:#F6E7EC; --pinksoft:#FBE8EE; --mintsoft:#E2F4EF; --ambersoft:#F6EEDD;
+    --gold:#C9A15A; --wine:#7B1E3A; --rose:#D24E74;
+    --shadow:0 18px 50px rgba(60,20,34,.12); --radius:20px;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -26,7 +27,8 @@
   header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
   .nav{display:flex;align-items:center;gap:22px;height:70px}
   .logo{display:flex;align-items:center;gap:11px;font-weight:900}
-  .logo .lg{width:40px;height:40px;border-radius:11px;background:linear-gradient(135deg,var(--v),var(--pink));display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;font-weight:900}
+  .logo .lg{position:relative;width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--v),var(--rose));display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;font-weight:900;overflow:hidden;flex:none;box-shadow:0 4px 12px rgba(123,30,58,.28)}
+  .logo .lg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
   .logo .nm{font-size:15px;line-height:1}
   .logo .nm span{display:block;font-size:9px;letter-spacing:2.5px;color:var(--v);margin-top:3px}
   .navlinks{display:flex;gap:26px;margin-left:12px}
@@ -34,7 +36,7 @@
   .navlinks a:hover{color:var(--tx)}
   .navcta{margin-left:auto;display:flex;gap:10px;align-items:center}
   .btn{display:inline-block;padding:11px 20px;border-radius:11px;font-weight:700;font-size:14.5px;cursor:pointer;border:none;transition:.15s}
-  .btn-p{background:linear-gradient(135deg,var(--v),var(--v2));color:#fff;box-shadow:0 10px 24px rgba(124,108,240,.35)}
+  .btn-p{background:linear-gradient(135deg,var(--v),var(--v2));color:#fff;box-shadow:0 10px 24px rgba(123,30,58,.35)}
   .btn-p:hover{transform:translateY(-1px)}
   .btn-o{background:#fff;color:var(--tx);border:1px solid var(--line)}
   .btn-o:hover{border-color:var(--v);color:var(--v)}
@@ -57,7 +59,12 @@
   .avs span{width:32px;height:32px;border-radius:50%;border:2.5px solid #fff;margin-left:-9px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:12px}
   .avs span:first-child{margin-left:0}
   /* hero card cluster */
-  .hvis{position:relative;height:460px}
+  .hvis{position:relative;height:480px}
+  .hphoto{position:absolute;inset:0 0 0 40px;border-radius:26px;overflow:hidden;background:linear-gradient(150deg,var(--v),var(--rose));box-shadow:0 30px 70px rgba(60,20,34,.28);display:flex;align-items:center;justify-content:center}
+  .hphoto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 25%}
+  .hph-mono{font-size:150px;font-weight:900;color:rgba(255,255,255,.85);letter-spacing:-.05em}
+  .ffl1{position:absolute;left:0;bottom:70px;width:250px;z-index:2}
+  .ffl2{position:absolute;right:-6px;top:44px;width:240px;z-index:2}
   .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
   .fcard{position:absolute;padding:18px 20px}
   .fc1{top:0;left:0;width:270px}
@@ -103,7 +110,7 @@
 
   /* DIRECTORY */
   .dsec{background:var(--ink);color:#fff;border-radius:34px;padding:64px 48px;position:relative;overflow:hidden}
-  .dsec:before{content:"";position:absolute;inset:0;background:radial-gradient(700px 340px at 85% -10%,rgba(124,108,240,.4),transparent 60%),radial-gradient(600px 300px at 5% 110%,rgba(240,86,122,.32),transparent 60%)}
+  .dsec:before{content:"";position:absolute;inset:0;background:radial-gradient(700px 340px at 85% -10%,rgba(123,30,58,.4),transparent 60%),radial-gradient(600px 300px at 5% 110%,rgba(210,78,116,.32),transparent 60%)}
   .dsec>*{position:relative}
   .dsec .eyebrow{color:#b9aeff}
   .dsec h2{color:#fff}
@@ -126,13 +133,14 @@
   .bgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:24px}
   .bcard{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 18px;text-align:center;transition:.16s}
   .bcard:hover{box-shadow:var(--shadow);transform:translateY(-3px);border-color:transparent}
-  .bcard .av{width:58px;height:58px;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:20px}
+  .bcard .av{position:relative;width:58px;height:58px;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:20px;overflow:hidden}
+  .bcard .av img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
   .bcard .dn{font-weight:800;font-size:15px}
   .bcard .di{font-size:12.5px;color:var(--mut);margin-top:2px;min-height:32px}
   .bcard .meta{display:flex;justify-content:center;gap:12px;font-size:12.5px;margin-top:6px}
   .bcard .rt{color:var(--amber);font-weight:700} .bcard .pr{color:var(--tx);font-weight:700}
   .bcard .tag{display:inline-block;font-size:11px;font-weight:800;padding:3px 10px;border-radius:999px;margin-top:10px}
-  .t-mint{background:var(--mintsoft);color:var(--mint)} .t-amber{background:var(--ambersoft);color:#b9791a} .t-v{background:var(--vsoft);color:var(--v)}
+  .t-mint{background:var(--mintsoft);color:var(--mint)} .t-amber{background:var(--ambersoft);color:#8A6A2E} .t-v{background:var(--vsoft);color:var(--v)}
   .bcard .bk{margin-top:13px;width:100%;padding:9px;border-radius:10px;background:linear-gradient(135deg,var(--v),var(--v2));color:#fff;font-weight:800;font-size:13px;cursor:pointer;border:none}
   .bcard .bk:hover{opacity:.92}
   .joincard{margin-top:28px;background:linear-gradient(120deg,var(--vsoft),var(--pinksoft));border:1px solid var(--line);border-radius:20px;padding:30px 34px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
@@ -149,6 +157,22 @@
   .toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(140px);background:var(--ink);color:#fff;padding:14px 22px;border-radius:12px;font-weight:700;font-size:14px;z-index:110;transition:transform .3s;box-shadow:0 14px 40px rgba(0,0,0,.3);max-width:90vw;text-align:center}
   .toast.show{transform:translateX(-50%) translateY(0)}
 
+  /* RESULTS / INFOGRAPHIC */
+  .rgrid{display:grid;grid-template-columns:1.55fr 1fr;gap:20px;margin-top:44px}
+  .rcard{padding:26px 26px 22px}
+  .rcard .h{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+  .rcard .h h3{font-size:17px}
+  .rcard .chip{background:var(--mintsoft);color:var(--mint);font-size:12px;font-weight:800;padding:4px 11px;border-radius:999px}
+  .rlabels{display:flex;justify-content:space-between;font-size:11.5px;color:var(--mut);font-weight:600;margin-top:4px;padding:0 6px}
+  .dleg{font-size:13px;margin-top:6px}
+  .dleg div{display:flex;align-items:center;gap:9px;margin-bottom:9px}
+  .dleg .dot{width:11px;height:11px;border-radius:3px;flex:none}
+  .dleg b{margin-left:auto;font-weight:800}
+  .rtiles{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:20px}
+  .rtile{background:linear-gradient(150deg,var(--vsoft),var(--pinksoft));border:1px solid var(--line);border-radius:16px;padding:22px 20px;text-align:center}
+  .rtile .n{font-size:30px;font-weight:900;letter-spacing:-.02em}
+  .rtile .l{font-size:12.5px;color:var(--mut);font-weight:600;margin-top:3px}
+
   /* SUCCESS */
   .tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:44px}
   .tcard{background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px 24px;box-shadow:var(--shadow)}
@@ -164,6 +188,8 @@
   .lgrid{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:center}
   .lphoto{aspect-ratio:1;border-radius:26px;background:linear-gradient(150deg,var(--v),var(--pink));position:relative;overflow:hidden;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center}
   .lphoto .mono{font-size:130px;font-weight:900;color:rgba(255,255,255,.9);letter-spacing:-.04em}
+  .lphoto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%;z-index:1}
+  .lphoto .badge{z-index:2}
   .lphoto .badge{position:absolute;bottom:20px;left:20px;right:20px;background:rgba(255,255,255,.94);border-radius:14px;padding:14px 16px;display:flex;gap:16px}
   .lphoto .badge div{flex:1}
   .lphoto .badge .n{font-size:20px;font-weight:900;color:var(--tx)}
@@ -175,7 +201,7 @@
   /* PRICING */
   .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px;align-items:start}
   .plan{background:#fff;border:1px solid var(--line);border-radius:22px;padding:32px 28px;position:relative}
-  .plan.feat{border:2px solid var(--v);box-shadow:0 26px 60px rgba(124,108,240,.22);transform:translateY(-8px)}
+  .plan.feat{border:2px solid var(--v);box-shadow:0 26px 60px rgba(123,30,58,.22);transform:translateY(-8px)}
   .plan .badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--v),var(--pink));color:#fff;font-size:12px;font-weight:800;padding:6px 16px;border-radius:999px;white-space:nowrap}
   .plan .pn{font-size:15px;font-weight:800;text-transform:uppercase;letter-spacing:1px}
   .plan .pr{font-size:46px;font-weight:900;letter-spacing:-.03em;margin:10px 0 2px}
@@ -197,7 +223,7 @@
 
   /* CTA BAND */
   .ctaband{background:linear-gradient(120deg,var(--v),var(--v2));border-radius:34px;padding:70px 40px;text-align:center;color:#fff;position:relative;overflow:hidden}
-  .ctaband:before{content:"";position:absolute;inset:0;background:radial-gradient(600px 300px at 80% -20%,rgba(240,86,122,.5),transparent 60%)}
+  .ctaband:before{content:"";position:absolute;inset:0;background:radial-gradient(600px 300px at 80% -20%,rgba(210,78,116,.5),transparent 60%)}
   .ctaband>*{position:relative}
   .ctaband h2{font-size:44px;color:#fff;margin-bottom:16px}
   .ctaband p{font-size:18px;color:rgba(255,255,255,.9);max-width:560px;margin:0 auto 30px}
@@ -221,6 +247,7 @@
     .modgrid,.tgrid,.pgrid{grid-template-columns:1fr 1fr}
     .dcards,.bgrid{grid-template-columns:1fr 1fr}
     .fgrid{grid-template-columns:1fr 1fr}
+    .rgrid{grid-template-columns:1fr}
     .plan.feat{transform:none}
   }
   @media(max-width:680px){
@@ -237,10 +264,12 @@
     .statrow{grid-template-columns:1fr 1fr;gap:26px}
     .modgrid,.steps,.tgrid,.pgrid,.dcards,.fgrid{grid-template-columns:1fr}
     .bgrid{grid-template-columns:1fr 1fr;gap:12px}
+    .rtiles{grid-template-columns:1fr 1fr}
     .joincard{flex-direction:column;text-align:center;padding:26px 22px}
     .dsec,.ctaband{padding:44px 24px;border-radius:24px}
-    .fc1,.fc2,.fc3{position:relative;width:100%!important;top:auto;left:auto;right:auto;bottom:auto;margin-bottom:14px}
     .hvis{height:auto}
+    .hphoto{position:relative;inset:auto;aspect-ratio:4/5;width:100%;left:auto}
+    .ffl1,.ffl2{position:relative;left:auto;right:auto;top:auto;bottom:auto;width:100%;margin-top:14px}
   }
 </style>
 </head>
@@ -249,7 +278,7 @@
 <!-- NAV -->
 <header>
   <div class="wrap nav">
-    <a href="#top" class="logo"><div class="lg">LT</div><div class="nm">Louise Thomson<span>ACADEMY</span></div></a>
+    <a href="#top" class="logo"><span class="lg"><span class="lgtx">LT</span><img src="images/louise.jpg" alt="Louise" onerror="this.remove()"></span><div class="nm">Louise Thomson<span>ACADEMY</span></div></a>
     <nav class="navlinks" id="navlinks">
       <a href="#curriculum" onclick="closeNav()">Curriculum</a>
       <a href="#directory" onclick="closeNav()">Creators</a>
@@ -282,33 +311,29 @@
       </div>
       <div class="hnote">
         <div class="avs">
-          <span style="background:#7C6CF0">M</span><span style="background:#F0567A">A</span>
-          <span style="background:#12B981">D</span><span style="background:#F4A63A">P</span><span style="background:#37B6F0">R</span>
+          <span style="background:#7B1E3A">M</span><span style="background:#D24E74">A</span>
+          <span style="background:#2FA98A">D</span><span style="background:#C9A15A">P</span><span style="background:#B76E79">R</span>
         </div>
         <span><b style="color:var(--tx)">4.9★</b> from 4,180 students · 68% finish (industry avg 40%)</span>
       </div>
     </div>
     <div class="hvis">
-      <div class="card fcard fc1">
+      <div class="hphoto">
+        <span class="hph-mono">LT</span>
+        <img src="images/louise.jpg" alt="Louise Thomson" onerror="this.remove()">
+      </div>
+      <div class="card fcard ffl1">
         <div class="row">
-          <div class="ic" style="background:var(--vsoft);color:var(--v)">💰</div>
+          <div class="ic" style="background:var(--vsoft);color:var(--wine)">💰</div>
           <div><div class="big">£12,400</div><div class="lab">Priya's first £10k month</div></div>
         </div>
         <div class="barmini"><span style="width:82%"></span></div>
       </div>
-      <div class="card fcard fc2">
-        <div class="row" style="justify-content:space-between">
-          <div><div class="lab">Course progress</div><div class="big" style="font-size:24px">Module 07</div></div>
-          <span class="chip">On track</span>
-        </div>
-        <div class="barmini"><span style="width:64%"></span></div>
-      </div>
-      <div class="card fcard fc3">
+      <div class="card fcard ffl2">
         <div class="row">
-          <div class="ic" style="background:var(--pinksoft);color:var(--pink)">🏆</div>
-          <div><div class="lab">Just earned</div><div class="big" style="font-size:22px">Brand Deal Blueprint</div></div>
+          <div class="ic" style="background:var(--ambersoft);color:var(--gold)">🏆</div>
+          <div><div class="lab">Just earned</div><div class="big" style="font-size:19px">Brand Deal Blueprint</div></div>
         </div>
-        <div style="margin-top:12px;font-size:12.5px;color:var(--mut)">Certificate ready to share ↗</div>
       </div>
     </div>
   </div>
@@ -336,11 +361,11 @@
       <div class="mod"><div class="ic" style="background:var(--vsoft);color:var(--v)">🚀</div><h3>Getting Started</h3><p>Set up your profile, niche and content pillars the right way from day one.</p><div class="meta">8 lessons</div></div>
       <div class="mod"><div class="ic" style="background:var(--pinksoft);color:var(--pink)">📈</div><h3>TikTok Growth Mastery</h3><p>The hook, retention and posting system behind millions of views.</p><div class="meta">12 lessons</div></div>
       <div class="mod"><div class="ic" style="background:var(--mintsoft);color:var(--mint)">🎬</div><h3>Content That Converts</h3><p>Turn views into followers, and followers into buyers.</p><div class="meta">10 lessons</div></div>
-      <div class="mod"><div class="ic" style="background:var(--ambersoft);color:#b9791a">🤝</div><h3>Landing Brand Deals</h3><p>Pitch templates, rates, and contracts that get you paid what you're worth.</p><div class="meta">9 lessons</div></div>
+      <div class="mod"><div class="ic" style="background:var(--ambersoft);color:#8A6A2E">🤝</div><h3>Landing Brand Deals</h3><p>Pitch templates, rates, and contracts that get you paid what you're worth.</p><div class="meta">9 lessons</div></div>
       <div class="mod"><div class="ic" style="background:var(--vsoft);color:var(--v)">🛍️</div><h3>TikTok Shop & UGC</h3><p>Set up shop, sell products and become a paid UGC creator.</p><div class="meta">11 lessons</div></div>
       <div class="mod"><div class="ic" style="background:var(--pinksoft);color:var(--pink)">💡</div><h3>Personal Brand</h3><p>Build a brand people trust, follow and buy from for years.</p><div class="meta">8 lessons</div></div>
       <div class="mod"><div class="ic" style="background:var(--mintsoft);color:var(--mint)">💸</div><h3>Multiple Income Streams</h3><p>Memberships, products, affiliates — stop relying on one payday.</p><div class="meta">10 lessons</div></div>
-      <div class="mod"><div class="ic" style="background:var(--ambersoft);color:#b9791a">🧠</div><h3>Mindset & Consistency</h3><p>The systems that keep you posting when motivation runs out.</p><div class="meta">6 lessons</div></div>
+      <div class="mod"><div class="ic" style="background:var(--ambersoft);color:#8A6A2E">🧠</div><h3>Mindset & Consistency</h3><p>The systems that keep you posting when motivation runs out.</p><div class="meta">6 lessons</div></div>
       <div class="mod"><div class="ic" style="background:var(--vsoft);color:var(--v)">🔁</div><h3>Repurpose & Scale</h3><p>One idea, ten platforms. Do less, reach more.</p><div class="meta">9 lessons</div></div>
     </div>
   </div>
@@ -414,19 +439,19 @@
         <div class="st">★★★★★</div>
         <div class="res">£10k first month</div>
         <p class="q">"I'd been posting for a year with nothing. Six weeks into the academy I landed my first brand deal — then hit £10k the next month. The templates alone paid for the course ten times over."</p>
-        <div class="who"><div class="av" style="background:#F0567A">P</div><div><b>Priya K.</b><span>Beauty creator · 84k followers</span></div></div>
+        <div class="who"><div class="av" style="background:#D24E74">P</div><div><b>Priya K.</b><span>Beauty creator · 84k followers</span></div></div>
       </div>
       <div class="tcard">
         <div class="st">★★★★★</div>
         <div class="res">Went full-time</div>
         <p class="q">"I quit my 9–5 four months after joining. The income-streams module was the game changer — I now make money from memberships, UGC and my own preset pack."</p>
-        <div class="who"><div class="av" style="background:#12B981">D</div><div><b>Dan R.</b><span>Fitness creator · 120k followers</span></div></div>
+        <div class="who"><div class="av" style="background:#2FA98A">D</div><div><b>Dan R.</b><span>Fitness creator · 120k followers</span></div></div>
       </div>
       <div class="tcard">
         <div class="st">★★★★★</div>
         <div class="res">3.2M views</div>
         <p class="q">"The hook system is unreal. My third video after the growth module hit 3.2 million views and added 40,000 followers in a week. I finally get it now."</p>
-        <div class="who"><div class="av" style="background:#7C6CF0">A</div><div><b>Amara J.</b><span>Fashion creator · 210k followers</span></div></div>
+        <div class="who"><div class="av" style="background:#7B1E3A">A</div><div><b>Amara J.</b><span>Fashion creator · 210k followers</span></div></div>
       </div>
     </div>
   </div>
@@ -437,6 +462,7 @@
   <div class="wrap lgrid">
     <div class="lphoto">
       <div class="mono">LT</div>
+      <img src="images/louise.jpg" alt="Louise Thomson" onerror="this.remove()">
       <div class="badge">
         <div><div class="n grad">7-figure</div><div class="l">Creator business</div></div>
         <div><div class="n grad">2.4M</div><div class="l">Combined following</div></div>
@@ -449,6 +475,57 @@
       <p>That system turned into a seven-figure creator business, brand partnerships with names you know, and a community of thousands of creators earning real money.</p>
       <p>I built this academy to hand you that exact playbook — no gatekeeping, no fluff. Every lesson is something I actually did. If I can do it, so can you.</p>
       <div class="sig">— Louise Thomson</div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS / INFOGRAPHIC -->
+<section class="sec" id="results">
+  <div class="wrap">
+    <div class="center" style="max-width:640px">
+      <span class="eyebrow">The results</span>
+      <h2>Growth you can measure.</h2>
+      <p class="lead">Not hype — numbers. This is what happens once students start posting with the system behind them.</p>
+    </div>
+    <div class="rgrid">
+      <div class="card rcard">
+        <div class="h"><h3>Average student earnings</h3><span class="chip">▲ 41% / quarter</span></div>
+        <svg viewBox="0 0 640 250" style="width:100%;height:auto;display:block">
+          <defs>
+            <linearGradient id="rfill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D24E74" stop-opacity=".30"/><stop offset="1" stop-color="#D24E74" stop-opacity="0"/></linearGradient>
+            <linearGradient id="rline" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7B1E3A"/><stop offset="1" stop-color="#D24E74"/></linearGradient>
+          </defs>
+          <g stroke="#F0E4E8" stroke-width="1"><line x1="30" y1="35" x2="620" y2="35"/><line x1="30" y1="95" x2="620" y2="95"/><line x1="30" y1="155" x2="620" y2="155"/><line x1="30" y1="205" x2="620" y2="205"/></g>
+          <path d="M30 200 L 128 190 L 226 172 L 324 150 L 422 118 L 520 78 L 620 40 L 620 210 L 30 210 Z" fill="url(#rfill)"/>
+          <path d="M30 200 L 128 190 L 226 172 L 324 150 L 422 118 L 520 78 L 620 40" fill="none" stroke="url(#rline)" stroke-width="3.5" stroke-linecap="round"/>
+          <g fill="#C9A15A"><circle cx="324" cy="150" r="4.5"/><circle cx="520" cy="78" r="4.5"/><circle cx="620" cy="40" r="5.5" stroke="#fff" stroke-width="2"/></g>
+        </svg>
+        <div class="rlabels"><span>Month 1</span><span>M3</span><span>M5</span><span>M7</span><span>M9</span><span>M12</span></div>
+      </div>
+      <div class="card rcard">
+        <div class="h"><h3>Where students earn</h3></div>
+        <svg viewBox="0 0 180 180" width="164" height="164" style="display:block;margin:10px auto 6px">
+          <circle cx="90" cy="90" r="70" fill="none" stroke="#F0E4E8" stroke-width="22"/>
+          <circle cx="90" cy="90" r="70" fill="none" stroke="#7B1E3A" stroke-width="22" stroke-dasharray="185 255" transform="rotate(-90 90 90)"/>
+          <circle cx="90" cy="90" r="70" fill="none" stroke="#D24E74" stroke-width="22" stroke-dasharray="123 317" transform="rotate(61 90 90)"/>
+          <circle cx="90" cy="90" r="70" fill="none" stroke="#C9A15A" stroke-width="22" stroke-dasharray="79 361" transform="rotate(162 90 90)"/>
+          <circle cx="90" cy="90" r="70" fill="none" stroke="#B76E79" stroke-width="22" stroke-dasharray="53 387" transform="rotate(227 90 90)"/>
+          <text x="90" y="86" text-anchor="middle" font-size="21" font-weight="900" fill="#2B1A22" font-family="Helvetica Neue">£4,180</text>
+          <text x="90" y="104" text-anchor="middle" font-size="9.5" fill="#8B6E78">avg / mo by M6</text>
+        </svg>
+        <div class="dleg">
+          <div><span class="dot" style="background:#7B1E3A"></span>Brand deals <b>42%</b></div>
+          <div><span class="dot" style="background:#D24E74"></span>Memberships <b>28%</b></div>
+          <div><span class="dot" style="background:#C9A15A"></span>Products <b>18%</b></div>
+          <div><span class="dot" style="background:#B76E79"></span>UGC &amp; other <b>12%</b></div>
+        </div>
+      </div>
+    </div>
+    <div class="rtiles">
+      <div class="rtile"><div class="n grad">£4,180</div><div class="l">Avg monthly income by month 6</div></div>
+      <div class="rtile"><div class="n grad">6 wks</div><div class="l">To first paid brand deal</div></div>
+      <div class="rtile"><div class="n grad">68%</div><div class="l">Finish the course (vs 40%)</div></div>
+      <div class="rtile"><div class="n grad">4.9★</div><div class="l">From 4,180 students</div></div>
     </div>
   </div>
 </section>
@@ -541,7 +618,7 @@
   <div class="wrap">
     <div class="fgrid">
       <div>
-        <a href="#top" class="logo"><div class="lg">LT</div><div class="nm" style="color:#fff">Louise Thomson<span>ACADEMY</span></div></a>
+        <a href="#top" class="logo"><span class="lg"><span class="lgtx">LT</span><img src="images/louise.jpg" alt="Louise" onerror="this.remove()"></span><div class="nm" style="color:#fff">Louise Thomson<span>ACADEMY</span></div></a>
         <p style="margin-top:16px;font-size:14px;max-width:280px">The step-by-step academy for creators who want to get paid for what they love.</p>
       </div>
       <div>
@@ -585,11 +662,11 @@
   }
 
   /* ===== CREATOR DIRECTORY ===== */
-  // [name, niche, category, rating, rate£, tag]
+  // [name, niche, category, rating, rate£, tag, photo?]
   var DIR=[
-    ['Mia K.','Beauty & UGC','Beauty',4.8,180,'Top rated'],
-    ['Jordan T.','Fitness coaching','Fitness',4.9,200,'Available'],
-    ['Amara L.','Fashion styling','Fashion',4.7,150,'Available'],
+    ['Mia K.','Beauty & UGC','Beauty',4.8,180,'Top rated','c1.jpg'],
+    ['Jordan T.','Fitness coaching','Fitness',4.9,200,'Available','c3.jpg'],
+    ['Amara L.','Fashion styling','Fashion',4.7,150,'Available','c2.jpg'],
     ['Sofia R.','Food & recipes','Food',4.8,160,'Busy'],
     ['Kai N.','Tech reviews','Tech',4.6,140,'Available'],
     ['Ella R.','Travel content','Travel',4.9,190,'Top rated'],
@@ -608,7 +685,7 @@
     ['Noah B.','Gaming & streams','Tech',4.5,130,'Available'],
     ['Zara H.','Parenting & family','Wellness',4.6,120,'Available']
   ];
-  var PAL=['#7C6CF0','#F0567A','#12B981','#F4A63A','#37B6F0'];
+  var PAL=['#7B1E3A','#D24E74','#2FA98A','#C9A15A','#B76E79'];
   var dcat='All';
   function renderDir(){
     var el=document.getElementById('dgrid');
@@ -616,7 +693,8 @@
     el.innerHTML=list.map(function(c,i){
       var col=PAL[i%PAL.length];
       var t=c[5]==='Top rated'?'t-v':(c[5]==='Busy'?'t-amber':'t-mint');
-      return '<div class="bcard"><div class="av" style="background:'+col+'">'+c[0][0]+'</div>'+
+      var ph=c[6]?'<img src="images/'+c[6]+'" alt="" onerror="this.remove()">':'';
+      return '<div class="bcard"><div class="av" style="background:'+col+'"><span>'+c[0][0]+'</span>'+ph+'</div>'+
         '<div class="dn">'+c[0]+'</div><div class="di">'+c[1]+'</div>'+
         '<div class="meta"><span class="rt">★ '+c[3]+'</span><span class="pr">£'+c[4]+'/session</span></div>'+
         '<div><span class="tag '+t+'">'+c[5]+'</span></div>'+
