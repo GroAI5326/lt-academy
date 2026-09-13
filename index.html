@@ -201,6 +201,11 @@
   .dcard .dp{font-size:13px;color:var(--ink);font-weight:700;margin-top:8px}
   .dcard .db2{margin-top:14px;display:flex;gap:8px;justify-content:center}
   @media(max-width:860px){.dgrid{grid-template-columns:1fr!important}}
+  .proj{border:1px solid var(--line);border-radius:14px;padding:14px 14px 16px;background:var(--bg)}
+  .proj .pl{font-size:11px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.5px}
+  .proj .pm{font-size:26px;font-weight:900;color:var(--tx);margin-top:4px;line-height:1}
+  .proj .ps{font-size:13px;font-weight:800;color:var(--mint);margin-top:3px}
+  .proj .pbar{height:6px;background:var(--line);border-radius:6px;overflow:hidden;margin-top:10px} .proj .pbar span{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--v),var(--mint))}
 </style>
 </head>
 <body>
@@ -250,10 +255,10 @@
       <!-- OVERVIEW -->
       <section id="overview" class="view on">
         <div class="kpis">
-          <div class="kpi"><div class="t"><span class="cap">Total revenue</span><span class="chip up">▲ 18%</span></div><div class="v">£486,200</div><div class="s">all-time gross</div></div>
-          <div class="kpi"><div class="t"><span class="cap">Monthly recurring</span><span class="chip up">▲ 12%</span></div><div class="v">£128,400</div><div class="s">MRR · this month</div></div>
-          <div class="kpi"><div class="t"><span class="cap">Your earnings (30%)</span><span class="chip up">▲ 14%</span></div><div class="v">£38,520</div><div class="s">this month · own academy</div></div>
-          <div class="kpi"><div class="t"><span class="cap">Active students</span><span class="chip up">▲ 9%</span></div><div class="v">1,842</div><div class="s">across all plans</div></div>
+          <div class="kpi"><div class="t"><span class="cap">Total revenue</span><span class="chip up">▲ 34%</span></div><div class="v">£1,284,600</div><div class="s">all-time gross</div></div>
+          <div class="kpi"><div class="t"><span class="cap">Monthly recurring</span><span class="chip up">▲ 41%</span></div><div class="v">£312,800</div><div class="s">MRR · this month</div></div>
+          <div class="kpi"><div class="t"><span class="cap">Your earnings (30%)</span><span class="chip up">▲ 38%</span></div><div class="v">£93,840</div><div class="s">this month · own academy</div></div>
+          <div class="kpi"><div class="t"><span class="cap">Active students</span><span class="chip up">▲ 27%</span></div><div class="v">6,120</div><div class="s">across all plans</div></div>
         </div>
 
         <div class="grid" style="grid-template-columns:1.6fr 1fr">
@@ -275,7 +280,7 @@
               <circle cx="90" cy="90" r="66" fill="none" stroke="#7C6CF0" stroke-width="20" stroke-dasharray="228 187" transform="rotate(-90 90 90)"/>
               <circle cx="90" cy="90" r="66" fill="none" stroke="#F0567A" stroke-width="20" stroke-dasharray="104 311" transform="rotate(107 90 90)"/>
               <circle cx="90" cy="90" r="66" fill="none" stroke="#12B981" stroke-width="20" stroke-dasharray="52 363" transform="rotate(197 90 90)"/>
-              <text x="90" y="86" text-anchor="middle" font-size="20" font-weight="800" fill="#191627" font-family="Helvetica Neue">£128k</text>
+              <text x="90" y="86" text-anchor="middle" font-size="20" font-weight="800" fill="#191627" font-family="Helvetica Neue">£313k</text>
               <text x="90" y="104" text-anchor="middle" font-size="10" fill="#8b87a3">this month</text>
             </svg>
             <div style="font-size:12.5px">
@@ -347,10 +352,10 @@
       <!-- STUDENTS -->
       <section id="students" class="view">
         <div class="kpis" style="grid-template-columns:repeat(4,1fr)">
-          <div class="kpi"><span class="cap">Active students</span><div class="v">1,842</div><div class="s">▲ 162 this month</div></div>
-          <div class="kpi"><span class="cap">Paying members</span><div class="v">1,040</div><div class="s">on monthly plans</div></div>
-          <div class="kpi"><span class="cap">Avg lifetime value</span><div class="v">£640</div><div class="s">per student</div></div>
-          <div class="kpi"><span class="cap">Monthly churn</span><div class="v">4.2%</div><div class="s">below 6% benchmark</div></div>
+          <div class="kpi"><span class="cap">Active students</span><div class="v">6,120</div><div class="s">▲ 540 this month</div></div>
+          <div class="kpi"><span class="cap">Paying members</span><div class="v">3,880</div><div class="s">on monthly plans</div></div>
+          <div class="kpi"><span class="cap">Avg lifetime value</span><div class="v">£940</div><div class="s">per student</div></div>
+          <div class="kpi"><span class="cap">Monthly churn</span><div class="v">2.9%</div><div class="s">below 6% benchmark</div></div>
         </div>
         <div class="card">
           <div class="h"><h3>Students</h3><button class="btn2" onclick="openAI('students')">✉️ Email all students</button></div>
@@ -424,9 +429,9 @@
       <!-- EARNINGS -->
       <section id="earnings" class="view">
         <div class="kpis" style="grid-template-columns:repeat(3,1fr)">
-          <div class="kpi"><div class="t"><span class="cap">Your total this month</span><span class="chip up">▲ 15%</span></div><div class="v" style="color:var(--v)">£46,720</div><div class="s">own academy + overrides</div></div>
-          <div class="kpi"><span class="cap">From your academy (30%)</span><div class="v">£38,520</div><div class="s">of £128,400 gross</div></div>
-          <div class="kpi"><span class="cap">Creator overrides (10%)</span><div class="v">£8,200</div><div class="s">from 5 creators</div></div>
+          <div class="kpi"><div class="t"><span class="cap">Your total this month</span><span class="chip up">▲ 38%</span></div><div class="v" style="color:var(--v)">£118,240</div><div class="s">own academy + overrides</div></div>
+          <div class="kpi"><span class="cap">From your academy (30%)</span><div class="v">£93,840</div><div class="s">of £312,800 gross</div></div>
+          <div class="kpi"><span class="cap">Creator overrides (10%)</span><div class="v">£24,400</div><div class="s">from 14 creators</div></div>
         </div>
 
         <div class="grid" style="grid-template-columns:1fr 1fr">
@@ -533,10 +538,10 @@
       <section id="analytics" class="view">
         <div class="card" style="margin-bottom:18px;border-left:4px solid var(--v);background:var(--vsoft)"><div class="lb" style="color:var(--v);font-size:11px;font-weight:800;text-transform:uppercase;margin-bottom:6px">✨ AI insight · read for you</div><div style="font-size:14.5px;color:var(--ink);line-height:1.5">Your <b>VIP tier converts 3× better</b> when members attend the first live call. AI suggests moving the welcome call to <b>day 2</b> — projected to lift VIP retention by ~9%. <span onclick="applyInsight()" style="color:var(--v);font-weight:700;cursor:pointer">Apply change →</span></div></div>
         <div class="kpis">
-          <div class="kpi"><span class="cap">Avg. watch time</span><div class="v">14m</div><div class="s">per session ▲ 11%</div></div>
-          <div class="kpi"><span class="cap">Completion rate</span><div class="v">68%</div><div class="s">vs 40% industry</div></div>
-          <div class="kpi"><span class="cap">30-day retention</span><div class="v">82%</div><div class="s">▲ 4 pts</div></div>
-          <div class="kpi"><span class="cap">Refund rate</span><div class="v">1.8%</div><div class="s">very low</div></div>
+          <div class="kpi"><span class="cap">Avg. watch time</span><div class="v">18m</div><div class="s">per session ▲ 16%</div></div>
+          <div class="kpi"><span class="cap">Completion rate</span><div class="v">74%</div><div class="s">vs 40% industry</div></div>
+          <div class="kpi"><span class="cap">30-day retention</span><div class="v">88%</div><div class="s">▲ 6 pts</div></div>
+          <div class="kpi"><span class="cap">Refund rate</span><div class="v">1.2%</div><div class="s">very low</div></div>
         </div>
         <div class="grid" style="grid-template-columns:1.5fr 1fr">
           <div class="card">
@@ -565,10 +570,10 @@
       <section id="affiliates" class="view">
         <p class="lead">Turn your students into your marketing team. Every member gets a referral link and earns commission for anyone they bring in — new students at zero ad cost, and it runs itself.</p>
         <div class="kpis">
-          <div class="kpi"><span class="cap">Active affiliates</span><div class="v">486</div><div class="s">students sharing their link</div></div>
-          <div class="kpi"><span class="cap">Referred members</span><div class="v">312</div><div class="s">joined via a referral</div></div>
-          <div class="kpi"><span class="cap">Referral revenue</span><div class="v">£74,200</div><div class="s">▲ 21% this quarter</div></div>
-          <div class="kpi"><span class="cap">Paid to affiliates</span><div class="v">£11,130</div><div class="s">15% commission</div></div>
+          <div class="kpi"><span class="cap">Active affiliates</span><div class="v">1,640</div><div class="s">students sharing their link</div></div>
+          <div class="kpi"><span class="cap">Referred members</span><div class="v">1,180</div><div class="s">joined via a referral</div></div>
+          <div class="kpi"><span class="cap">Referral revenue</span><div class="v">£214,600</div><div class="s">▲ 38% this quarter</div></div>
+          <div class="kpi"><span class="cap">Paid to affiliates</span><div class="v">£32,190</div><div class="s">15% commission</div></div>
         </div>
         <div class="card">
           <div class="h"><h3>Top referrers</h3><span class="pill">this month</span></div>
@@ -609,9 +614,9 @@
       <section id="certificates" class="view">
         <p class="lead">Every module completion earns a branded certificate — auto-issued, shareable to socials, and stamped with your academy name. Proof for your students, free marketing for you.</p>
         <div class="kpis" style="grid-template-columns:repeat(3,1fr)">
-          <div class="kpi"><span class="cap">Certificates issued</span><div class="v">1,204</div><div class="s">all-time</div></div>
-          <div class="kpi"><span class="cap">This month</span><div class="v">168</div><div class="s">▲ 22%</div></div>
-          <div class="kpi"><span class="cap">Shared to socials</span><div class="v">41%</div><div class="s">every share = reach</div></div>
+          <div class="kpi"><span class="cap">Certificates issued</span><div class="v">4,180</div><div class="s">all-time</div></div>
+          <div class="kpi"><span class="cap">This month</span><div class="v">540</div><div class="s">▲ 31%</div></div>
+          <div class="kpi"><span class="cap">Shared to socials</span><div class="v">58%</div><div class="s">every share = reach</div></div>
         </div>
         <div class="certgrid">
           <div class="cert"><div class="seal">🎓</div><div class="k">Certificate of Completion</div><div class="nm">Priya K.</div><div class="mo">TikTok Growth Mastery</div><div class="dt">Issued 12 Sep 2026 · Louise Thomson Academy</div></div>
@@ -669,10 +674,10 @@
       <section id="coaching" class="view">
         <p class="lead">Sell your time at a premium — a paid 1:1 calendar. Students book and pay, reminders are automated, and it stacks straight on top of your recurring income.</p>
         <div class="kpis">
-          <div class="kpi"><span class="cap">1:1 sessions booked</span><div class="v">38</div><div class="s">this month ▲ 9</div></div>
-          <div class="kpi"><span class="cap">1:1 revenue</span><div class="v">£9,500</div><div class="s">▲ 21%</div></div>
-          <div class="kpi"><span class="cap">Avg session price</span><div class="v">£250</div><div class="s">60-minute call</div></div>
-          <div class="kpi"><span class="cap">Slots open</span><div class="v">12</div><div class="s">next 2 weeks</div></div>
+          <div class="kpi"><span class="cap">1:1 sessions booked</span><div class="v">92</div><div class="s">this month ▲ 24</div></div>
+          <div class="kpi"><span class="cap">1:1 revenue</span><div class="v">£27,600</div><div class="s">▲ 34%</div></div>
+          <div class="kpi"><span class="cap">Avg session price</span><div class="v">£300</div><div class="s">60-minute call</div></div>
+          <div class="kpi"><span class="cap">Slots open</span><div class="v">6</div><div class="s">next 2 weeks</div></div>
         </div>
         <div class="grid" style="grid-template-columns:1fr 1fr">
           <div class="card">
@@ -696,9 +701,9 @@
         <p class="lead">One-off digital products your audience buys on impulse — templates, presets, swipe files. Made once, sold forever, and the AI can spin up new ones in minutes.</p>
         <div class="kpis">
           <div class="kpi"><span class="cap">Products</span><div class="v" id="prodCount">5</div><div class="s">live in your store</div></div>
-          <div class="kpi"><span class="cap">Store revenue</span><div class="v">£18,640</div><div class="s">this month ▲ 16%</div></div>
-          <div class="kpi"><span class="cap">Best seller</span><div class="v" style="font-size:19px">Viral Hooks</div><div class="s">312 sold</div></div>
-          <div class="kpi"><span class="cap">Downloads</span><div class="v">2,410</div><div class="s">all-time</div></div>
+          <div class="kpi"><span class="cap">Store revenue</span><div class="v">£52,400</div><div class="s">this month ▲ 29%</div></div>
+          <div class="kpi"><span class="cap">Best seller</span><div class="v" style="font-size:19px">Viral Hooks</div><div class="s">940 sold</div></div>
+          <div class="kpi"><span class="cap">Downloads</span><div class="v">8,600</div><div class="s">all-time</div></div>
         </div>
         <div class="card">
           <div class="h"><h3>Your products</h3><button class="btn" onclick="addProductModal()">+ Add product</button></div>
@@ -710,10 +715,10 @@
       <section id="crm" class="view">
         <p class="lead">Every contact in one place — tagged, scored and flagged. See who's about to cancel and who's ready to upgrade, then let the AI reach out for you.</p>
         <div class="kpis">
-          <div class="kpi"><span class="cap">Total contacts</span><div class="v">2,140</div><div class="s">leads + members</div></div>
-          <div class="kpi"><span class="cap">⚠ At-risk</span><div class="v" style="color:var(--pink)">48</div><div class="s">AI is re-engaging</div></div>
-          <div class="kpi"><span class="cap">⭐ Ready to upgrade</span><div class="v" style="color:var(--mint)">63</div><div class="s">prime for VIP</div></div>
-          <div class="kpi"><span class="cap">Avg lifetime value</span><div class="v">£640</div><div class="s">per contact</div></div>
+          <div class="kpi"><span class="cap">Total contacts</span><div class="v">7,240</div><div class="s">leads + members</div></div>
+          <div class="kpi"><span class="cap">⚠ At-risk</span><div class="v" style="color:var(--pink)">62</div><div class="s">AI is re-engaging</div></div>
+          <div class="kpi"><span class="cap">⭐ Ready to upgrade</span><div class="v" style="color:var(--mint)">184</div><div class="s">prime for VIP</div></div>
+          <div class="kpi"><span class="cap">Avg lifetime value</span><div class="v">£940</div><div class="s">per contact</div></div>
         </div>
         <div class="card">
           <div class="h"><h3>Contacts</h3><div style="display:flex;gap:8px;flex-wrap:wrap"><span class="pill" onclick="toast('Showing: everyone')">All</span><span class="pill" style="background:var(--pinksoft);color:var(--pink)" onclick="toast('Filtered: at-risk')">At-risk</span><span class="pill" style="background:var(--mintsoft);color:var(--mint)" onclick="toast('Filtered: ready to upgrade')">Ready to upgrade</span></div></div>
@@ -727,8 +732,8 @@
         <div class="kpis">
           <div class="kpi"><span class="cap">Open tickets</span><div class="v">7</div><div class="s">3 need Louise</div></div>
           <div class="kpi"><span class="cap">Avg first response</span><div class="v">30s</div><div class="s">AI, instant</div></div>
-          <div class="kpi"><span class="cap">AI-resolved</span><div class="v">82%</div><div class="s">no human needed</div></div>
-          <div class="kpi"><span class="cap">Satisfaction</span><div class="v">4.9★</div><div class="s">1,204 ratings</div></div>
+          <div class="kpi"><span class="cap">AI-resolved</span><div class="v">88%</div><div class="s">no human needed</div></div>
+          <div class="kpi"><span class="cap">Satisfaction</span><div class="v">4.9★</div><div class="s">4,180 ratings</div></div>
         </div>
         <div class="grid" style="grid-template-columns:1.5fr 1fr">
           <div class="card">
@@ -784,16 +789,26 @@
       <section id="directory" class="view">
         <p class="lead">A public directory where your creators list their profile and clients book them direct. Creators keep <b>100%</b> of what they earn — you charge a flat <b>£60/month</b> to be listed. Pure recurring revenue, no admin, no chasing a cut of every booking.</p>
         <div class="kpis">
-          <div class="kpi"><span class="cap">Directory members</span><div class="v" id="dirMembers">68</div><div class="s">paying £60/mo</div></div>
-          <div class="kpi"><span class="cap">Monthly recurring</span><div class="v" id="dirRecurring" style="color:var(--mint)">£4,080</div><div class="s">from listings</div></div>
-          <div class="kpi"><span class="cap">Bookings this month</span><div class="v">214</div><div class="s">▲ 27%</div></div>
-          <div class="kpi"><span class="cap">Booked volume</span><div class="v">£41,300</div><div class="s">creators keep 100%</div></div>
+          <div class="kpi"><span class="cap">Directory members</span><div class="v" id="dirMembers">214</div><div class="s">paying £60/mo ▲ 46</div></div>
+          <div class="kpi"><span class="cap">Monthly recurring</span><div class="v" id="dirRecurring" style="color:var(--mint)">£12,840</div><div class="s">from listings ▲ 40%</div></div>
+          <div class="kpi"><span class="cap">Bookings this month</span><div class="v">640</div><div class="s">▲ 44%</div></div>
+          <div class="kpi"><span class="cap">Booked volume</span><div class="v">£128,400</div><div class="s">creators keep 100%</div></div>
+        </div>
+        <div class="card" style="margin-top:16px">
+          <div class="h"><h3>Projected growth</h3><span class="pill" style="background:var(--mintsoft);color:var(--mint)">recurring · £60/member</span></div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:6px">
+            <div class="proj"><div class="pl">Now</div><div class="pm">214</div><div class="ps">£12,840/mo</div><div class="pbar"><span style="width:21%"></span></div></div>
+            <div class="proj"><div class="pl">6 months</div><div class="pm">500</div><div class="ps">£30,000/mo</div><div class="pbar"><span style="width:50%"></span></div></div>
+            <div class="proj"><div class="pl">12 months</div><div class="pm">1,000</div><div class="ps">£60,000/mo</div><div class="pbar"><span style="width:75%"></span></div></div>
+            <div class="proj"><div class="pl">Year 2 target</div><div class="pm">2,000</div><div class="ps">£120,000/mo</div><div class="pbar"><span style="width:100%"></span></div></div>
+          </div>
+          <div class="note" style="margin-top:14px">Pure recurring revenue — every creator who joins adds £60/mo for life. At <b>2,000 members that's £1.44M/year</b> on the directory alone, before a single course sale.</div>
         </div>
         <div class="card">
           <div class="h"><h3>Featured creators</h3><div style="display:flex;gap:10px"><button class="btn2" onclick="toast('Directory shared ✓ — link copied')">Share directory</button><button class="btn" onclick="applyDirectoryModal()">+ Join the directory</button></div></div>
           <div class="dgrid" id="dirgrid" style="margin-top:4px"></div>
         </div>
-        <div class="note" style="margin-top:18px">Creators pay a flat <b>£60/month</b> to be listed — that's your recurring revenue. They keep everything they earn from bookings, so it's an easy yes for them. <b>68 members = £4,080/month</b>, and it grows every time a creator joins.</div>
+        <div class="note" style="margin-top:18px">Creators pay a flat <b>£60/month</b> to be listed — that's your recurring revenue. They keep everything they earn from bookings, so it's an easy yes for them. <b>214 members = £12,840/month</b>, and it grows every time a creator joins.</div>
       </section>
 
       <!-- SETTINGS -->
@@ -937,9 +952,13 @@
 
   /* ---- creators ---- */
   var creators=[
-    ['Mia K.','#F0567A','Beauty',420,24000,'Live'],['Jordan T.','#7C6CF0','Fitness',310,18000,'Live'],
-    ['Amara L.','#12B981','Fashion',260,14000,'Live'],['Sofia R.','#F4A63A','Food',180,16000,'Live'],
-    ['Kai N.','#37B6F0','Tech',140,10000,'Launching']
+    ['Mia K.','#F0567A','Beauty',1240,42000,'Live'],['Jordan T.','#7C6CF0','Fitness',980,34000,'Live'],
+    ['Amara L.','#12B981','Fashion',760,26000,'Live'],['Sofia R.','#F4A63A','Food',640,22000,'Live'],
+    ['Kai N.','#37B6F0','Tech',520,18000,'Live'],['Ella R.','#7C6CF0','Travel',480,17000,'Live'],
+    ['Noah B.','#F0567A','Gaming',410,15000,'Live'],['Priya S.','#12B981','Wellness',390,14000,'Live'],
+    ['Leo M.','#F4A63A','Finance',350,13000,'Live'],['Zara H.','#37B6F0','Parenting',300,11000,'Live'],
+    ['Dan W.','#7C6CF0','Comedy',280,10000,'Live'],['Ruby F.','#F0567A','Art',240,9000,'Live'],
+    ['Theo K.','#12B981','Music',210,8000,'Live'],['Isla C.','#F4A63A','DIY',180,5000,'Launching']
   ];
   function renderCreators(){
     var el=document.getElementById('creatorlist'); if(!el)return;
@@ -1115,7 +1134,7 @@
     }).join('');
     updateDirStats();
   }
-  var dirMembers=68;
+  var dirMembers=214;
   function updateDirStats(){
     var m=document.getElementById('dirMembers'); if(m)m.textContent=dirMembers;
     var r=document.getElementById('dirRecurring'); if(r)r.textContent='£'+(dirMembers*60).toLocaleString();
