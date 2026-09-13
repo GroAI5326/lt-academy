@@ -191,6 +191,15 @@
   @keyframes sp{to{transform:rotate(360deg)}}
   .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(24px);background:var(--ink);color:#fff;padding:13px 20px;border-radius:12px;font-size:13.5px;font-weight:600;z-index:200;opacity:0;transition:.25s;box-shadow:0 14px 34px rgba(0,0,0,.35);pointer-events:none;max-width:90vw}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .dgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .dcard{border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:22px 20px;box-shadow:var(--shadow);text-align:center}
+  .dcard .av{width:66px;height:66px;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:24px}
+  .dcard .dn{font-weight:800;color:var(--ink);font-size:16px}
+  .dcard .di{font-size:12px;color:var(--mut);margin-top:2px}
+  .dcard .dr{font-size:12.5px;color:#b9791a;margin-top:8px;font-weight:700}
+  .dcard .dp{font-size:13px;color:var(--ink);font-weight:700;margin-top:8px}
+  .dcard .db2{margin-top:14px;display:flex;gap:8px;justify-content:center}
+  @media(max-width:860px){.dgrid{grid-template-columns:1fr!important}}
 </style>
 </head>
 <body>
@@ -214,6 +223,7 @@
       <a data-v="store" onclick="show('store','Digital Store','Sell templates, presets &amp; downloads')"><svg viewBox="0 0 24 24"><path d="M3 3h2l2.4 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6L21 8H6"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>Store</a>
       <a data-v="earnings" onclick="show('earnings','Earnings &amp; Commission','What you take home')"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Earnings</a>
       <a data-v="creators" onclick="show('creators','Creator Network','Creators you bring on, and your override')"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><circle cx="5" cy="18" r="3"/><circle cx="19" cy="18" r="3"/><path d="M12 11v3M9.5 15.5 7 16.5M14.5 15.5 17 16.5"/></svg>Creator Network</a>
+      <a data-v="directory" onclick="show('directory','Creator Directory','Creators list profiles · clients book through you')"><svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M5.5 21a6.5 6.5 0 0 1 13 0"/><circle cx="19" cy="6" r="1.5"/><circle cx="5" cy="6" r="1.5"/></svg>Directory</a>
       <a data-v="affiliates" onclick="show('affiliates','Affiliate Program','Your students become your marketing')"><svg viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>Affiliates</a>
       <a data-v="growth" onclick="show('growth','Growth','Funnels, waitlists, social &amp; integrations')"><svg viewBox="0 0 24 24"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg>Growth</a>
       <div class="sec">Intelligence · AI</div>
@@ -769,6 +779,22 @@
         </div>
       </section>
 
+      <!-- DIRECTORY -->
+      <section id="directory" class="view">
+        <p class="lead">A public directory where creators list their profile and clients book them direct — but every booking is taken and paid <b>through the academy</b>, so you earn a fee on all of it. Creators get clients; you get a cut of every booking.</p>
+        <div class="kpis">
+          <div class="kpi"><span class="cap">Creators listed</span><div class="v" id="dirCount">6</div><div class="s">accepting bookings</div></div>
+          <div class="kpi"><span class="cap">Bookings this month</span><div class="v">214</div><div class="s">▲ 27%</div></div>
+          <div class="kpi"><span class="cap">Booking volume</span><div class="v">£41,300</div><div class="s">paid through you</div></div>
+          <div class="kpi"><span class="cap">Your 20% fee</span><div class="v" style="color:var(--mint)">£8,260</div><div class="s">this month</div></div>
+        </div>
+        <div class="card">
+          <div class="h"><h3>The directory</h3><div style="display:flex;gap:10px"><button class="btn2" onclick="toast('Directory shared ✓ — link copied')">Share directory</button><button class="btn" onclick="applyDirectoryModal()">+ Apply to list</button></div></div>
+          <div class="dgrid" id="dirgrid" style="margin-top:4px"></div>
+        </div>
+        <div class="note" style="margin-top:18px">Every booking is processed on the platform — the client pays the academy, you take a <b>20% booking fee</b> automatically, and the creator is paid the rest. Nobody books off-platform.</div>
+      </section>
+
       <!-- SETTINGS -->
       <section id="settings" class="view">
         <p class="lead">Your academy, your brand. Everything is white-labelled to Louise Thomson — your name, your domain, your look. GroAI runs the tech behind it.</p>
@@ -1071,8 +1097,42 @@
     }).join('');
   }
 
+  /* ---- directory (bookable creators, booked through the platform) ---- */
+  var directory=[
+    ['Louise Thomson','#7C6CF0','Content &amp; TikTok growth',4.9,'£250','Top rated'],
+    ['Mia K.','#F0567A','Beauty &amp; UGC',4.8,'£180','Available'],
+    ['Jordan T.','#12B981','Fitness coaching',4.9,'£200','Available'],
+    ['Amara L.','#F4A63A','Fashion styling',4.7,'£150','Available'],
+    ['Sofia R.','#37B6F0','Food &amp; recipes',4.8,'£160','Busy'],
+    ['Kai N.','#C46BFF','Tech reviews',4.6,'£140','Available']
+  ];
+  function renderDirectory(){
+    var el=document.getElementById('dirgrid'); if(!el)return;
+    el.innerHTML=directory.map(function(d){
+      var st=d[5]==='Busy'?'t-amber':(d[5]==='Top rated'?'t-v':'t-mint');
+      return '<div class="dcard"><div class="av" style="background:'+d[1]+'">'+d[0][0]+'</div><div class="dn">'+d[0]+'</div><div class="di">'+d[2]+'</div><div class="dr">★ '+d[3]+'</div><div class="dp">from '+d[4]+' / session</div><div style="margin-top:8px"><span class="tag '+st+'">'+d[5]+'</span></div><div class="db2"><button class="btn" style="padding:8px 14px" onclick="bookCreator(\''+d[0]+'\',\''+d[4]+'\')">Book</button><button class="btn2" style="padding:8px 12px" onclick="toast(\'Opening profile…\')">Profile</button></div></div>';
+    }).join('');
+    var c=document.getElementById('dirCount'); if(c)c.textContent=directory.length;
+  }
+  function applyDirectoryModal(){
+    openModal('Apply to the creator directory',
+      '<div class="fl"><label>Name / handle</label><input class="inp" id="d_name" placeholder="e.g. Ella Rose"></div><div class="fl"><label>What you do</label><input class="inp" id="d_niche" placeholder="e.g. Travel content &amp; UGC"></div><div class="fl"><label>Rate per session (£)</label><input class="inp" id="d_rate" type="number" value="150"></div><div class="fl"><label>Short bio</label><textarea id="d_bio" placeholder="A line or two clients will see"></textarea></div>',
+      '<button class="btn3" onclick="closeModal()">Cancel</button><button class="btn" onclick="submitApply()">Submit application</button>');
+  }
+  function submitApply(){
+    var n=val('d_name')||'New Creator', ni=val('d_niche')||'Creator', r='£'+(val('d_rate')||'150');
+    directory.push([titleCase(n),palette[directory.length%palette.length],ni,5.0,r,'Available']); renderDirectory(); closeModal();
+    toast('✓ '+titleCase(n)+' added to the directory — now bookable');
+  }
+  function bookCreator(name,rate){
+    openModal('Book '+name,
+      '<div class="fl"><label>Session</label><select id="b_type"><option>60-min 1:1 ('+rate+')</option><option>30-min quick call</option><option>Half-day collaboration</option></select></div><div class="fl"><label>Date</label><input class="inp" id="b_date" type="date"></div><div class="fl"><label>Your email</label><input class="inp" id="b_email" placeholder="you@email.com"></div><div class="note" style="margin-top:8px">Payment is taken securely by <b>Louise Thomson Academy</b>. A 20% platform fee applies — the creator is paid the rest.</div>',
+      '<button class="btn3" onclick="closeModal()">Cancel</button><button class="btn" onclick="confirmBooking(\''+name+'\')">Confirm &amp; pay</button>');
+  }
+  function confirmBooking(name){ closeModal(); toast('✓ Booked '+name+' — paid through the academy, 20% fee applied'); }
+
   /* ---- init ---- */
-  renderMods(); renderCreators(); renderInbox(); renderChat(); renderStore(); renderCRM();
+  renderMods(); renderCreators(); renderInbox(); renderChat(); renderStore(); renderCRM(); renderDirectory();
   (function(){
     var events={3:['Coaching call','#7C6CF0'],9:['Guest expert','#F0567A'],16:['Live Q&A','#12B981'],24:['VIP mastermind','#F4A63A'],30:['Launch party','#37B6F0']};
     var today=14, first=new Date(2026,9,1).getDay(), lead=(first+6)%7, cells='';
