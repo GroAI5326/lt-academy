@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Louise Thomson — The Creator Playbook</title>
+<style>
+  :root{
+    --wine:#7B1E3A; --wine2:#5E1530; --rose:#D24E74; --gold:#C9A15A; --gold2:#B8893F;
+    --ink:#241019; --tx:#2B1A22; --mut:#8B6E78; --cream:#FBF3F5; --blush:#F6E7EC; --line:#EADAE0;
+    --grad:linear-gradient(135deg,var(--wine),var(--rose));
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{font-family:'Helvetica Neue',Arial,sans-serif;color:var(--tx);background:#4a3540}
+  .serif{font-family:Georgia,'Times New Roman',serif}
+  h1,h2,h3{line-height:1.08;letter-spacing:-.01em}
+  .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  img{display:block}
+
+  @page{size:A4;margin:0}
+  .page{width:210mm;height:297mm;position:relative;overflow:hidden;page-break-after:always;background:var(--cream)}
+  .page:last-child{page-break-after:auto}
+  .pad{padding:20mm 18mm}
+
+  .eyebrow{font-size:10.5pt;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--gold2)}
+  .lg{display:inline-flex;align-items:center;gap:9px;font-weight:900}
+  .lg .m{width:34px;height:34px;border-radius:50%;background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;overflow:hidden;position:relative}
+  .lg .m img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .lg .nm{font-size:12pt;line-height:1;color:var(--ink)} .lg .nm span{display:block;font-size:7pt;letter-spacing:3px;color:var(--gold2);margin-top:2px}
+
+  /* full-bleed image helpers */
+  .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .shade{position:absolute;inset:0}
+
+  /* COVER */
+  .cover .shade{background:linear-gradient(180deg,rgba(20,8,14,.35) 0%,rgba(20,8,14,.15) 40%,rgba(20,8,14,.82) 100%)}
+  .cover .top{position:absolute;top:18mm;left:18mm;right:18mm;display:flex;justify-content:space-between;align-items:center;color:#fff}
+  .cover .top .lg .nm{color:#fff}
+  .cover .top .pill{border:1px solid rgba(255,255,255,.5);border-radius:999px;padding:6px 14px;font-size:9pt;font-weight:700;letter-spacing:1px}
+  .cover .btm{position:absolute;left:18mm;right:18mm;bottom:20mm;color:#fff}
+  .cover .kick{font-size:11pt;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--gold)}
+  .cover h1{font-size:52pt;font-weight:900;margin:10px 0 6px;color:#fff}
+  .cover h1 em{font-style:normal;color:var(--gold)}
+  .cover .sub{font-size:14pt;color:#F3E3E9;max-width:150mm;font-weight:300;line-height:1.4}
+  .cover .free{display:inline-block;margin-top:16px;background:var(--grad);color:#fff;font-weight:800;font-size:11pt;padding:10px 20px;border-radius:10px}
+  .cover .soc{margin-top:14px;font-size:10.5pt;color:#EAD3DC;letter-spacing:.3px}
+
+  /* content page shells */
+  .kh{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:20px}
+  .kh .pn{font-size:9pt;color:var(--mut);font-weight:700;letter-spacing:1px}
+  .h2{font-size:30pt;font-weight:900;color:var(--ink);margin:6px 0 14px}
+  .lead{font-size:12.5pt;line-height:1.6;color:#4b3540}
+  .lead b{color:var(--wine)}
+
+  /* story split */
+  .split{display:grid;grid-template-columns:1fr 74mm;gap:14mm;align-items:center;height:100%}
+  .photo{border-radius:16px;overflow:hidden;height:200mm;position:relative;box-shadow:0 20px 50px rgba(60,20,34,.25)}
+  .photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .sig{font-family:Georgia,serif;font-style:italic;font-size:20pt;color:var(--wine);margin-top:14px}
+  .quote{font-family:Georgia,serif;font-size:15pt;font-style:italic;color:var(--wine);border-left:3px solid var(--gold);padding-left:14px;margin:18px 0}
+
+  /* stat callouts */
+  .stats4{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+  .stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .stat .n{font-size:26pt;font-weight:900;letter-spacing:-1px}
+  .stat .l{font-size:9.5pt;color:var(--mut);font-weight:600;margin-top:2px}
+
+  /* timeline */
+  .tl{margin-top:10px}
+  .tl .row{display:flex;gap:16px;align-items:flex-start;padding:11px 0;border-bottom:1px dashed var(--line)}
+  .tl .row:last-child{border-bottom:none}
+  .tl .dot{width:30px;height:30px;border-radius:50%;background:var(--grad);color:#fff;font-weight:800;font-size:10pt;display:flex;align-items:center;justify-content:center;flex:none}
+  .tl .tt{font-weight:800;font-size:12pt;color:var(--ink)}
+  .tl .td{font-size:10.5pt;color:var(--mut)}
+
+  /* cards */
+  .cards3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:16px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 18px;position:relative}
+  .card .e{font-size:26pt}
+  .card h3{font-size:14pt;margin:8px 0 6px;color:var(--ink)}
+  .card p{font-size:10pt;color:var(--mut);line-height:1.5}
+  .card .tag{display:inline-block;margin-top:10px;background:var(--blush);color:var(--wine);font-size:9pt;font-weight:800;padding:4px 10px;border-radius:999px}
+
+  .banner{background:var(--grad);border-radius:18px;padding:22px 26px;color:#fff;margin-top:18px}
+  .banner .big{font-size:20pt;font-weight:900}
+  .banner p{font-size:11pt;opacity:.95;margin-top:4px}
+
+  /* income streams */
+  .streamgrid{display:grid;grid-template-columns:92mm 1fr;gap:10mm;align-items:center;margin-top:6mm}
+  .leg div{display:flex;align-items:center;gap:10px;font-size:11pt;margin-bottom:12px;font-weight:600}
+  .leg .dot{width:13px;height:13px;border-radius:4px;flex:none}
+  .leg b{margin-left:auto;font-weight:900}
+  .listcol{margin-top:16px}
+  .listcol .li{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+  .listcol .li:last-child{border-bottom:none}
+  .listcol .ic{color:var(--gold2);font-weight:900;font-size:13pt}
+  .listcol .lt{font-weight:800;font-size:11.5pt;color:var(--ink)}
+  .listcol .ld{font-size:10pt;color:var(--mut)}
+
+  /* why grid with photos */
+  .why{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+  .wc{border-radius:14px;overflow:hidden;position:relative;height:78mm;color:#fff}
+  .wc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .wc .ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,8,14,.05),rgba(20,8,14,.8));display:flex;flex-direction:column;justify-content:flex-end;padding:16px}
+  .wc h3{font-size:15pt;margin-bottom:3px}
+  .wc p{font-size:9.5pt;opacity:.92;line-height:1.4}
+
+  /* steps */
+  .steps .s{display:flex;gap:16px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:11px}
+  .steps .no{font-family:Georgia,serif;font-size:24pt;font-weight:900;color:var(--gold);line-height:1;flex:none;width:34px}
+  .steps h3{font-size:13pt;color:var(--ink);margin-bottom:3px}
+  .steps p{font-size:10.5pt;color:var(--mut);line-height:1.5}
+
+  /* final CTA page */
+  .final{background:var(--ink);color:#fff}
+  .final .shade{background:radial-gradient(600px 400px at 85% 0%,rgba(210,78,116,.4),transparent 60%),radial-gradient(500px 360px at 0% 100%,rgba(201,161,90,.28),transparent 60%)}
+  .final .inner{position:absolute;inset:0;padding:24mm 18mm;display:flex;flex-direction:column}
+  .final h2{font-size:38pt;font-weight:900;margin:8px 0 12px}
+  .final h2 em{font-style:normal;color:var(--gold)}
+  .final .lead{color:#EAD3DC;font-size:12.5pt;max-width:150mm}
+  .final .box{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:22px 24px;margin-top:22px}
+  .final .box h3{font-size:15pt;color:var(--gold);margin-bottom:8px}
+  .final .box p{font-size:11pt;color:#F3E3E9;line-height:1.6}
+  .final .soc{margin-top:auto;display:flex;flex-direction:column;gap:8px;font-size:12pt}
+  .final .soc b{color:var(--gold)}
+  .final .cta{display:inline-block;background:var(--grad);color:#fff;font-weight:900;font-size:13pt;padding:14px 26px;border-radius:12px;margin-top:8px}
+  .disc{font-size:7.5pt;color:var(--mut);position:absolute;bottom:8mm;left:18mm;right:18mm;text-align:center}
+</style>
+</head>
+<body>
+
+<!-- 1. COVER -->
+<section class="page cover">
+  <img class="bg" src="images/p4.jpg" alt="">
+  <div class="shade"></div>
+  <div class="top">
+    <span class="lg"><span class="m"><img src="images/louise.jpg" alt=""></span><span class="nm">Louise Thomson<span>CREATOR</span></span></span>
+    <span class="pill">FREE GUIDE · 2026</span>
+  </div>
+  <div class="btm">
+    <div class="kick">From a 9–5 to full-time creator</div>
+    <h1 class="serif">0 to <em>£20K</em><br>months.</h1>
+    <div class="sub">How I quit my 9–5, built a following, and turned my phone into a full-time income — and how you can start doing the same, even on the side.</div>
+    <div class="free">Your free playbook — read this first ↓</div>
+    <div class="soc">📸 instagram.com/lou1sethomson &nbsp;·&nbsp; 🎵 tiktok.com/@lou1sethomsonx</div>
+  </div>
+</section>
+
+<!-- 2. MY STORY -->
+<section class="page">
+  <div class="split pad">
+    <div>
+      <div class="eyebrow">My story</div>
+      <h2 class="h2 serif">Two years ago, I<br>was clocking in.</h2>
+      <p class="lead">I was in a <b>9–5</b>, counting down to Friday, wondering if that was really it. No plan B. No savings to speak of. Just a phone and a feeling that I was built for more.</p>
+      <div class="quote">I didn't win the lottery. I didn't know anyone. I learned how to turn a phone and an idea into an income — and I wrote down every step.</div>
+      <p class="lead">Today I run my own brand, get paid by companies I used to admire, travel when I want, and I bought my <b>dream car outright — in cash</b>. This little guide is the honest version of how it happened, and how you can start too.</p>
+      <div class="sig">— Louise</div>
+    </div>
+    <div class="photo"><img src="images/p1.jpg" alt="Louise"></div>
+  </div>
+</section>
+
+<!-- 3. THE JOURNEY + NUMBERS -->
+<section class="page">
+  <div class="pad">
+    <div class="kh"><span class="lg"><span class="m"><img src="images/louise.jpg"></span><span class="nm">Louise Thomson<span>CREATOR</span></span></span><span class="pn">THE JOURNEY · 02</span></div>
+    <div class="eyebrow">The receipts</div>
+    <h2 class="h2 serif">The numbers don't lie.</h2>
+
+    <div class="stats4">
+      <div class="stat"><div class="n grad">£0 → £20k</div><div class="l">Monthly income on TikTok</div></div>
+      <div class="stat"><div class="n grad">18M+</div><div class="l">Likes on a single post</div></div>
+      <div class="stat"><div class="n grad">850k+</div><div class="l">Followers built from zero</div></div>
+      <div class="stat"><div class="n grad">15+</div><div class="l">Countries — working from my phone</div></div>
+    </div>
+
+    <div style="margin-top:20px" class="eyebrow">How the income grew</div>
+    <svg viewBox="0 0 640 230" style="width:100%;height:auto;margin-top:6px">
+      <defs>
+        <linearGradient id="f" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D24E74" stop-opacity=".28"/><stop offset="1" stop-color="#D24E74" stop-opacity="0"/></linearGradient>
+        <linearGradient id="l" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7B1E3A"/><stop offset="1" stop-color="#D24E74"/></linearGradient>
+      </defs>
+      <g stroke="#EADAE0" stroke-width="1"><line x1="34" y1="30" x2="628" y2="30"/><line x1="34" y1="80" x2="628" y2="80"/><line x1="34" y1="130" x2="628" y2="130"/><line x1="34" y1="180" x2="628" y2="180"/></g>
+      <text x="0" y="34" font-size="9" fill="#8B6E78">£20k</text><text x="0" y="134" font-size="9" fill="#8B6E78">£8k</text><text x="6" y="184" font-size="9" fill="#8B6E78">£0</text>
+      <path d="M34 185 L 118 181 L 202 168 L 286 146 L 370 112 L 454 78 L 538 48 L 628 30 L 628 185 L 34 185 Z" fill="url(#f)"/>
+      <path d="M34 185 L 118 181 L 202 168 L 286 146 L 370 112 L 454 78 L 538 48 L 628 30" fill="none" stroke="url(#l)" stroke-width="3.5" stroke-linecap="round"/>
+      <g fill="#C9A15A"><circle cx="370" cy="112" r="4.5"/><circle cx="538" cy="48" r="4.5"/><circle cx="628" cy="30" r="5.5" stroke="#fff" stroke-width="2"/></g>
+      <g font-size="9" fill="#8B6E78"><text x="30" y="205">Month 1</text><text x="270" y="205">Month 8</text><text x="520" y="205">Month 16</text></g>
+    </svg>
+
+    <div class="tl" style="margin-top:14px">
+      <div class="row"><div class="dot">1</div><div><div class="tt">Posted my first video — £0, terrified</div><div class="td">No following, no clue. I just started, badly, and kept going.</div></div></div>
+      <div class="row"><div class="dot">2</div><div><div class="tt">First video went viral → first brand deal</div><div class="td">One post changed everything. A brand paid me more than a week's wages.</div></div></div>
+      <div class="row"><div class="dot">3</div><div><div class="tt">Hit my first £5k month — then quit the 9–5</div><div class="td">Scary decision. Best one I ever made.</div></div></div>
+      <div class="row"><div class="dot">4</div><div><div class="tt">£20k months + running socials for companies</div><div class="td">Creating for myself and getting paid to grow other brands too.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. THREE PATHS -->
+<section class="page">
+  <div class="pad">
+    <div class="kh"><span class="lg"><span class="m"><img src="images/louise.jpg"></span><span class="nm">Louise Thomson<span>CREATOR</span></span></span><span class="pn">WHAT YOU CAN DO · 03</span></div>
+    <div class="eyebrow">Three ways to get paid</div>
+    <h2 class="h2 serif">Pick your lane.<br>Or run all three.</h2>
+    <p class="lead">You don't need to be famous. You need a skill people pay for — and I'll show you three that changed my life.</p>
+    <div class="cards3">
+      <div class="card"><div class="e">📱</div><h3>Content Creator</h3><p>Get paid to post. Brand deals, TikTok, UGC, affiliate — turn attention into income.</p><div class="tag">£500–£10k / deal</div></div>
+      <div class="card"><div class="e">💼</div><h3>Social Media Manager</h3><p>Run socials for businesses that don't have the time. Retainer clients, every month.</p><div class="tag">£1k–£3k / client / mo</div></div>
+      <div class="card"><div class="e">🚀</div><h3>Your Own Business</h3><p>Products, digital downloads, your own agency or brand. Build an asset that's yours.</p><div class="tag">Unlimited upside</div></div>
+    </div>
+    <div class="banner">
+      <div class="big">There is no salary cap on the internet.</div>
+      <p>In a job, your income is set by someone else. Here, your income is a decision — you can start on the side tonight and scale it as far as you're willing to go.</p>
+    </div>
+    <div class="stats4" style="grid-template-columns:1fr 1fr 1fr">
+      <div class="stat"><div class="n grad">Be your<br>own boss</div><div class="l">No permission needed</div></div>
+      <div class="stat"><div class="n grad">Do it on<br>the side</div><div class="l">Keep your job while you build</div></div>
+      <div class="stat"><div class="n grad">Work from<br>anywhere</div><div class="l">All you need is your phone</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. INCOME STREAMS -->
+<section class="page">
+  <div class="pad">
+    <div class="kh"><span class="lg"><span class="m"><img src="images/louise.jpg"></span><span class="nm">Louise Thomson<span>CREATOR</span></span></span><span class="pn">UNLIMITED INCOME · 04</span></div>
+    <div class="eyebrow">Never rely on one payday</div>
+    <h2 class="h2 serif">Five income streams,<br>one phone.</h2>
+    <div class="streamgrid">
+      <svg viewBox="0 0 200 200" width="88mm" style="max-width:88mm;height:auto;display:block;margin:0 auto">
+        <circle cx="100" cy="100" r="72" fill="none" stroke="#EADAE0" stroke-width="26"/>
+        <circle cx="100" cy="100" r="72" fill="none" stroke="#7B1E3A" stroke-width="26" stroke-dasharray="158 294" transform="rotate(-90 100 100)"/>
+        <circle cx="100" cy="100" r="72" fill="none" stroke="#D24E74" stroke-width="26" stroke-dasharray="113 339" transform="rotate(36 100 100)"/>
+        <circle cx="100" cy="100" r="72" fill="none" stroke="#C9A15A" stroke-width="26" stroke-dasharray="90 362" transform="rotate(126 100 100)"/>
+        <circle cx="100" cy="100" r="72" fill="none" stroke="#E0577C" stroke-width="26" stroke-dasharray="54 398" transform="rotate(198 100 100)"/>
+        <circle cx="100" cy="100" r="72" fill="none" stroke="#8B6E78" stroke-width="26" stroke-dasharray="36 416" transform="rotate(241 100 100)"/>
+        <text x="100" y="96" text-anchor="middle" font-size="20" font-weight="900" fill="#241019" font-family="Georgia">100%</text>
+        <text x="100" y="114" text-anchor="middle" font-size="9" fill="#8B6E78">yours</text>
+      </svg>
+      <div class="leg">
+        <div><span class="dot" style="background:#7B1E3A"></span>Brand deals <b>35%</b></div>
+        <div><span class="dot" style="background:#D24E74"></span>Social media management <b>25%</b></div>
+        <div><span class="dot" style="background:#C9A15A"></span>UGC content <b>20%</b></div>
+        <div><span class="dot" style="background:#E0577C"></span>Product commissions <b>12%</b></div>
+        <div><span class="dot" style="background:#8B6E78"></span>My own products <b>8%</b></div>
+      </div>
+    </div>
+    <div class="listcol">
+      <div class="li"><div class="ic">✦</div><div><div class="lt">Brand deals</div><div class="ld">Companies pay you to feature them — one post can be a month's wages.</div></div></div>
+      <div class="li"><div class="ic">✦</div><div><div class="lt">Social media management</div><div class="ld">Run accounts for local businesses on a monthly retainer — recurring income.</div></div></div>
+      <div class="li"><div class="ic">✦</div><div><div class="lt">UGC &amp; commissions</div><div class="ld">Make content for brands, and earn a cut every time your link sells.</div></div></div>
+      <div class="li"><div class="ic">✦</div><div><div class="lt">Your own products</div><div class="ld">Digital guides, presets, merch — you keep (almost) all of it.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. WHY THIS LIFE -->
+<section class="page">
+  <div class="pad">
+    <div class="kh"><span class="lg"><span class="m"><img src="images/louise.jpg"></span><span class="nm">Louise Thomson<span>CREATOR</span></span></span><span class="pn">THE LIFESTYLE · 05</span></div>
+    <div class="eyebrow">Why I'll never go back</div>
+    <h2 class="h2 serif">This isn't about money.<br>It's about freedom.</h2>
+    <div class="why">
+      <div class="wc"><img src="images/v1.jpg"><div class="ov"><h3>Travel anywhere</h3><p>My office is wherever the wifi is. 15+ countries and counting.</p></div></div>
+      <div class="wc"><img src="images/p4.jpg"><div class="ov"><h3>Buy the dream — in cash</h3><p>I bought my dream car outright. No finance, no permission.</p></div></div>
+      <div class="wc"><img src="images/p2.jpg"><div class="ov"><h3>Own your time</h3><p>Train, rest, work when you want. No one clocks you in.</p></div></div>
+      <div class="wc"><img src="images/p3.jpg"><div class="ov"><h3>Be your own boss</h3><p>Your decisions, your brand, your ceiling. Financial freedom on your terms.</p></div></div>
+    </div>
+    <div class="banner"><div class="big">You can start tonight — around your job.</div><p>Most people who work with me begin on the side, with the phone already in their hand. You don't quit anything until the numbers say you can.</p></div>
+  </div>
+</section>
+
+<!-- 7. HOW TO START -->
+<section class="page">
+  <div class="pad">
+    <div class="kh"><span class="lg"><span class="m"><img src="images/louise.jpg"></span><span class="nm">Louise Thomson<span>CREATOR</span></span></span><span class="pn">GET STARTED · 06</span></div>
+    <div class="eyebrow">The five steps</div>
+    <h2 class="h2 serif">How to actually begin.</h2>
+    <div class="steps" style="margin-top:16px">
+      <div class="s"><div class="no serif">1</div><div><h3>Pick your niche &amp; your lane</h3><p>Choose what you'll post about and how you'll earn — creator, manager, or both. Clarity beats talent.</p></div></div>
+      <div class="s"><div class="no serif">2</div><div><h3>Post with a system, not by mood</h3><p>Hooks, formats and a simple weekly plan. Consistency is the whole game — the system does the heavy lifting.</p></div></div>
+      <div class="s"><div class="no serif">3</div><div><h3>Grow your audience</h3><p>Learn what makes people stop scrolling. One video can change your life — I've seen 18M+ likes on a single post.</p></div></div>
+      <div class="s"><div class="no serif">4</div><div><h3>Monetise — early</h3><p>Land your first brand deal or client. You don't need millions of followers to get paid; you need the right approach.</p></div></div>
+      <div class="s"><div class="no serif">5</div><div><h3>Scale to full-time</h3><p>Stack your income streams, raise your rates, and replace your 9–5 on your terms.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. WORK WITH ME -->
+<section class="page final">
+  <div class="shade"></div>
+  <div class="inner">
+    <span class="lg"><span class="m"><img src="images/louise.jpg"></span><span class="nm" style="color:#fff">Louise Thomson<span>CREATOR</span></span></span>
+    <div style="margin-top:auto"></div>
+    <div class="eyebrow" style="color:var(--gold)">The bit you've been waiting for</div>
+    <h2 class="serif">Want to learn<br>exactly <em>how I did it?</em></h2>
+    <p class="lead">Everything in this guide — the growth, the brand deals, the social media management, building your own business — I'm putting into one place.</p>
+    <div class="box">
+      <h3>🎓 My Academy is opening soon.</h3>
+      <p>A step-by-step programme to take you from wherever you are now to a real income as a creator, social media manager or business owner — with me guiding you the whole way. <b>Follow me and turn on notifications</b> so you're first in when the doors open — early members get the best price.</p>
+    </div>
+    <a class="cta">Join the waitlist — follow @lou1sethomson</a>
+    <div class="soc">
+      <div>📸 Instagram — <b>instagram.com/lou1sethomson</b></div>
+      <div>🎵 TikTok — <b>tiktok.com/@lou1sethomsonx</b></div>
+    </div>
+    <div class="disc">This guide shares one creator's personal experience and is for information and inspiration only — it isn't a guarantee of income. Results vary and depend on your own effort. © 2026 Louise Thomson.</div>
+  </div>
+</section>
+
+</body>
+</html>
