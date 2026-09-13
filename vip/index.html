@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Louise Thomson — VIP</title>
+<style>
+  :root{
+    --bg:#140A10; --panel:#1F121A; --panel2:#271722; --line:rgba(255,255,255,.09);
+    --tx:#F5ECF0; --mut:#B295A2; --gold:#E6BE86; --gold2:#D49F5E;
+    --rose:#E85D82; --wine:#8E2947; --mint:#4FD1A5;
+    --grad:linear-gradient(135deg,var(--rose),var(--gold));
+    --shadow:0 20px 60px rgba(0,0,0,.5); --radius:18px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--tx);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+  h1,h2,h3{line-height:1.12;letter-spacing:-.02em;font-weight:800}
+  .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 20px;border-radius:11px;font-weight:800;font-size:14.5px;cursor:pointer;border:none;transition:.15s;font-family:inherit}
+  .btn-p{background:var(--grad);color:#20121a;box-shadow:0 10px 26px rgba(232,93,130,.32)}
+  .btn-p:hover{transform:translateY(-1px)}
+  .btn-o{background:rgba(255,255,255,.06);color:var(--tx);border:1px solid var(--line)}
+  .btn-o:hover{border-color:var(--gold);color:var(--gold)}
+  .btn-lg{padding:15px 28px;font-size:16px;border-radius:13px}
+  .lock-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(230,190,134,.14);color:var(--gold);font-size:12px;font-weight:800;padding:5px 12px;border-radius:999px}
+  .eyebrow{font-size:12.5px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:var(--gold)}
+
+  /* AGE GATE */
+  .age{position:fixed;inset:0;z-index:200;background:rgba(10,5,8,.94);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:22px}
+  .age .box{background:var(--panel);border:1px solid var(--line);border-radius:22px;max-width:440px;width:100%;padding:38px 34px;text-align:center;box-shadow:var(--shadow)}
+  .age .lg{width:64px;height:64px;border-radius:50%;margin:0 auto 18px;overflow:hidden;border:2px solid var(--gold)}
+  .age .lg img{width:100%;height:100%;object-fit:cover;object-position:center 20%}
+  .age h2{font-size:24px;margin-bottom:10px}
+  .age p{color:var(--mut);font-size:14px;margin-bottom:22px}
+  .age .row{display:flex;gap:12px}
+  .age .row .btn{flex:1}
+  .age .fine{font-size:11.5px;color:var(--mut);margin-top:18px;line-height:1.5}
+
+  /* NAV */
+  header{position:sticky;top:0;z-index:50;background:rgba(20,10,16,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;gap:22px;height:68px}
+  .logo{display:flex;align-items:center;gap:11px;font-weight:900}
+  .logo .lg{position:relative;width:40px;height:40px;border-radius:50%;overflow:hidden;border:1.5px solid var(--gold);flex:none;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:14px;color:#20121a}
+  .logo .lg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .logo .nm{font-size:15px;line-height:1}
+  .logo .nm span{display:block;font-size:8.5px;letter-spacing:2.5px;color:var(--gold);margin-top:3px}
+  .navlinks{display:flex;gap:24px;margin-left:10px}
+  .navlinks a{font-size:14px;font-weight:700;color:var(--mut)}
+  .navlinks a:hover{color:var(--tx)}
+  .navcta{margin-left:auto;display:flex;gap:10px;align-items:center}
+  .cartbtn{position:relative;background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:11px;width:42px;height:42px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:17px}
+  .cartbtn .cc{position:absolute;top:-6px;right:-6px;background:var(--rose);color:#fff;font-size:10.5px;font-weight:800;min-width:18px;height:18px;border-radius:999px;display:flex;align-items:center;justify-content:center;padding:0 4px}
+  .burger{display:none;margin-left:auto;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px}
+  .burger span{width:24px;height:2.5px;background:var(--tx);border-radius:3px}
+
+  /* HERO / PROFILE */
+  .hero{position:relative;padding:44px 0 30px;background:radial-gradient(900px 420px at 80% -10%,rgba(142,41,71,.5),transparent 60%),radial-gradient(700px 360px at 0% 20%,rgba(230,190,134,.12),transparent 55%)}
+  .phero{display:grid;grid-template-columns:300px 1fr;gap:34px;align-items:center}
+  .pcard{position:relative;border-radius:22px;overflow:hidden;aspect-ratio:4/5;border:1px solid var(--line);box-shadow:var(--shadow);background:var(--grad)}
+  .pcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%}
+  .pcard .on{position:absolute;top:12px;left:12px;background:rgba(20,10,16,.7);color:var(--mint);font-size:12px;font-weight:800;padding:5px 11px;border-radius:999px;backdrop-filter:blur(6px);display:flex;align-items:center;gap:6px}
+  .pcard .on i{width:8px;height:8px;border-radius:50%;background:var(--mint);display:inline-block}
+  .pmeta .verified{display:inline-flex;align-items:center;gap:7px;font-size:13px;color:var(--gold);font-weight:700}
+  .pmeta h1{font-size:44px;margin:8px 0 4px}
+  .pmeta .handle{color:var(--mut);font-size:15px}
+  .pmeta .bio{font-size:15.5px;color:#E7D7DE;margin:16px 0;max-width:560px}
+  .pstats{display:flex;gap:26px;margin:16px 0 22px;flex-wrap:wrap}
+  .pstats .s .n{font-size:22px;font-weight:900}
+  .pstats .s .l{font-size:12px;color:var(--mut);font-weight:600}
+  .pcta{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .pprice{font-size:13px;color:var(--mut)}
+  .pprice b{color:var(--tx);font-size:16px}
+
+  /* SECTION */
+  .sec{padding:52px 0}
+  .sec .head{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-bottom:22px}
+  .sec .head h2{font-size:28px}
+  .sec .head p{color:var(--mut);font-size:14px;margin-top:4px}
+
+  /* TIERS */
+  .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .tier{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:28px 26px;position:relative}
+  .tier.feat{border:1.5px solid var(--gold);box-shadow:0 20px 50px rgba(230,190,134,.14)}
+  .tier .badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--grad);color:#20121a;font-size:11.5px;font-weight:800;padding:5px 15px;border-radius:999px;white-space:nowrap}
+  .tier .tn{font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--gold)}
+  .tier .tp{font-size:38px;font-weight:900;margin:8px 0 2px}
+  .tier .tp span{font-size:15px;color:var(--mut);font-weight:600}
+  .tier ul{list-style:none;margin:18px 0 22px}
+  .tier li{font-size:14px;padding:8px 0 8px 26px;position:relative;color:#E7D7DE}
+  .tier li:before{content:"✦";position:absolute;left:0;color:var(--gold)}
+  .tier .btn{width:100%}
+
+  /* CONTENT / LOCKED GRID */
+  .cgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .ctile{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:1;border:1px solid var(--line);background:linear-gradient(150deg,var(--panel2),var(--panel));cursor:pointer}
+  .ctile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%}
+  .ctile.locked img{filter:blur(16px) brightness(.5);transform:scale(1.1)}
+  .ctile .ov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:linear-gradient(180deg,rgba(20,10,16,.1),rgba(20,10,16,.65))}
+  .ctile .ov .ic{font-size:26px}
+  .ctile .ov .t{font-size:13px;font-weight:800}
+  .ctile .ov .c{font-size:11.5px;color:var(--mut)}
+  .ctile .free{position:absolute;top:10px;left:10px;background:rgba(79,209,165,.16);color:var(--mint);font-size:11px;font-weight:800;padding:3px 10px;border-radius:999px}
+  .ctile .price{position:absolute;bottom:10px;right:10px;background:rgba(20,10,16,.72);color:var(--gold);font-size:12px;font-weight:800;padding:4px 10px;border-radius:999px;backdrop-filter:blur(6px)}
+  .ctile .dur{position:absolute;bottom:10px;left:10px;background:rgba(20,10,16,.72);color:#fff;font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px;display:flex;align-items:center;gap:5px}
+
+  /* CATEGORY CARDS */
+  .catrow{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+  .catcard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 16px;text-align:center;cursor:pointer;transition:.15s}
+  .catcard:hover{border-color:var(--gold);transform:translateY(-3px)}
+  .catcard .e{font-size:28px}
+  .catcard .n{font-weight:800;font-size:14.5px;margin-top:8px}
+  .catcard .c{font-size:12px;color:var(--mut);margin-top:2px}
+
+  /* SHOP */
+  .chips{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:22px}
+  .chip{padding:8px 15px;border-radius:999px;border:1px solid var(--line);background:var(--panel);font-size:13px;font-weight:700;color:var(--mut);cursor:pointer;transition:.14s}
+  .chip:hover{color:var(--gold);border-color:var(--gold)}
+  .chip.on{background:var(--grad);color:#20121a;border-color:transparent}
+  .shop{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .prod{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:.15s}
+  .prod:hover{transform:translateY(-3px);border-color:rgba(230,190,134,.4)}
+  .prod .im{position:relative;aspect-ratio:1;overflow:hidden;background:linear-gradient(150deg,var(--panel2),var(--wine))}
+  .prod .im img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%}
+  .prod .im .worn{position:absolute;top:10px;left:10px;background:rgba(20,10,16,.72);color:var(--gold);font-size:10.5px;font-weight:800;padding:3px 9px;border-radius:999px;backdrop-filter:blur(4px)}
+  .prod .im .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:40px;opacity:.5}
+  .prod .b{padding:15px 16px 17px}
+  .prod .pn{font-weight:800;font-size:14.5px}
+  .prod .pd{font-size:12.5px;color:var(--mut);margin-top:3px;min-height:34px}
+  .prod .pr{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
+  .prod .pr .price{font-size:18px;font-weight:900}
+  .prod .pr button{background:var(--grad);color:#20121a;border:none;border-radius:9px;padding:8px 14px;font-weight:800;font-size:12.5px;cursor:pointer;font-family:inherit}
+
+  /* PRIVATE SERVICES */
+  .svc{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .scard{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:20px;padding:26px 24px}
+  .scard .e{font-size:30px}
+  .scard h3{font-size:19px;margin:12px 0 6px}
+  .scard p{font-size:14px;color:var(--mut);min-height:60px}
+  .scard .pr{font-size:15px;font-weight:800;color:var(--gold);margin:10px 0 16px}
+  .scard .btn{width:100%}
+
+  /* CHAT BANNER */
+  .chatb{background:linear-gradient(120deg,var(--wine),#3a1622);border:1px solid var(--line);border-radius:24px;padding:40px 38px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;position:relative;overflow:hidden}
+  .chatb:before{content:"";position:absolute;inset:0;background:radial-gradient(500px 260px at 90% -20%,rgba(230,190,134,.28),transparent 60%)}
+  .chatb>*{position:relative}
+  .chatb h2{font-size:30px;margin-bottom:8px}
+  .chatb p{color:#EAD3DC;font-size:15px;max-width:440px}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--line);padding:40px 0 30px;margin-top:20px}
+  .fbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;align-items:center}
+  .fbar .demo{background:rgba(230,190,134,.12);border:1px solid rgba(230,190,134,.3);border-radius:999px;padding:6px 14px;font-weight:700;font-size:12.5px;color:var(--gold)}
+  .fnote{font-size:12px;color:var(--mut);margin-top:16px;line-height:1.6;max-width:760px}
+
+  /* MODAL + TOAST */
+  .modalbg{position:fixed;inset:0;background:rgba(8,4,7,.72);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;z-index:120;padding:20px}
+  .modalbg.show{display:flex}
+  .modal{background:var(--panel);border:1px solid var(--line);border-radius:20px;max-width:430px;width:100%;padding:30px;box-shadow:var(--shadow)}
+  .modal h3{font-size:22px;margin-bottom:6px}
+  .modal p.ms{color:var(--mut);font-size:14px;margin-bottom:14px}
+  .modal label{display:block;font-size:12.5px;font-weight:700;margin:13px 0 5px;color:var(--mut)}
+  .modal input{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:11px;font-size:14px;font-family:inherit;background:var(--panel2);color:var(--tx)}
+  .modal input:focus{outline:none;border-color:var(--gold)}
+  .modal .mrow{display:flex;gap:12px;justify-content:flex-end;margin-top:22px}
+  .toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(140px);background:var(--grad);color:#20121a;padding:14px 22px;border-radius:12px;font-weight:800;font-size:14px;z-index:130;transition:transform .3s;box-shadow:0 14px 40px rgba(0,0,0,.4);max-width:90vw;text-align:center}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+
+  @media(max-width:960px){
+    .phero{grid-template-columns:1fr;gap:24px} .pcard{max-width:320px}
+    .tiers,.svc{grid-template-columns:1fr}
+    .cgrid,.shop{grid-template-columns:1fr 1fr}
+    .catrow{grid-template-columns:1fr 1fr 1fr}
+  }
+  @media(max-width:680px){
+    .navlinks,.navcta .btn{display:none}
+    .navcta{margin-left:auto} .burger{display:flex}
+    .navlinks.show{display:flex;position:absolute;top:68px;left:0;right:0;background:var(--panel);flex-direction:column;padding:18px 22px;gap:15px;border-bottom:1px solid var(--line)}
+    .pmeta h1{font-size:34px}
+    .catrow{grid-template-columns:1fr 1fr}
+    .chatb{padding:30px 24px}
+  }
+</style>
+</head>
+<body>
+
+<!-- AGE GATE -->
+<div class="age" id="age">
+  <div class="box">
+    <div class="lg"><img src="images/louise.jpg" alt="" onerror="this.parentNode.style.display='none'"></div>
+    <h2>This is an 18+ page</h2>
+    <p>Exclusive content from Louise Thomson. You must be 18 or older to enter.</p>
+    <div class="row">
+      <button class="btn btn-o" onclick="location.href='https://groai5326.github.io/lt-academy/site/'">Leave</button>
+      <button class="btn btn-p" onclick="document.getElementById('age').style.display='none'">I'm 18 or older — enter</button>
+    </div>
+    <div class="fine">All content features consenting adults aged 18+. By entering you agree to the terms and confirm you are of legal age in your country.</div>
+  </div>
+</div>
+
+<!-- NAV -->
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="logo"><span class="lg"><span>LT</span><img src="images/louise.jpg" alt="Louise" onerror="this.remove()"></span><div class="nm">Louise Thomson<span>VIP</span></div></a>
+    <nav class="navlinks" id="navlinks">
+      <a href="#tiers" onclick="closeNav()">Membership</a>
+      <a href="#exclusive" onclick="closeNav()">Exclusive</a>
+      <a href="#shop" onclick="closeNav()">Shop</a>
+      <a href="#private" onclick="closeNav()">Private</a>
+      <a href="#chat" onclick="closeNav()">Chat</a>
+    </nav>
+    <div class="navcta">
+      <div class="cartbtn" onclick="toast('🛍️ Your bag — checkout is handled securely at the next step.')">🛍️<span class="cc" id="cc">0</span></div>
+      <button class="btn btn-o" onclick="openLogin()">Member login</button>
+      <button class="btn btn-p" onclick="openJoin()">Join VIP</button>
+    </div>
+    <button class="burger" onclick="toggleNav()" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<span id="top"></span>
+
+<!-- HERO / PROFILE -->
+<section class="hero">
+  <div class="wrap phero">
+    <div class="pcard">
+      <img src="images/louise.jpg" alt="Louise Thomson" onerror="this.remove()">
+      <span class="on"><i></i> Online now</span>
+    </div>
+    <div class="pmeta">
+      <span class="verified">✔ Verified creator</span>
+      <h1>Louise Thomson</h1>
+      <div class="handle">@louisethomson · 💎 VIP creator</div>
+      <p class="bio">Your exclusive access to me 💋 Daily photos, weekly videos, worn outfits, private chat and 1:1 video calls. Subscribe to unlock everything — and message me anytime.</p>
+      <div class="pstats">
+        <div class="s"><div class="n grad">1,240</div><div class="l">Posts</div></div>
+        <div class="s"><div class="n grad">680</div><div class="l">Photos</div></div>
+        <div class="s"><div class="n grad">210</div><div class="l">Videos</div></div>
+        <div class="s"><div class="n grad">18.4k</div><div class="l">Members</div></div>
+      </div>
+      <div class="pcta">
+        <button class="btn btn-p btn-lg" onclick="openJoin()">🔓 Unlock everything</button>
+        <button class="btn btn-o btn-lg" onclick="openChat()">💬 Message me</button>
+        <div class="pprice">from <b>£14.99</b>/mo · cancel anytime</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEMBERSHIP TIERS -->
+<section class="sec" id="tiers">
+  <div class="wrap">
+    <div class="head"><div><span class="eyebrow">Membership</span><h2>Choose your access.</h2></div></div>
+    <div class="tiers">
+      <div class="tier">
+        <div class="tn">Free</div>
+        <div class="tp">£0</div>
+        <ul><li>Public feed &amp; previews</li><li>Follow &amp; like</li><li>Pay-per-item unlocks</li><li>Browse the shop</li></ul>
+        <button class="btn btn-o" onclick="openJoin()">Follow free</button>
+      </div>
+      <div class="tier feat">
+        <div class="badge">★ Most popular</div>
+        <div class="tn">VIP</div>
+        <div class="tp">£14.99<span> /mo</span></div>
+        <ul><li>All photos unlocked</li><li>Weekly premium videos</li><li>Feet &amp; hands galleries</li><li>Priority chat replies</li><li>10% off the shop</li></ul>
+        <button class="btn btn-p" onclick="openJoin()">Join VIP</button>
+      </div>
+      <div class="tier">
+        <div class="tn">VIP+ Diamond</div>
+        <div class="tp">£29.99<span> /mo</span></div>
+        <ul><li>Everything in VIP</li><li>Free private chat</li><li>Monthly 1:1 video call</li><li>Custom content requests</li><li>20% off the shop</li></ul>
+        <button class="btn btn-o" onclick="openJoin()">Go Diamond</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="sec" id="exclusive">
+  <div class="wrap">
+    <div class="head"><div><span class="eyebrow">Exclusive content</span><h2>Categories.</h2><p>Tap any category to unlock with your membership.</p></div></div>
+    <div class="catrow">
+      <div class="catcard" onclick="unlock()"><div class="e">📸</div><div class="n">Premium Photos</div><div class="c">680 posts</div></div>
+      <div class="catcard" onclick="unlock()"><div class="e">🎬</div><div class="n">Premium Videos</div><div class="c">210 clips</div></div>
+      <div class="catcard" onclick="unlock()"><div class="e">🦶</div><div class="n">Feet</div><div class="c">140 posts</div></div>
+      <div class="catcard" onclick="unlock()"><div class="e">💅</div><div class="n">Hands</div><div class="c">96 posts</div></div>
+      <div class="catcard" onclick="unlock()"><div class="e">✨</div><div class="n">Behind the scenes</div><div class="c">320 posts</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PREMIUM PHOTOS GRID -->
+<section class="sec">
+  <div class="wrap">
+    <div class="head"><div><span class="eyebrow">Latest photos</span><h2>Premium gallery.</h2></div><button class="btn btn-o" onclick="openJoin()">Unlock all 680 →</button></div>
+    <div class="cgrid" id="photogrid"></div>
+  </div>
+</section>
+
+<!-- FEET & HANDS -->
+<section class="sec">
+  <div class="wrap">
+    <div class="head"><div><span class="eyebrow">Fan favourites</span><h2>Feet &amp; hands.</h2><p>A dedicated collection — unlock with VIP or buy individually.</p></div></div>
+    <div class="cgrid" id="feetgrid"></div>
+  </div>
+</section>
+
+<!-- VIDEOS -->
+<section class="sec">
+  <div class="wrap">
+    <div class="head"><div><span class="eyebrow">Watch</span><h2>Premium videos.</h2></div><button class="btn btn-o" onclick="openJoin()">Unlock all 210 →</button></div>
+    <div class="cgrid" id="videogrid"></div>
+  </div>
+</section>
+
+<!-- SHOP -->
+<section class="sec" id="shop">
+  <div class="wrap">
+    <div class="head"><div><span class="eyebrow">The wardrobe</span><h2>Shop my worn clothing.</h2><p>Authentic pieces I've worn — signed &amp; sealed. Discreet worldwide shipping.</p></div></div>
+    <div class="chips" id="shopchips"></div>
+    <div class="shop" id="shopgrid"></div>
+  </div>
+</section>
+
+<!-- PRIVATE SERVICES -->
+<section class="sec" id="private">
+  <div class="wrap">
+    <div class="head"><div><span class="eyebrow">Just for you</span><h2>Private &amp; personal.</h2></div></div>
+    <div class="svc">
+      <div class="scard"><div class="e">💬</div><h3>Private chat</h3><p>One-to-one DMs with me. Ask for what you want — I reply personally, no bots.</p><div class="pr">£3 / message · free on VIP+</div><button class="btn btn-p" onclick="openChat()">Start chatting</button></div>
+      <div class="scard"><div class="e">📹</div><h3>Private video call</h3><p>Book a live 1:1 video call. Pick your slot and it's just us for the session.</p><div class="pr">£8 / minute · book a slot</div><button class="btn btn-p" onclick="openBook('Private video call','£8/minute')">Book a call</button></div>
+      <div class="scard"><div class="e">🎁</div><h3>Custom requests</h3><p>Want something made just for you? Tell me the idea and I'll create a custom photo or video set.</p><div class="pr">from £40 · your idea</div><button class="btn btn-p" onclick="openBook('Custom request','from £40')">Request custom</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAT BANNER -->
+<section class="sec" id="chat">
+  <div class="wrap">
+    <div class="chatb">
+      <div>
+        <span class="lock-pill">💬 Direct message</span>
+        <h2 style="margin-top:12px">Talk to me directly.</h2>
+        <p>No middlemen. Message me for a chat, a custom, or just to say hi. VIP+ members message free — everyone else £3 a message.</p>
+      </div>
+      <button class="btn btn-p btn-lg" onclick="openChat()">Message Louise →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="fbar">
+      <a href="#top" class="logo"><span class="lg"><span>LT</span><img src="images/louise.jpg" alt="Louise" onerror="this.remove()"></span><div class="nm">Louise Thomson<span>VIP</span></div></a>
+      <span class="demo">✨ Demo example built by GroAI</span>
+    </div>
+    <p class="fnote">18+ only. All content on this site features consenting adults aged 18 or over. Purchases and subscriptions are billed discreetly and processed securely through the platform. Payments to creators are handled by Louise Thomson VIP — nothing is bought or sold off-platform. © 2026 Louise Thomson VIP. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- MODAL + TOAST -->
+<div class="modalbg" id="mbg" onclick="if(event.target===this)closeModal()"><div class="modal" id="mbox"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+  function toggleNav(){document.getElementById('navlinks').classList.toggle('show')}
+  function closeNav(){document.getElementById('navlinks').classList.remove('show')}
+  var _tt; function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(function(){t.classList.remove('show')},3400)}
+  function closeModal(){document.getElementById('mbg').classList.remove('show')}
+  function showModal(html){document.getElementById('mbox').innerHTML=html;document.getElementById('mbg').classList.add('show')}
+
+  var cart=0;
+  function addBag(name){cart++;document.getElementById('cc').textContent=cart;toast('🛍️ Added "'+name+'" to your bag');}
+  function unlock(){openJoin();}
+
+  function openJoin(){
+    showModal('<h3>Join Louise Thomson VIP</h3><p class="ms">Unlock every photo, video and gallery — and message me directly.</p>'+
+      '<label>Email</label><input id="v_email" placeholder="you@email.com">'+
+      '<label>Choose your plan</label><input id="v_plan" value="VIP — £14.99/mo" readonly>'+
+      '<label>Card number</label><input id="v_card" placeholder="•••• •••• •••• ••••">'+
+      '<div class="mrow"><button class="btn btn-o" onclick="closeModal()">Cancel</button><button class="btn btn-p" onclick="closeModal();toast(\'💎 Welcome to VIP — everything is unlocked!\')">Unlock for £14.99/mo</button></div>');
+  }
+  function openLogin(){
+    showModal('<h3>Member login</h3><p class="ms">Private members area — sign in to view your unlocked content.</p>'+
+      '<label>Email</label><input id="l_email" placeholder="you@email.com">'+
+      '<label>Password</label><input id="l_pass" type="password" placeholder="••••••••">'+
+      '<div class="mrow"><button class="btn btn-o" onclick="openJoin()">Not a member?</button><button class="btn btn-p" onclick="closeModal();toast(\'✔ Welcome back — your VIP content is unlocked.\')">Sign in</button></div>');
+  }
+  function openChat(){
+    showModal('<h3>Message Louise</h3><p class="ms">£3 per message · free for VIP+ Diamond members. I reply personally.</p>'+
+      '<label>Your message</label><input id="c_msg" placeholder="Say hi…">'+
+      '<div class="mrow"><button class="btn btn-o" onclick="closeModal()">Cancel</button><button class="btn btn-p" onclick="closeModal();toast(\'💬 Message sent to Louise — she\\\'ll reply soon.\')">Send (£3)</button></div>');
+  }
+  function openBook(t,p){
+    showModal('<h3>'+t+'</h3><p class="ms">'+p+'. Choose a time and I\'ll confirm.</p>'+
+      '<label>Preferred date</label><input id="b_date" type="date">'+
+      '<label>Email</label><input id="b_email" placeholder="you@email.com">'+
+      '<div class="mrow"><button class="btn btn-o" onclick="closeModal()">Cancel</button><button class="btn btn-p" onclick="closeModal();toast(\'✔ Request sent — Louise will confirm your booking.\')">Request</button></div>');
+  }
+
+  /* ---- PREMIUM PHOTO GRID (previews use real images, most locked) ---- */
+  var PHOTOS=[
+    {img:'images/v1.jpg',free:true},
+    {img:'images/v4.jpg',lock:'£8'},
+    {img:'images/v2.jpg',lock:'£6'},
+    {img:'images/c1.jpg',free:true},
+    {img:'images/v3.jpg',lock:'£6'},
+    {img:'images/louise.jpg',lock:'£8'},
+    {img:'images/c2.jpg',lock:'£6'},
+    {img:'images/v1.jpg',lock:'£10'},
+    {img:'images/c4.jpg',lock:'£6'},
+    {img:'images/v4.jpg',lock:'£8'},
+    {img:'images/v2.jpg',lock:'£6'},
+    {img:'images/c3.jpg',lock:'£8'}
+  ];
+  function renderPhotos(){
+    document.getElementById('photogrid').innerHTML=PHOTOS.map(function(p){
+      if(p.free) return '<div class="ctile" onclick="openJoin()"><img src="'+p.img+'" onerror="this.remove()"><span class="free">Free preview</span></div>';
+      return '<div class="ctile locked" onclick="unlock()"><img src="'+p.img+'" onerror="this.remove()"><div class="ov"><div class="ic">🔒</div><div class="t">VIP only</div></div><span class="price">'+p.lock+'</span></div>';
+    }).join('');
+  }
+  /* ---- FEET & HANDS (locked placeholders) ---- */
+  function renderFeet(){
+    var items=[['🦶','Feet','£5'],['💅','Hands','£5'],['🦶','Feet set','£9'],['💅','Hands set','£9'],['🦶','Feet','£5'],['💅','Hands','£5'],['🦶','Feet HD','£12'],['💅','Hands HD','£12']];
+    document.getElementById('feetgrid').innerHTML=items.map(function(i){
+      return '<div class="ctile locked" onclick="unlock()"><div class="ov"><div class="ic">'+i[0]+'</div><div class="t">'+i[1]+'</div><div class="c">🔒 Unlock</div></div><span class="price">'+i[2]+'</span></div>';
+    }).join('');
+  }
+  /* ---- VIDEOS (locked placeholders with duration) ---- */
+  function renderVideos(){
+    var vids=[['4:12','£9'],['8:40','£14'],['2:05','£6'],['12:30','£19']];
+    var imgs=['images/v1.jpg','images/v4.jpg','images/v2.jpg','images/v3.jpg'];
+    document.getElementById('videogrid').innerHTML=vids.map(function(v,i){
+      return '<div class="ctile locked" onclick="unlock()"><img src="'+imgs[i]+'" onerror="this.remove()"><div class="ov"><div class="ic">▶</div><div class="t">Premium video</div><div class="c">🔒 VIP</div></div><span class="dur">🎬 '+v[0]+'</span><span class="price">'+v[1]+'</span></div>';
+    }).join('');
+  }
+
+  /* ---- SHOP: worn clothing, categorised ---- */
+  // [name, category, worn, price£, img?]
+  var SHOP=[
+    ['Red lace mini dress','Dresses','Worn on a night out',120,'images/c1.jpg'],
+    ['Black lace dress','Dresses','Worn to dinner',110,'images/c2.jpg'],
+    ['Burgundy satin dress','Dresses','Worn once',95,'images/louise.jpg'],
+    ['The Unit gym jacket','Gym wear','Worn to train',85,'images/c3.jpg'],
+    ['White gym shorts','Gym wear','Worn to train',60,'images/c4.jpg'],
+    ['Grey sports bra','Gym wear','Worn — gym session',45,'images/c4.jpg'],
+    ['Black lace lingerie set','Lingerie','Worn',75,null],
+    ['Satin slip','Lingerie','Worn once',55,null],
+    ['Ankle socks (pair)','Socks & hosiery','Worn to the gym',35,null],
+    ['Sheer tights','Socks & hosiery','Worn on a night out',30,null],
+    ['Black heels','Shoes','Worn dancing',90,null],
+    ['White trainers','Shoes','Worn to train',70,null],
+    ['Signed polaroid','Accessories','Hand-signed',25,null],
+    ['Worn baseball cap','Accessories','Worn',30,null]
+  ];
+  var scat='All';
+  function renderShop(){
+    var list=SHOP.filter(function(p){return scat==='All'||p[1]===scat});
+    document.getElementById('shopgrid').innerHTML=list.map(function(p){
+      var media=p[4]?'<img src="'+p[4]+'" onerror="this.remove()">':'<div class="ph">👗</div>';
+      return '<div class="prod"><div class="im">'+media+'<span class="worn">'+p[2]+'</span></div>'+
+        '<div class="b"><div class="pn">'+p[0]+'</div><div class="pd">'+p[1]+'</div>'+
+        '<div class="pr"><span class="price">£'+p[3]+'</span><button onclick="addBag(\''+p[0].replace(/'/g,"")+'\')">Add to bag</button></div></div></div>';
+    }).join('');
+  }
+  function renderShopChips(){
+    var cats=['All','Dresses','Gym wear','Lingerie','Socks & hosiery','Shoes','Accessories'];
+    document.getElementById('shopchips').innerHTML=cats.map(function(c,i){
+      return '<button class="chip'+(i===0?' on':'')+'" onclick="setShop(this,\''+c+'\')">'+c+'</button>';
+    }).join('');
+  }
+  function setShop(el,c){scat=c;document.querySelectorAll('#shopchips .chip').forEach(function(x){x.classList.remove('on')});el.classList.add('on');renderShop();}
+
+  renderPhotos(); renderFeet(); renderVideos(); renderShopChips(); renderShop();
+</script>
+</body>
+</html>
