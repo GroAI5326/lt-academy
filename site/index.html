@@ -124,6 +124,11 @@
   .dcard .dp{font-size:13px;color:#fff;font-weight:700;margin-top:4px}
   .dcard .bk{margin-top:12px;display:block;width:100%;padding:9px;border-radius:10px;background:#fff;color:var(--ink);font-weight:800;font-size:13px;cursor:pointer;border:none}
   .dnote{margin-top:26px;font-size:14px;color:#c6c2e0;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:16px 20px}
+  .dhooks{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:30px}
+  .dhook{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:15px;padding:18px 12px;text-align:center}
+  .dhook .b{font-size:24px;font-weight:900;color:var(--gold);letter-spacing:-.5px}
+  .dhook .s{font-size:12px;color:#EAD9DF;margin-top:3px;font-weight:600;line-height:1.3}
+  @media(max-width:860px){.dhooks{grid-template-columns:1fr 1fr}}
 
   /* BROWSE DIRECTORY */
   .chips{display:flex;gap:9px;flex-wrap:wrap;margin-top:26px}
@@ -393,13 +398,19 @@
       <div class="center" style="max-width:660px">
         <span class="eyebrow">The creator directory</span>
         <h2>Get discovered. Get booked.</h2>
-        <p class="lead">Graduate creators list a profile in the academy directory. Brands and clients book them directly — securely, through the platform. You keep 100% of what you earn.</p>
+        <p class="lead">List your profile, get booked by brands and clients directly, and <b style="color:#fff">keep 100% of everything you earn</b>. Just £60/month — that's it.</p>
       </div>
-      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:34px">
+      <div class="dhooks">
+        <div class="dhook"><div class="b">0%</div><div class="s">commission — keep it all</div></div>
+        <div class="dhook"><div class="b">No</div><div class="s">contract, ever</div></div>
+        <div class="dhook"><div class="b">No</div><div class="s">upfront fee</div></div>
+        <div class="dhook"><div class="b">Cancel</div><div class="s">anytime</div></div>
+      </div>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:26px">
         <a class="btn btn-lg btn-w" href="#browse">Browse the creators ↓</a>
         <button class="btn btn-lg btn-g" onclick="openJoin()">Join the directory — £60/mo</button>
       </div>
-      <div class="dnote">💡 <b>How it works:</b> creators pay a flat <b>£60/month</b> to be listed and keep every penny they earn from bookings. Clients book direct, but pay securely through Louise Thomson Academy — simple, safe, and trusted.</div>
+      <div class="dnote">💡 <b>Why creators love it:</b> most platforms take 20–50% and tie you into contracts. We take <b>0% commission</b> — you keep every single penny. Just a flat <b>£60/month</b> to stay listed. No upfront fee, no contract, cancel anytime.</div>
     </div>
   </div>
 </section>
@@ -419,7 +430,7 @@
     <div class="joincard">
       <div>
         <h3 style="font-size:23px">Are you a creator? Get listed.</h3>
-        <p style="color:var(--mut);font-size:15px;margin-top:6px;max-width:460px">List your profile for a flat <b>£60/month</b>. Clients book you directly and you keep <b>100%</b> of your fee. Set up in two minutes.</p>
+        <p style="color:var(--mut);font-size:15px;margin-top:6px;max-width:480px">Just <b>£60/month</b> to be listed. <b>0% commission</b>, no contract, no upfront fee, cancel anytime — you keep <b>100%</b> of every booking. Set up in two minutes.</p>
       </div>
       <button class="btn btn-lg btn-p" onclick="openJoin()">Join the directory →</button>
     </div>
@@ -593,7 +604,7 @@
       <div class="qa"><button onclick="tq(this)">Do I need a following already? <span class="ic">+</span></button><div class="ans"><p>No. Most students start from zero or a few hundred followers. The first modules are built exactly for that — the growth system does the heavy lifting.</p></div></div>
       <div class="qa"><button onclick="tq(this)">How long until I see results? <span class="ic">+</span></button><div class="ans"><p>It depends on the effort you put in, but most students see meaningful growth within 4–6 weeks of applying the growth module, and first income within a couple of months.</p></div></div>
       <div class="qa"><button onclick="tq(this)">Is it a one-off payment or a subscription? <span class="ic">+</span></button><div class="ans"><p>Both options exist. Buy the course outright (with lifetime access) or spread it over monthly instalments. There are also rolling monthly memberships from £80/mo.</p></div></div>
-      <div class="qa"><button onclick="tq(this)">What's the creator directory? <span class="ic">+</span></button><div class="ans"><p>Once you've graduated, you can list a profile in our directory for £60/month. Brands and clients book you directly and pay securely through the academy — you keep 100% of your fee.</p></div></div>
+      <div class="qa"><button onclick="tq(this)">What's the creator directory? <span class="ic">+</span></button><div class="ans"><p>You can list a profile in our directory for a flat £60/month. Brands and clients book you directly and you keep 100% of your fee — we take 0% commission. No contract, no upfront fee, cancel anytime.</p></div></div>
       <div class="qa"><button onclick="tq(this)">Is there a guarantee? <span class="ic">+</span></button><div class="ans"><p>Yes — a 14-day money-back guarantee. Go through the first modules, and if it's not for you, we'll refund you. No hard feelings.</p></div></div>
     </div>
   </div>
@@ -712,7 +723,7 @@
   function openJoin(){
     document.getElementById('mbox').innerHTML=
       '<h3>Join the creator directory</h3>'+
-      '<p class="ms">£60/month. Keep 100% of every booking. Cancel anytime.</p>'+
+      '<p class="ms">£60/month · 0% commission · no contract · no upfront fee · cancel anytime. You keep 100% of every booking.</p>'+
       '<label>Name / handle</label><input id="j_name" placeholder="e.g. Ella Rose">'+
       '<label>What you do</label><input id="j_niche" placeholder="e.g. Travel content & UGC">'+
       '<label>Rate per session (£)</label><input id="j_rate" type="number" value="150">'+
