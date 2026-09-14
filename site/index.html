@@ -148,6 +148,8 @@
   .t-mint{background:var(--mintsoft);color:var(--mint)} .t-amber{background:var(--ambersoft);color:#8A6A2E} .t-v{background:var(--vsoft);color:var(--v)}
   .bcard .bk{margin-top:13px;width:100%;padding:9px;border-radius:10px;background:linear-gradient(135deg,var(--v),var(--v2));color:#fff;font-weight:800;font-size:13px;cursor:pointer;border:none}
   .bcard .bk:hover{opacity:.92}
+  .bcard .bk2{margin-top:7px;width:100%;padding:8px;border-radius:10px;background:#fff;color:var(--v);font-weight:800;font-size:12.5px;cursor:pointer;border:1px solid var(--line)}
+  .bcard .bk2:hover{border-color:var(--v)}
   .joincard{margin-top:28px;background:linear-gradient(120deg,var(--vsoft),var(--pinksoft));border:1px solid var(--line);border-radius:20px;padding:30px 34px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
   /* MODAL + TOAST */
   .modalbg{position:fixed;inset:0;background:rgba(20,17,38,.55);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:100;padding:20px}
@@ -159,6 +161,29 @@
   .modal input{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:11px;font-size:14px;font-family:inherit}
   .modal input:focus{outline:none;border-color:var(--v)}
   .modal .mrow{display:flex;gap:12px;justify-content:flex-end;margin-top:24px}
+  .modal.wide{max-width:640px;max-height:90vh;overflow:auto}
+  .modal textarea,.modal select{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:11px;font-size:14px;font-family:inherit;background:#fff}
+  .modal textarea{min-height:70px;resize:vertical}
+  .modal .grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+  .modal .up{border:1.5px dashed var(--line);border-radius:12px;padding:16px;text-align:center;color:var(--mut);font-size:13px;cursor:pointer;background:var(--soft)}
+  /* profile view */
+  .pv-head{display:flex;gap:16px;align-items:center;margin-bottom:14px}
+  .pv-av{width:72px;height:72px;border-radius:50%;overflow:hidden;position:relative;flex:none;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:26px}
+  .pv-av img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .pv-head h3{font-size:21px;margin:0}
+  .pv-head .vf{color:var(--v);font-weight:700;font-size:12.5px}
+  .pv-head .loc{color:var(--mut);font-size:13px;margin-top:2px}
+  .pv-gal{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+  .pv-gal .g{aspect-ratio:1;border-radius:12px;overflow:hidden;position:relative;background:linear-gradient(150deg,var(--vsoft),var(--pinksoft))}
+  .pv-gal .g img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%}
+  .pv-gal .g.vid:after{content:"▶";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:22px;background:rgba(20,16,25,.35)}
+  .pv-info{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+  .pv-info .b{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:11px 13px}
+  .pv-info .b .l{font-size:11px;color:var(--mut);font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+  .pv-info .b .v{font-size:14px;font-weight:700;color:var(--tx);margin-top:2px}
+  .pv-bio{font-size:14px;color:#4b3540;line-height:1.55;margin:10px 0}
+  .pv-soc a{display:inline-block;background:var(--soft);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:12.5px;font-weight:700;margin:0 6px 6px 0;color:var(--tx)}
+  @media(max-width:640px){.modal .grid2,.pv-info,.pv-gal{grid-template-columns:1fr 1fr}}
   .toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(140px);background:var(--ink);color:#fff;padding:14px 22px;border-radius:12px;font-weight:700;font-size:14px;z-index:110;transition:transform .3s;box-shadow:0 14px 40px rgba(0,0,0,.3);max-width:90vw;text-align:center}
   .toast.show{transform:translateX(-50%) translateY(0)}
 
@@ -673,43 +698,46 @@
   }
 
   /* ===== CREATOR DIRECTORY ===== */
-  // [name, niche, category, rating, rate£, tag, photo?]
-  var DIR=[
-    ['Mia K.','Beauty & UGC','Beauty',4.8,180,'Top rated','c1.jpg'],
-    ['Jordan T.','Fitness coaching','Fitness',4.9,200,'Available','c3.jpg'],
-    ['Amara L.','Fashion styling','Fashion',4.7,150,'Available','c2.jpg'],
-    ['Sofia R.','Food & recipes','Food',4.8,160,'Busy'],
-    ['Kai N.','Tech reviews','Tech',4.6,140,'Available'],
-    ['Ella R.','Travel content','Travel',4.9,190,'Top rated'],
-    ['Priya S.','Wellness & yoga','Wellness',4.8,170,'Available','c4.jpg'],
-    ['Leo M.','Finance & investing','Finance',4.7,220,'Busy'],
-    ['Ruby F.','Makeup artistry','Beauty',4.7,145,'Available'],
-    ['Theo K.','Strength coaching','Fitness',4.8,185,'Top rated'],
-    ['Isla C.','Sustainable fashion','Fashion',4.6,135,'Available'],
-    ['Marcus D.','Investing & stocks','Finance',4.9,250,'Available'],
-    ['Chloe B.','Baking & desserts','Food',4.7,150,'Available'],
-    ['Nina P.','Solo travel','Travel',4.8,175,'Available'],
-    ['Oscar L.','AI & gadgets','Tech',4.6,160,'Available'],
-    ['Freya M.','Skincare science','Beauty',4.9,210,'Top rated'],
-    ['Sam R.','Home workouts','Fitness',4.5,125,'Busy'],
-    ['Aisha K.','Mindfulness','Wellness',4.8,165,'Available'],
-    ['Noah B.','Gaming & streams','Tech',4.5,130,'Available'],
-    ['Zara H.','Parenting & family','Wellness',4.6,120,'Available']
-  ];
   var PAL=['#7B1E3A','#D24E74','#2FA98A','#C9A15A','#B76E79'];
+  var POOL=['p1.jpg','p3.jpg','p4.jpg','v1.jpg','v2.jpg','v3.jpg','v4.jpg','q1.jpg','q4.jpg'];
+  // full creator profiles
+  var DIR=[
+    {n:'Mia K.',niche:'Beauty & UGC',cat:'Beauty',rating:4.8,rate:180,tag:'Top rated',photo:'c1.jpg',loc:'London',travel:'London · South East · will travel UK for shoots',bio:'Beauty & UGC creator making scroll-stopping content for skincare and makeup brands. 4 years on camera, 300+ branded videos delivered.',ig:'@miak',tt:'@miak.creates',gallery:['c1.jpg','v2.jpg','q4.jpg'],vids:4},
+    {n:'Jordan T.',niche:'Fitness coaching',cat:'Fitness',rating:4.9,rate:200,tag:'Available',photo:'c3.jpg',loc:'Manchester',travel:'Manchester · North West · remote coaching worldwide',bio:'PT and fitness creator. I make training content that actually converts followers into gym members and clients.',ig:'@jordantrains',tt:'@jordantrains',gallery:['c3.jpg','c4.jpg','v1.jpg'],vids:3},
+    {n:'Amara L.',niche:'Fashion styling',cat:'Fashion',rating:4.7,rate:150,tag:'Available',photo:'c2.jpg',loc:'London',travel:'London · anywhere for the right brand',bio:'Fashion stylist & content creator. Lookbooks, hauls, get-ready-with-me and campaign content for fashion labels.',ig:'@amarastyles',tt:'@amara.styles',gallery:['c2.jpg','p3.jpg','q1.jpg'],vids:5},
+    {n:'Priya S.',niche:'Wellness & yoga',cat:'Wellness',rating:4.8,rate:170,tag:'Available',photo:'c4.jpg',loc:'Bristol',travel:'Bristol · South West · retreats worldwide',bio:'Yoga teacher & wellness creator. Calm, aesthetic content for wellness, supplement and activewear brands.',ig:'@priyawell',tt:'@priya.wellness',gallery:['c4.jpg','v3.jpg','v4.jpg'],vids:2},
+    {n:'Sofia R.',niche:'Food & recipes',cat:'Food',rating:4.8,rate:160,tag:'Busy',loc:'Leeds',travel:'Leeds · Yorkshire',bio:'Recipe developer & food creator. Fast, beautiful food videos that make people screenshot and save.',ig:'@sofiacooks',tt:'@sofiacooks'},
+    {n:'Kai N.',niche:'Tech reviews',cat:'Tech',rating:4.6,rate:140,tag:'Available',loc:'London',travel:'London · remote',bio:'Tech reviewer & gadget creator. Clean, honest reviews and unboxings for tech and lifestyle brands.',ig:'@kaitech',tt:'@kai.tech'},
+    {n:'Ella R.',niche:'Travel content',cat:'Travel',rating:4.9,rate:190,tag:'Top rated',loc:'Remote',travel:'Anywhere — full-time travel',bio:'Travel creator documenting hotels, destinations and experiences. Perfect for tourism boards and hospitality brands.',ig:'@ellaroams',tt:'@ellaroams'},
+    {n:'Leo M.',niche:'Finance & investing',cat:'Finance',rating:4.7,rate:220,tag:'Busy',loc:'London',travel:'London · remote',bio:'Finance creator making money simple. Explainers and brand content for fintech and money apps.',ig:'@leomoney',tt:'@leo.money'},
+    {n:'Ruby F.',niche:'Makeup artistry',cat:'Beauty',rating:4.7,rate:145,tag:'Available',loc:'Birmingham',travel:'Birmingham · Midlands · UK travel',bio:'MUA & beauty creator. Tutorials, transformations and product-focused content that sells.',ig:'@rubyfaces',tt:'@rubyfaces'},
+    {n:'Theo K.',niche:'Strength coaching',cat:'Fitness',rating:4.8,rate:185,tag:'Top rated',loc:'Glasgow',travel:'Glasgow · Scotland · remote',bio:'Strength coach & creator. High-energy training content and programmes for fitness brands.',ig:'@theolifts',tt:'@theolifts'},
+    {n:'Isla C.',niche:'Sustainable fashion',cat:'Fashion',rating:4.6,rate:135,tag:'Available',loc:'Brighton',travel:'Brighton · South East',bio:'Sustainable fashion creator. Thrift, styling and conscious-brand content for a values-led audience.',ig:'@islawears',tt:'@islawears'},
+    {n:'Marcus D.',niche:'Investing & stocks',cat:'Finance',rating:4.9,rate:250,tag:'Available',loc:'London',travel:'London · remote',bio:'Investing creator breaking down markets. Trusted brand content for finance and trading platforms.',ig:'@marcusinvests',tt:'@marcusinvests'},
+    {n:'Chloe B.',niche:'Baking & desserts',cat:'Food',rating:4.7,rate:150,tag:'Available',loc:'Cardiff',travel:'Cardiff · Wales · UK',bio:'Baker & food creator. Satisfying dessert content for food, kitchenware and grocery brands.',ig:'@chloebakes',tt:'@chloebakes'},
+    {n:'Nina P.',niche:'Solo travel',cat:'Travel',rating:4.8,rate:175,tag:'Available',loc:'Remote',travel:'Anywhere — solo travel creator',bio:'Solo female travel creator. Aspirational, safe-travel content for tourism and lifestyle brands.',ig:'@ninaroams',tt:'@ninaroams'},
+    {n:'Oscar L.',niche:'AI & gadgets',cat:'Tech',rating:4.6,rate:160,tag:'Available',loc:'London',travel:'London · remote',bio:'AI & gadget creator. Explainers and demos that make new tech make sense.',ig:'@oscarai',tt:'@oscar.ai'},
+    {n:'Freya M.',niche:'Skincare science',cat:'Beauty',rating:4.9,rate:210,tag:'Top rated',loc:'London',travel:'London · UK · will travel',bio:'Skincare creator with a science lean. Trusted, research-backed content for skincare brands.',ig:'@freyaskin',tt:'@freya.skin'},
+    {n:'Sam R.',niche:'Home workouts',cat:'Fitness',rating:4.5,rate:125,tag:'Busy',loc:'Liverpool',travel:'Liverpool · North West · remote',bio:'Home-workout creator. No-equipment training content for fitness apps and activewear.',ig:'@samsweats',tt:'@samsweats'},
+    {n:'Aisha K.',niche:'Mindfulness',cat:'Wellness',rating:4.8,rate:165,tag:'Available',loc:'London',travel:'London · retreats',bio:'Mindfulness & meditation creator. Calming content for wellness, sleep and self-care brands.',ig:'@aishacalm',tt:'@aishacalm'},
+    {n:'Noah B.',niche:'Gaming & streams',cat:'Tech',rating:4.5,rate:130,tag:'Available',loc:'Nottingham',travel:'Nottingham · remote',bio:'Gaming creator & streamer. Energetic content and integrations for gaming and tech brands.',ig:'@noahplays',tt:'@noahplays'},
+    {n:'Zara H.',niche:'Parenting & family',cat:'Wellness',rating:4.6,rate:120,tag:'Available',loc:'Sheffield',travel:'Sheffield · Yorkshire · UK',bio:'Parenting creator. Relatable family content for baby, home and family brands.',ig:'@zarafamily',tt:'@zarafamily'}
+  ];
   var dcat='All';
+  function initials(n){return n.replace(/[^A-Za-z ].*/,'').trim().split(' ').map(function(w){return w[0]}).join('').slice(0,2);}
   function renderDir(){
     var el=document.getElementById('dgrid');
-    var list=DIR.filter(function(c){return dcat==='All'||c[2]===dcat});
-    el.innerHTML=list.map(function(c,i){
-      var col=PAL[i%PAL.length];
-      var t=c[5]==='Top rated'?'t-v':(c[5]==='Busy'?'t-amber':'t-mint');
-      var ph=c[6]?'<img src="images/'+c[6]+'" alt="" onerror="this.remove()">':'';
-      return '<div class="bcard"><div class="av" style="background:'+col+'"><span>'+c[0][0]+'</span>'+ph+'</div>'+
-        '<div class="dn">'+c[0]+'</div><div class="di">'+c[1]+'</div>'+
-        '<div class="meta"><span class="rt">★ '+c[3]+'</span><span class="pr">£'+c[4]+'/session</span></div>'+
-        '<div><span class="tag '+t+'">'+c[5]+'</span></div>'+
-        '<button class="bk" onclick="bookC(\''+c[0].replace(/'/g,"")+'\')">Book '+c[0].split(' ')[0]+'</button></div>';
+    var list=DIR.filter(function(c){return dcat==='All'||c.cat===dcat});
+    el.innerHTML=list.map(function(c){
+      var i=DIR.indexOf(c), col=PAL[i%PAL.length];
+      var t=c.tag==='Top rated'?'t-v':(c.tag==='Busy'?'t-amber':'t-mint');
+      var ph=c.photo?'<img src="images/'+c.photo+'" alt="" onerror="this.remove()">':'';
+      return '<div class="bcard"><div class="av" style="background:'+col+'"><span>'+initials(c.n)+'</span>'+ph+'</div>'+
+        '<div class="dn">'+c.n+'</div><div class="di">'+c.niche+'</div>'+
+        '<div class="meta"><span class="rt">★ '+c.rating+'</span><span class="pr">£'+c.rate+'/session</span></div>'+
+        '<div><span class="tag '+t+'">'+c.tag+'</span></div>'+
+        '<button class="bk" onclick="openProfile('+i+')">View profile</button>'+
+        '<button class="bk2" onclick="enquire('+i+')">Enquire</button></div>';
     }).join('');
   }
   function renderChips(){
@@ -719,29 +747,76 @@
     }).join('');
   }
   function setCat(el,cat){dcat=cat;document.querySelectorAll('.chip2').forEach(function(x){x.classList.remove('on')});el.classList.add('on');renderDir();}
-  function bookC(n){toast('✓ In the live platform this books '+n+' directly — paid securely through the academy.');}
-  function openJoin(){
+
+  /* ---- full profile view ---- */
+  function openProfile(i){
+    var c=DIR[i], col=PAL[i%PAL.length];
+    var av=c.photo?'<img src="images/'+c.photo+'">':'<span>'+initials(c.n)+'</span>';
+    var gal=c.gallery||[POOL[i%POOL.length],POOL[(i+3)%POOL.length]];
+    var g='';
+    for(var k=0;k<3;k++){ var im=gal[k]; g+='<div class="g'+(k===2?' vid':'')+'">'+(im?'<img src="images/'+im+'" onerror="this.remove()">':'')+'</div>'; }
+    var rate=c.rate?'£'+c.rate+' / session':'On enquiry';
+    document.getElementById('mbox').className='modal wide';
     document.getElementById('mbox').innerHTML=
-      '<h3>Join the creator directory</h3>'+
-      '<p class="ms">£60/month · 0% commission · no contract · no upfront fee · cancel anytime. You keep 100% of every booking.</p>'+
-      '<label>Name / handle</label><input id="j_name" placeholder="e.g. Ella Rose">'+
+      '<div class="pv-head"><div class="pv-av" style="background:'+col+'">'+av+'</div>'+
+        '<div><h3>'+c.n+'</h3><div class="vf">✔ Verified · ★ '+c.rating+' · '+c.niche+'</div><div class="loc">📍 '+c.loc+'</div></div></div>'+
+      '<div class="pv-gal">'+g+'</div>'+
+      '<div class="pv-info">'+
+        '<div class="b"><div class="l">Rate</div><div class="v">'+rate+'</div></div>'+
+        '<div class="b"><div class="l">Videos</div><div class="v">'+(c.vids||'—')+' clips</div></div>'+
+        '<div class="b" style="grid-column:1/3"><div class="l">Areas / travel</div><div class="v">'+c.travel+'</div></div>'+
+      '</div>'+
+      '<div class="pv-bio">'+c.bio+'</div>'+
+      '<div class="pv-soc"><a>📸 IG '+c.ig+'</a><a>🎵 TikTok '+c.tt+'</a></div>'+
+      '<div class="mrow"><button class="btn btn-o" onclick="closeModal()">Close</button><button class="btn btn-p" onclick="enquire('+i+')">Enquire — book '+c.n.split(' ')[0]+'</button></div>';
+    document.getElementById('mbg').classList.add('show');
+  }
+  /* ---- enquiry goes direct to the creator through the platform ---- */
+  function enquire(i){
+    var c=DIR[i];
+    document.getElementById('mbox').className='modal';
+    document.getElementById('mbox').innerHTML=
+      '<h3>Enquire — '+c.n+'</h3>'+
+      '<p class="ms">Your enquiry goes <b>straight to '+c.n+'</b> through the platform. They reply and book you in directly — you\'re never passed around.</p>'+
+      '<label>What do you need?</label><textarea id="e_msg" placeholder="e.g. a UGC video for our new product launch in June"></textarea>'+
+      '<div class="grid2"><div><label>Preferred date</label><input id="e_date" type="date"></div><div><label>Budget (optional)</label><input id="e_budget" placeholder="£"></div></div>'+
+      '<label>Your email</label><input id="e_email" placeholder="you@email.com">'+
+      '<div class="mrow"><button class="btn btn-o" onclick="closeModal()">Cancel</button><button class="btn btn-p" onclick="closeModal();toast(\'✓ Enquiry sent straight to '+c.n.replace(/'/g,"")+' — they\\\'ll reply to you directly.\')">Send enquiry</button></div>';
+    document.getElementById('mbg').classList.add('show');
+  }
+
+  /* ---- build your profile (signup) ---- */
+  function openJoin(){
+    document.getElementById('mbox').className='modal wide';
+    document.getElementById('mbox').innerHTML=
+      '<h3>Build your creator profile</h3>'+
+      '<p class="ms">£60/month · 0% commission · no contract · cancel anytime. Enquiries come <b>straight to you</b> — you keep 100%.</p>'+
+      '<div class="grid2"><div><label>Name / handle</label><input id="j_name" placeholder="e.g. Ella Rose"></div><div><label>Category</label><select id="j_cat"><option>Beauty</option><option>Fitness</option><option>Fashion</option><option>Food</option><option>Tech</option><option>Travel</option><option>Wellness</option><option>Finance</option></select></div></div>'+
       '<label>What you do</label><input id="j_niche" placeholder="e.g. Travel content & UGC">'+
-      '<label>Rate per session (£)</label><input id="j_rate" type="number" value="150">'+
-      '<label>Email</label><input id="j_email" placeholder="you@email.com">'+
-      '<div class="mrow"><button class="btn btn-o" onclick="closeModal()">Cancel</button><button class="btn btn-p" onclick="submitJoin()">Join for £60/mo</button></div>';
+      '<div class="grid2"><div><label>Location</label><input id="j_loc" placeholder="e.g. London"></div><div><label>Rate per session (£) — optional</label><input id="j_rate" type="number" placeholder="leave blank to discuss"></div></div>'+
+      '<label>Areas you\'ll travel to</label><input id="j_travel" placeholder="e.g. London · South East · will travel UK">'+
+      '<label>Your bio</label><textarea id="j_bio" placeholder="A few lines clients will see — what you do, who for, your experience"></textarea>'+
+      '<div class="grid2"><div><label>Instagram</label><input id="j_ig" placeholder="@yourhandle"></div><div><label>TikTok</label><input id="j_tt" placeholder="@yourhandle"></div></div>'+
+      '<label>Photos</label><div class="up" onclick="toast(\'📷 In the live platform you upload your photos here.\')">📷 Tap to upload photos (up to 10)</div>'+
+      '<label>Videos</label><div class="up" onclick="toast(\'🎬 In the live platform you upload or link your videos here.\')">🎬 Tap to add videos or links</div>'+
+      '<label>Email (for enquiries)</label><input id="j_email" placeholder="you@email.com">'+
+      '<div class="mrow"><button class="btn btn-o" onclick="closeModal()">Cancel</button><button class="btn btn-p" onclick="submitJoin()">Publish my profile — £60/mo</button></div>';
     document.getElementById('mbg').classList.add('show');
   }
   function closeModal(){document.getElementById('mbg').classList.remove('show');}
+  function gv(id){var e=document.getElementById(id);return e?(e.value||'').trim():'';}
   function submitJoin(){
-    var n=(document.getElementById('j_name').value||'').trim()||'New Creator';
-    var ni=(document.getElementById('j_niche').value||'').trim()||'Creator';
-    var r=parseInt(document.getElementById('j_rate').value)||150;
-    DIR.unshift([n,ni,'All',5.0,r,'New']);
-    var c=document.getElementById('dcount'); c.textContent=(parseInt(c.textContent.replace(/\D/g,''))+1);
+    var n=gv('j_name')||'New Creator';
+    var c={n:n,niche:gv('j_niche')||'Creator',cat:gv('j_cat')||'Beauty',rating:5.0,rate:parseInt(gv('j_rate'))||0,tag:'New',
+      loc:gv('j_loc')||'UK',travel:gv('j_travel')||'Ask me',bio:gv('j_bio')||'New to the directory — get in touch!',
+      ig:gv('j_ig')||'@'+n.toLowerCase().replace(/[^a-z]/g,''),tt:gv('j_tt')||'@'+n.toLowerCase().replace(/[^a-z]/g,'')};
+    DIR.unshift(c);
+    var d=document.getElementById('dcount'); d.textContent=(parseInt(d.textContent.replace(/\D/g,''))+1);
     dcat='All'; document.querySelectorAll('.chip2').forEach(function(x,i){x.classList.toggle('on',i===0)});
     renderDir(); closeModal();
-    toast('✓ '+n+' added to the directory — you\'re now listed & bookable!');
+    toast('✓ '+n+' — your profile is live! You\'re now listed & taking enquiries.');
     document.getElementById('browse').scrollIntoView({behavior:'smooth'});
+    setTimeout(function(){openProfile(0)},600);
   }
   var _tt;
   function toast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(function(){t.classList.remove('show')},3400);}
