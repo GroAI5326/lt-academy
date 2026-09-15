@@ -101,6 +101,24 @@
   .mod p{font-size:14px;color:var(--mut)}
   .mod .meta{font-size:12.5px;color:var(--v);font-weight:700;margin-top:12px}
 
+  /* TikTok masterclass module cards */
+  .ttbar{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:26px}
+  .ttbar span{background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:13px;font-weight:700;color:var(--tx)}
+  .ttbar span b{color:var(--v)}
+  .ttgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
+  .ttcard{background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px 24px;transition:.18s;display:flex;flex-direction:column}
+  .ttcard:hover{box-shadow:var(--shadow);transform:translateY(-3px);border-color:transparent}
+  .ttcard .tthead{display:flex;align-items:center;gap:13px;margin-bottom:12px}
+  .ttcard .ttic{width:48px;height:48px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:23px;flex:none}
+  .ttcard .ttnum{font-size:12px;font-weight:800;letter-spacing:1.5px;color:var(--amber);text-transform:uppercase}
+  .ttcard h3{font-size:18px;margin:2px 0 0;line-height:1.2}
+  .ttcard .ttsub{font-size:13.5px;color:var(--mut);margin:0 0 15px;line-height:1.5}
+  .ttcard .ttlist{list-style:none;display:grid;gap:9px;margin:0;padding:0}
+  .ttcard .ttlist li{font-size:13.5px;color:var(--tx);padding-left:24px;position:relative;line-height:1.4}
+  .ttcard .ttlist li:before{content:"✓";position:absolute;left:0;top:0;color:var(--mint);font-weight:900;font-size:13px}
+  .ttcard .ttmeta{margin-top:auto;padding-top:16px;font-size:11.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--v)}
+  .ttcard .ttmeta span{background:var(--vsoft);padding:5px 11px;border-radius:999px}
+
   /* HOW */
   .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:46px}
   .step{position:relative;padding:30px 26px;background:var(--soft);border-radius:18px}
@@ -274,7 +292,7 @@
   @media(max-width:960px){
     .hgrid,.lgrid{grid-template-columns:1fr;gap:36px}
     .hvis{height:400px;max-width:440px;margin:0 auto}
-    .modgrid,.tgrid,.pgrid{grid-template-columns:1fr 1fr}
+    .modgrid,.tgrid,.ttgrid,.pgrid{grid-template-columns:1fr 1fr}
     .dcards,.bgrid{grid-template-columns:1fr 1fr}
     .fgrid{grid-template-columns:1fr 1fr}
     .rgrid{grid-template-columns:1fr}
@@ -292,7 +310,7 @@
     .sec{padding:60px 0}
     .sec h2,.ltext h2,.ctaband h2{font-size:30px}
     .statrow{grid-template-columns:1fr 1fr;gap:26px}
-    .modgrid,.steps,.tgrid,.pgrid,.dcards,.fgrid{grid-template-columns:1fr}
+    .modgrid,.steps,.tgrid,.ttgrid,.pgrid,.dcards,.fgrid{grid-template-columns:1fr}
     .bgrid{grid-template-columns:1fr 1fr;gap:12px}
     .rtiles{grid-template-columns:1fr 1fr}
     .joincard{flex-direction:column;text-align:center;padding:26px 22px}
@@ -311,6 +329,7 @@
     <a href="#top" class="logo"><span class="lg"><span class="lgtx">LT</span><img src="images/louise.jpg" alt="Louise" onerror="this.remove()"></span><div class="nm">Louise Thomson<span>ACADEMY</span></div></a>
     <nav class="navlinks" id="navlinks">
       <a href="#curriculum" onclick="closeNav()">Curriculum</a>
+      <a href="#tiktok" onclick="closeNav()">TikTok</a>
       <a href="#directory" onclick="closeNav()">Creators</a>
       <a href="#success" onclick="closeNav()">Success</a>
       <a href="#pricing" onclick="closeNav()">Pricing</a>
@@ -397,6 +416,208 @@
       <div class="mod"><div class="ic" style="background:var(--mintsoft);color:var(--mint)">💸</div><h3>Multiple Income Streams</h3><p>Memberships, products, affiliates — stop relying on one payday.</p><div class="meta">10 lessons</div></div>
       <div class="mod"><div class="ic" style="background:var(--ambersoft);color:#8A6A2E">🧠</div><h3>Mindset & Consistency</h3><p>The systems that keep you posting when motivation runs out.</p><div class="meta">6 lessons</div></div>
       <div class="mod"><div class="ic" style="background:var(--vsoft);color:var(--v)">🔁</div><h3>Repurpose & Scale</h3><p>One idea, ten platforms. Do less, reach more.</p><div class="meta">9 lessons</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TIKTOK MASTERCLASS -->
+<section class="sec" id="tiktok" style="background:var(--soft)">
+  <div class="wrap">
+    <div class="center" style="max-width:680px">
+      <span class="eyebrow">The TikTok masterclass</span>
+      <h2>Start on TikTok. Go viral. Get paid.</h2>
+      <p class="lead">This is the exact system I used to hit 18.3M views on one TikTok Shop post. Everything about TikTok — start to sold-out — broken into modules, with every lesson spelled out. Nothing left to guess.</p>
+      <div class="ttbar">
+        <span><b>13</b> modules</span>
+        <span><b>100+</b> lessons</span>
+        <span>Shop <b>+</b> LIVE <b>+</b> Brand deals</span>
+        <span>From <b>£0</b> to your first payout</span>
+      </div>
+    </div>
+    <div class="ttgrid">
+
+      <div class="ttcard">
+        <div class="tthead"><div class="ttic" style="background:var(--vsoft);color:var(--v)">🚀</div><div><div class="ttnum">Module 01</div><h3>Set Up TikTok the Right Way</h3></div></div>
+        <p class="ttsub">Get the boring bits perfect on day one so the algorithm trusts you from your very first post.</p>
+        <ul class="ttlist">
+          <li>Creator vs Business account — which to pick and why</li>
+          <li>A profile that gets follows: name, handle, photo, bio</li>
+          <li>Adding your links (and when the link in bio unlocks)</li>
+          <li>Choosing your niche and 3 content pillars</li>
+          <li>Warming up a brand-new account so it doesn't flop</li>
+          <li>Switching on analytics and what to watch</li>
+        </ul>
+        <div class="ttmeta"><span>8 LESSONS</span></div>
+      </div>
+
+      <div class="ttcard">
+        <div class="tthead"><div class="ttic" style="background:var(--pinksoft);color:var(--pink)">🧠</div><div><div class="ttnum">Module 02</div><h3>How the For You Page Works</h3></div></div>
+        <p class="ttsub">Stop guessing. Once you know what TikTok actually rewards, you make videos that spread.</p>
+        <ul class="ttlist">
+          <li>What the algorithm really measures — watch time, completion, shares, saves</li>
+          <li>Why views matter more than likes</li>
+          <li>How TikTok tests every video on a small batch first</li>
+          <li>Re-watches, replays and the loop trick</li>
+          <li>Why your first videos flop — and why that's normal</li>
+          <li>Reading a video's performance and reacting fast</li>
+        </ul>
+        <div class="ttmeta"><span>7 LESSONS</span></div>
+      </div>
+
+      <div class="ttcard">
+        <div class="tthead"><div class="ttic" style="background:var(--mintsoft);color:var(--mint)">🎣</div><div><div class="ttnum">Module 03</div><h3>Hooks That Stop the Scroll</h3></div></div>
+        <p class="ttsub">You have 3 seconds. This module is how you win them, every single time.</p>
+        <ul class="ttlist">
+          <li>The first 3 seconds — the only thing that matters</li>
+          <li>10 hook formulas you can steal today</li>
+          <li>Visual hooks vs spoken hooks vs text hooks</li>
+          <li>Pattern interrupts that keep people watching</li>
+          <li>Captions and on-screen text that hold attention</li>
+          <li>Ending on a loop so the video replays itself</li>
+        </ul>
+        <div class="ttmeta"><span>9 LESSONS</span></div>
+      </div>
+
+      <div class="ttcard">
+        <div class="tthead"><div class="ttic" style="background:var(--ambersoft);color:#8A6A2E">🎬</div><div><div class="ttnum">Module 04</div><h3>Film & Edit on Just Your Phone</h3></div></div>
+        <p class="ttsub">No fancy kit. Your phone is better than you think — I'll show you how to use it.</p>
+        <ul class="ttlist">
+          <li>The camera settings to change right now</li>
+          <li>Natural light, ring lights and framing yourself</li>
+          <li>Filming when you're shy — talking to camera</li>
+          <li>Editing in TikTok and CapCut — cuts, text, captions</li>
+          <li>Trending sounds and how to use them properly</li>
+          <li>Batch filming — a week of content in one hour</li>
+        </ul>
+        <div class="ttmeta"><span>10 LESSONS</span></div>
+      </div>
+
+      <div class="ttcard">
+        <div class="tthead"><div class="ttic" style="background:var(--vsoft);color:var(--v)">🗓️</div><div><div class="ttnum">Module 05</div><h3>Content Strategy & Posting</h3></div></div>
+        <p class="ttsub">The plan that keeps you posting without burning out — and keeps the views climbing.</p>
+        <ul class="ttlist">
+          <li>Your 3 content pillars and a simple weekly plan</li>
+          <li>How often to post (consistency beats perfect)</li>
+          <li>The best times to post for your audience</li>
+          <li>Series that make people follow for part 2</li>
+          <li>Trends vs evergreen — the mix that grows you</li>
+          <li>A content calendar so you never run out of ideas</li>
+        </ul>
+        <div class="ttmeta"><span>9 LESSONS</span></div>
+      </div>
+
+      <div class="ttcard">
+        <div class="tthead"><div class="ttic" style="background:var(--pinksoft);color:var(--pink)">🔎</div><div><div class="ttnum">Module 06</div><h3>TikTok SEO & Getting Found</h3></div></div>
+        <p class="ttsub">TikTok is a search engine now. Get this right and your videos earn for months.</p>
+        <ul class="ttlist">
+          <li>Keywords in your video, caption, cover and speech</li>
+          <li>Creator Search Insights — find what people search</li>
+          <li>Hashtags that actually help (and ones that don't)</li>
+          <li>Making savable, searchable content</li>
+          <li>Why old videos keep selling long after you post</li>
+        </ul>
+        <div class="ttmeta"><span>6 LESSONS</span></div>
+      </div>
+
+      <div class="ttcard">
+        <div class="tthead"><div class="ttic" style="background:var(--mintsoft);color:var(--mint)">🛍️</div><div><div class="ttnum">Module 07</div><h3>TikTok Shop: Set It Up</h3></div></div>
+        <p class="ttsub">Open your shop the right way and turn your videos into a checkout.</p>
+        <ul class="ttlist">
+          <li>What TikTok Shop is and who can open one</li>
+          <li>Opening your shop step by step</li>
+          <li>Seller shop vs affiliate — which is right for you</li>
+          <li>Listing products, your showcase and shoppable videos</li>
+          <li>Getting approved and staying compliant</li>
+          <li>Fulfilment, shipping and reviews</li>
+        </ul>
+        <div class="ttmeta"><span>8 LESSONS</span></div>
+      </div>
+
+      <div class="ttcard">
+        <div class="tthead"><div class="ttic" style="background:var(--ambersoft);color:#8A6A2E">💷</div><div><div class="ttnum">Module 08</div><h3>Shop Affiliate: Sell With No Stock</h3></div></div>
+        <p class="ttsub">Earn commission promoting other people's products — zero stock, zero risk.</p>
+        <ul class="ttlist">
+          <li>Becoming a TikTok Shop affiliate</li>
+          <li>How to find winning products to promote</li>
+          <li>Requesting free samples from brands</li>
+          <li>Review, demo and unboxing videos that sell</li>
+          <li>Tagging products and the orange basket</li>
+          <li>The post that did 18.3M views — broken down</li>
+        </ul>
+        <div class="ttmeta"><span>9 LESSONS</span></div>
+      </div>
+
+      <div class="ttcard">
+        <div class="tthead"><div class="ttic" style="background:var(--vsoft);color:var(--v)">🔴</div><div><div class="ttnum">Module 09</div><h3>Go LIVE &amp; Sell Live</h3></div></div>
+        <p class="ttsub">LIVE is where the real money and connection happens. Here's how to run one that sells.</p>
+        <ul class="ttlist">
+          <li>Unlocking LIVE and the rules to know</li>
+          <li>Your LIVE setup: lighting, sound, background</li>
+          <li>Planning a LIVE people actually stay on</li>
+          <li>Selling live — pinning products and demos</li>
+          <li>LIVE gifts, diamonds and cashing out</li>
+          <li>Moderators, engagement and a LIVE schedule</li>
+        </ul>
+        <div class="ttmeta"><span>8 LESSONS</span></div>
+      </div>
+
+      <div class="ttcard">
+        <div class="tthead"><div class="ttic" style="background:var(--pinksoft);color:var(--pink)">💸</div><div><div class="ttnum">Module 10</div><h3>Get Paid: Every Income Stream</h3></div></div>
+        <p class="ttsub">The full list of ways TikTok pays you — and how to stack them so you never rely on one.</p>
+        <ul class="ttlist">
+          <li>Creator Rewards Programme — longer videos that pay</li>
+          <li>TikTok Shop commission and seller profit</li>
+          <li>LIVE gifts and diamonds</li>
+          <li>Brand deals and paid partnerships</li>
+          <li>Becoming a paid UGC creator</li>
+          <li>Stacking income so you're never one payday away</li>
+        </ul>
+        <div class="ttmeta"><span>8 LESSONS</span></div>
+      </div>
+
+      <div class="ttcard">
+        <div class="tthead"><div class="ttic" style="background:var(--mintsoft);color:var(--mint)">🤝</div><div><div class="ttnum">Module 11</div><h3>Brand Deals &amp; UGC</h3></div></div>
+        <p class="ttsub">Get brands paying you what you're worth — with the templates and rates I actually use.</p>
+        <ul class="ttlist">
+          <li>Build a media kit that gets you booked</li>
+          <li>Pitching brands (with copy-paste templates)</li>
+          <li>What to charge — a rate card by follower size</li>
+          <li>Spark Ads and whitelisting explained simply</li>
+          <li>Deliverables, usage rights and contracts</li>
+          <li>Disclosure — staying legal and trusted</li>
+        </ul>
+        <div class="ttmeta"><span>7 LESSONS</span></div>
+      </div>
+
+      <div class="ttcard">
+        <div class="tthead"><div class="ttic" style="background:var(--ambersoft);color:#8A6A2E">📊</div><div><div class="ttnum">Module 12</div><h3>Read Your Analytics &amp; Double Down</h3></div></div>
+        <p class="ttsub">Your numbers tell you exactly what to make next. I'll teach you to read them.</p>
+        <ul class="ttlist">
+          <li>The only metrics worth watching</li>
+          <li>Spotting your winners — and why they won</li>
+          <li>Reworking a flop into a hit</li>
+          <li>Follower growth vs view growth</li>
+          <li>Turning your data into your next 10 videos</li>
+        </ul>
+        <div class="ttmeta"><span>6 LESSONS</span></div>
+      </div>
+
+      <div class="ttcard">
+        <div class="tthead"><div class="ttic" style="background:var(--vsoft);color:var(--v)">🛡️</div><div><div class="ttnum">Module 13</div><h3>Stay Safe on TikTok</h3></div></div>
+        <p class="ttsub">Putting yourself out there is brilliant — do it safely. This is the bit no one warns you about.</p>
+        <ul class="ttlist">
+          <li>Protect your privacy — address, background, location</li>
+          <li>Spotting scam brand-deal DMs</li>
+          <li>Selling safely and avoiding money scams</li>
+          <li>Community Guidelines — avoid strikes and bans</li>
+          <li>Locking your account down (2FA, passwords)</li>
+        </ul>
+        <div class="ttmeta"><span>6 LESSONS</span></div>
+      </div>
+
+    </div>
+    <div class="center" style="margin-top:40px">
+      <a class="btn btn-p btn-lg" href="#pricing">Start the TikTok masterclass →</a>
     </div>
   </div>
 </section>
